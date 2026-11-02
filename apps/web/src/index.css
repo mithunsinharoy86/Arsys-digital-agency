@@ -1282,13 +1282,87 @@ h2 > span { color: #64748b; font-weight: 500; }
 .metric-box {
   background: #ffffff;
   border: 1px solid #e2e8f0;
-  border-radius: 12px;
+  border-radius: 14px;
   padding: 24px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.03);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  position: relative;
+  overflow: hidden;
 }
-.metric-label { font-size: 11px; font-weight: 700; color: #64748b; text-transform: uppercase; }
-.metric-value { font-family: 'Sora', sans-serif; font-size: 32px; font-weight: 700; color: #2563eb; margin: 8px 0 4px; }
-.metric-detail { font-size: 13px; color: #475569; }
+.metric-box:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.07);
+}
+
+/* Colorful top indicator per theme */
+.metric-box.theme-green { border-top: 4px solid #146844; }
+.metric-box.theme-cyan { border-top: 4px solid #0284c7; }
+.metric-box.theme-violet { border-top: 4px solid #7c3aed; }
+.metric-box.theme-amber { border-top: 4px solid #ea580c; }
+
+/* Bold, Highlighted, and Colourful Headings */
+.metric-heading-wrap {
+  display: flex;
+  align-items: center;
+}
+.metric-highlight-title {
+  display: inline-flex;
+  align-items: center;
+  font-family: 'Sora', sans-serif;
+  font-size: 12.5px;
+  font-weight: 800;
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+  padding: 6px 12px;
+  border-radius: 6px;
+  line-height: 1.25;
+}
+.theme-green .metric-highlight-title {
+  background: #dcfce7;
+  color: #146844;
+  border: 1px solid #86efac;
+}
+.theme-cyan .metric-highlight-title {
+  background: #e0f2fe;
+  color: #0369a1;
+  border: 1px solid #7dd3fc;
+}
+.theme-violet .metric-highlight-title {
+  background: #f3e8ff;
+  color: #6d28d9;
+  border: 1px solid #d8b4fe;
+}
+.theme-amber .metric-highlight-title {
+  background: #fef3c7;
+  color: #b45309;
+  border: 1px solid #fde68a;
+}
+
+/* Simple Text for Metric Value */
+.metric-value-row {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+}
+.metric-simple-val {
+  font-family: 'Sora', sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+  color: #0f172a;
+  letter-spacing: -0.3px;
+  line-height: 1.3;
+}
+
+/* Metric Detail Paragraph */
+.metric-detail {
+  font-size: 13.5px;
+  color: #475569;
+  line-height: 1.6;
+  margin: 0;
+}
 
 .tech-stack-container { margin-bottom: 75px; }
 .section-subheading { margin-bottom: 36px; max-width: 650px; }

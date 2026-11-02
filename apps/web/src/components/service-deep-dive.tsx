@@ -30,13 +30,21 @@ export function ServiceDeepDive({ item }: { item: Offering }) {
       {item.metrics && item.metrics.length > 0 && (
         <div className="service-metrics-strip">
           <div className="metrics-grid">
-            {item.metrics.map((m) => (
-              <div key={m.label} className="metric-box">
-                <span className="metric-label">{m.label}</span>
-                <span className="metric-value">{m.value}</span>
-                <span className="metric-detail">{m.detail}</span>
-              </div>
-            ))}
+            {item.metrics.map((m, idx) => {
+              const themes = ['green', 'cyan', 'violet', 'amber'];
+              const theme = themes[idx % themes.length];
+              return (
+                <div key={m.label} className={`metric-box theme-${theme}`}>
+                  <div className="metric-heading-wrap">
+                    <span className="metric-highlight-title">{m.label}</span>
+                  </div>
+                  <div className="metric-value-row">
+                    <span className="metric-simple-val">{m.value}</span>
+                  </div>
+                  <p className="metric-detail">{m.detail}</p>
+                </div>
+              );
+            })}
           </div>
         </div>
       )}
