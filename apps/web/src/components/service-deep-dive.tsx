@@ -1,5 +1,4 @@
 import {
-  Check,
   ShieldCheck,
   Cpu,
   Layers,
@@ -207,12 +206,10 @@ export function ServiceDeepDive({ item }: { item: Offering }) {
                 <div key={ms.phase} className="milestone-card-luxury">
                   <div className="milestone-card-glow" />
                   <div className="milestone-card-inner">
-                    <div className="milestone-top-meta">
+                    <div className="milestone-phase-header">
                       <span className="milestone-phase-badge">
+                        <span className="phase-dot" />
                         PHASE {phaseNumber}
-                      </span>
-                      <span className="milestone-timeline-badge">
-                        <Clock size={11} /> {ms.timeline}
                       </span>
                     </div>
 
@@ -220,11 +217,10 @@ export function ServiceDeepDive({ item }: { item: Offering }) {
                     <p className="milestone-card-desc">{ms.description}</p>
 
                     <div className="milestone-card-footer">
-                      <div className="milestone-indicator">
-                        <span className="milestone-pulse-dot" />
-                        <span>Sprint Deliverable</span>
+                      <div className="milestone-timeline-badge">
+                        <Clock size={12} className="timeline-clock-icon" />
+                        <span>{ms.timeline}</span>
                       </div>
-                      <span className="milestone-sequence-num">0{idx + 1}</span>
                     </div>
                   </div>
                 </div>
@@ -269,28 +265,7 @@ export function ServiceDeepDive({ item }: { item: Offering }) {
         </div>
       )}
 
-      {/* 4. Compliance & Commercial Guarantees */}
-      {item.complianceGuarantees && item.complianceGuarantees.length > 0 && (
-        <div className="service-guarantees-panel">
-          <div className="guarantees-header">
-            <ShieldCheck size={24} className="guarantees-icon" />
-            <div>
-              <h3>Our Commercial &amp; Compliance Guarantees</h3>
-              <p>Built into every contract Statement of Work (SOW) with dual US/UK legal protections.</p>
-            </div>
-          </div>
-          <div className="guarantees-grid">
-            {item.complianceGuarantees.map((g) => (
-              <div key={g} className="guarantee-item">
-                <Check size={16} className="guarantee-check" />
-                <span>{g}</span>
-              </div>
-            ))}
-          </div>
-        </div>
-      )}
-
-      {/* 5. Direct Sprint Action Banner */}
+      {/* 4. Direct Sprint Action Banner */}
       <div className="deep-dive-cta-strip">
         <div className="deep-dive-cta-info">
           <h3>Ready to turn this blueprint into production reality?</h3>
