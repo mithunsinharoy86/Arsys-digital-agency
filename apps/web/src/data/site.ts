@@ -55,7 +55,7 @@ export type Offering = {
   deliverables: string[];
   outcomes: string[];
   questions: { q: string; a: string }[];
-  techStack?: { category: string; items: string[] }[];
+  techStack?: { category: string; description?: string; items?: string[] }[];
   milestones?: { phase: string; title: string; timeline: string; description: string }[];
   complianceGuarantees?: string[];
   metrics?: { label: string; value: string; detail: string }[];
@@ -111,10 +111,22 @@ export const services: Offering[] = [
       },
     ],
     techStack: [
-      { category: 'Frontend & Architecture', items: ['React 19', 'TypeScript', 'Tailwind CSS', 'Vite / React Router', 'Next.js'] },
-      { category: 'CMS & Backend Options', items: ['Headless WordPress', 'PocketBase', 'Supabase', 'Node.js Microservices'] },
-      { category: 'Speed & Infrastructure', items: ['Cloudflare Edge CDN', 'WebP/AVIF Image Pipelines', 'Sub-second SSR', 'HTTP/3 Support'] },
-      { category: 'Compliance & Security', items: ['WCAG 2.1 AA Standards', 'UK/EU GDPR Consent Engine', 'US CCPA/CPRA Privacy Notice', 'SSL 256-bit Encryption'] },
+      {
+        category: 'Frontend & Architecture',
+        description: 'Clean-code, component-driven interfaces engineered for speed, responsive fluidity, and zero bloated page builder scripts.',
+      },
+      {
+        category: 'CMS & Backend Options',
+        description: 'Flexible, decoupled content management empowering your marketing team with intuitive editing and air-gapped security.',
+      },
+      {
+        category: 'Speed & Infrastructure',
+        description: 'Global edge distribution, modern media pipelines, and sub-second server rendering for instant page transitions worldwide.',
+      },
+      {
+        category: 'Compliance & Security',
+        description: 'Engineered from day one to satisfy WCAG 2.1 AA accessibility guidelines, UK/EU GDPR consent, and US data protection standards.',
+      },
     ],
     milestones: [
       { phase: '01', title: 'Discovery & Technical Blueprint', timeline: 'Week 1', description: 'Customer journey mapping, competitor benchmark analysis, conversion architecture, and agreed scope of work.' },
