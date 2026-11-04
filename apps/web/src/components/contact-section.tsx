@@ -88,7 +88,6 @@ export function ContactSection({
         <div className="consultation-note">
           <span className="live-dot" /> Free strategic consultation. No sales pressure.
         </div>
-        <small>Supporting growth businesses across the United States &amp; United Kingdom.</small>
       </div>
 
       <div className="contact-form-wrap">

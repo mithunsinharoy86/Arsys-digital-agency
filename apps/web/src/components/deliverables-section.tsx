@@ -61,13 +61,6 @@ export function DeliverablesSection({ item }: { item: Offering }) {
 
         {/* Right Column: Detailed Deliverable Cards */}
         <div className="deliverables-right">
-          <div className="deliverables-grid-header">
-            <span className="deliverables-count-pill">
-              {item.deliverables.length} Specific Project Deliverables
-            </span>
-            <span className="deliverables-contract-note">Fixed scope &middot; Zero surprise billings</span>
-          </div>
-
           <div className="deliverables-cards-list">
             {item.deliverables.map((deliverable, index) => {
               const num = String(index + 1).padStart(2, '0');
@@ -93,11 +86,6 @@ export function DeliverablesSection({ item }: { item: Offering }) {
                         <span className="tile-tech-spec">{techSpec}</span>
                       </div>
                     )}
-
-                    <div className="tile-footer">
-                      <span className="tile-status-dot" />
-                      <span className="tile-status-text">Included in Scope of Work</span>
-                    </div>
                   </div>
                 </div>
               );

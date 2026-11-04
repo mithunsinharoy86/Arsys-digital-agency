@@ -6,7 +6,6 @@ import {
   Database,
   Zap,
   Milestone,
-  Clock,
   Video,
   MonitorCheck,
   MessageSquare,
@@ -215,13 +214,6 @@ export function ServiceDeepDive({ item }: { item: Offering }) {
 
                     <h3 className="milestone-card-title">{ms.title}</h3>
                     <p className="milestone-card-desc">{ms.description}</p>
-
-                    <div className="milestone-card-footer">
-                      <div className="milestone-timeline-badge">
-                        <Clock size={12} className="timeline-clock-icon" />
-                        <span>{ms.timeline}</span>
-                      </div>
-                    </div>
                   </div>
                 </div>
               );
