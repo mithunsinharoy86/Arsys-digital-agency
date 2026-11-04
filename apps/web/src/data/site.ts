@@ -75,11 +75,11 @@ export const services: Offering[] = [
     deliverables: [
       'Conversion-Focused Information Architecture & Sitemap Strategy',
       'Custom UI/UX Wireframing & High-Fidelity Interactive Prototypes',
-      'Clean-Code Full-Stack Development (React Router, Next.js, or Modern WordPress)',
-      'Sub-Second Core Web Vitals Optimization (LCP < 1.2s, CLS 0)',
+      'Clean-Code Full-Stack Development',
+      'Sub-Second Core Web Vitals Optimization',
       'WCAG 2.1 AA Accessibility & Cross-Browser Responsive Testing',
       'GDPR & CCPA Compliant Privacy Notice & Cookie Consent Integration',
-      'Technical On-Page SEO (Schema.org JSON-LD, Sitemap & OpenGraph Tags)',
+      'Technical On-Page SEO',
       'Full Source Code Handover, Documentation & 30-Day Defect Warranty',
     ],
     outcomes: [
