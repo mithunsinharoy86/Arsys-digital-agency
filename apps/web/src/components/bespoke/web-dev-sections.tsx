@@ -131,28 +131,24 @@ export function FullStackArchitectureSection() {
     {
       step: '01',
       title: 'Global Edge & CDN Layer',
-      tech: 'Cloudflare / AWS CloudFront',
       description: 'Sub-50ms Time to First Byte (TTFB) globally. Automatic SSL, DDoS mitigation, and HTTP/3 multiplexing.',
       icon: Globe,
     },
     {
       step: '02',
       title: 'Server-Side Rendered (SSR) Frontend',
-      tech: 'React Router / Next.js / TypeScript',
       description: 'Pre-rendered semantic HTML served instantaneously to search engine crawlers and users with zero white-screen lag.',
       icon: Cpu,
     },
     {
       step: '03',
       title: 'Decoupled CMS & API Mesh',
-      tech: 'Headless WordPress / Sanity / PocketBase',
       description: 'Marketing teams publish effortlessly in an intuitive dashboard while the public frontend remains securely air-gapped.',
       icon: Layers,
     },
     {
       step: '04',
       title: 'Compliance & Telemetry Hardening',
-      tech: 'GDPR / CCPA / WCAG 2.1 AA',
       description: 'Zero third-party tracker leaking, cookie consent enforcement, and automated GitHub Actions test pipelines.',
       icon: Lock,
     },
@@ -181,7 +177,6 @@ export function FullStackArchitectureSection() {
                 <span className="layer-icon-wrap"><Icon size={18} /></span>
               </div>
               <h3 className="layer-title">{layer.title}</h3>
-              <span className="layer-tech-badge">{layer.tech}</span>
               <p className="layer-desc">{layer.description}</p>
             </div>
           );
