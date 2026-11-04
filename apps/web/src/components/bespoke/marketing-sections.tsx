@@ -6,17 +6,14 @@ export function PaidMarketingEconomicsSection() {
   const pillars = [
     {
       title: 'Commercial Intent Filtering',
-      metric: 'Zero Ad Waste',
       desc: 'We target high-intent buying queries ("book consultation", "enterprise software quote") while aggressively shielding against negative informational keywords.',
     },
     {
       title: 'Full-Funnel Offline Attribution',
-      metric: 'Closed-Won Tracking',
       desc: 'Connect Google & LinkedIn ad clicks directly to your CRM (HubSpot/Salesforce) to optimize for actual revenue contracts, not just cheap vanity leads.',
     },
     {
       title: 'Conversion Landing Experience',
-      metric: 'Sub-Second Speed',
       desc: 'Campaign visitors land on dedicated, ultra-fast landing pages with singular clear value propositions, boosting Google Quality Scores and lowering CPC.',
     },
   ];
@@ -39,7 +36,6 @@ export function PaidMarketingEconomicsSection() {
       <div className="marketing-pillars-grid">
         {pillars.map((p, idx) => (
           <div key={idx} className="marketing-pillar-card">
-            <span className="pillar-metric-tag">{p.metric}</span>
             <h3 className="pillar-title">{p.title}</h3>
             <p className="pillar-desc">{p.desc}</p>
           </div>

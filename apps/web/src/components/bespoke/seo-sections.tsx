@@ -93,25 +93,21 @@ export function SeoAuditTeardownSection() {
       num: '01',
       title: 'Technical Crawl & Indexation Protocol',
       desc: 'Audit crawl budget, fix 301 redirect chains, resolve canonical mismatches, eliminate 404 dead-ends, and optimize robots.txt and XML sitemaps for edge crawlers.',
-      tag: 'Foundation & Health',
     },
     {
       num: '02',
       title: 'Schema.org Knowledge Graph Engineering',
       desc: 'Inject comprehensive JSON-LD structured metadata (Organization, Service, FAQPage, Author, LocalBusiness) linking your brand entities directly into Google Knowledge Graph.',
-      tag: 'Entity Resolution',
     },
     {
       num: '03',
       title: 'Commercial Intent & Content Clusters',
       desc: 'Map keywords by buying stage. Build high-density topic pillars addressing specific commercial queries with high information gain to win Google Featured Snippets.',
-      tag: 'Information Gain',
     },
     {
       num: '04',
       title: 'Authority & Editorial Digital PR',
       desc: 'Earn high-tier editorial coverage and contextual backlinks from established industry publications, completely avoiding toxic automated link schemes.',
-      tag: 'Domain Authority',
     },
   ];
 
@@ -133,7 +129,6 @@ export function SeoAuditTeardownSection() {
           <div key={st.num} className="stage-card">
             <div className="stage-top">
               <span className="stage-number">{st.num}</span>
-              <span className="stage-tag">{st.tag}</span>
             </div>
             <h3 className="stage-title">{st.title}</h3>
             <p className="stage-desc">{st.desc}</p>

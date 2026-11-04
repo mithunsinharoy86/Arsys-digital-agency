@@ -64,9 +64,7 @@ export function DeliverablesSection({ item }: { item: Offering }) {
           <div className="deliverables-cards-list">
             {item.deliverables.map((deliverable, index) => {
               const num = String(index + 1).padStart(2, '0');
-              const match = deliverable.match(/^(.*?)(?:\s*\((.*?)\))?$/);
-              const mainTitle = match && match[1] ? match[1].trim() : deliverable;
-              const techSpec = match && match[2] ? match[2].trim() : null;
+              const cleanTitle = deliverable.replace(/\s*\([^)]*\)\s*$/, '').trim();
 
               return (
                 <div key={index} className="deliverable-tile">
@@ -79,13 +77,7 @@ export function DeliverablesSection({ item }: { item: Offering }) {
                       </span>
                     </div>
 
-                    <h3 className="tile-title">{mainTitle}</h3>
-
-                    {techSpec && (
-                      <div className="tile-tech-wrap">
-                        <span className="tile-tech-spec">{techSpec}</span>
-                      </div>
-                    )}
+                    <h3 className="tile-title">{cleanTitle}</h3>
                   </div>
                 </div>
               );

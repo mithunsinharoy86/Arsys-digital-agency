@@ -145,18 +145,6 @@ export function ServiceProjectsSection({ item }: { item: Offering }) {
               </ul>
             </div>
 
-            {/* Tech Stack Pills */}
-            <div className="project-tech-strip">
-              <span className="tech-label">Stack:</span>
-              <div className="tech-pills-wrap">
-                {activeProject.tags.map((tag) => (
-                  <span key={tag} className="project-tech-pill">
-                    {tag}
-                  </span>
-                ))}
-              </div>
-            </div>
-
             {/* CTA action */}
             <div className="project-cta-actions">
               <button
@@ -276,17 +264,6 @@ export function ServiceProjectsSection({ item }: { item: Offering }) {
                       </li>
                     ))}
                   </ul>
-                </div>
-
-                <div className="modal-specs-section">
-                  <h4>Tech Ecosystem</h4>
-                  <div className="modal-tags-list">
-                    {activeProject.tags.map((t) => (
-                      <span key={t} className="tech-pill">
-                        {t}
-                      </span>
-                    ))}
-                  </div>
                 </div>
 
                 <div className="modal-cta-box">
