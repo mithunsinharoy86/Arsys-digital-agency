@@ -114,7 +114,7 @@ export function SeoAuditTeardownSection() {
   return (
     <section className="section bespoke-section seo-audit-stages">
       <div className="bespoke-header">
-        <span className="eyebrow">03 / SYSTEMATIC EXECUTION</span>
+        <span className="eyebrow">SYSTEMATIC EXECUTION</span>
         <h2>
           The 4-Stage Technical SEO Engine.<br />
           <span>Measurable Visibility &middot; Zero Speculation.</span>

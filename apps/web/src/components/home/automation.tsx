@@ -9,7 +9,7 @@ export function Automation() {
   return (
     <section className="section automation-section">
       <div className="automation-copy">
-        <span className="eyebrow violet-text">05 / AI, WITH A PURPOSE</span>
+        <span className="eyebrow violet-text">AI, WITH A PURPOSE</span>
         <h2>
           Let the repetitive<br />
           work run.<br />

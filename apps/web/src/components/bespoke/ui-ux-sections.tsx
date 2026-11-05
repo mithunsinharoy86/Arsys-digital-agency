@@ -121,7 +121,7 @@ export function UserJourneyTeardownSection() {
   return (
     <section className="section bespoke-section user-journey-section">
       <div className="bespoke-header">
-        <span className="eyebrow">03 / HUMAN-CENTRED METHODOLOGY</span>
+        <span className="eyebrow">HUMAN-CENTRED METHODOLOGY</span>
         <h2>
           Dismantling User Friction.<br />
           <span>From Initial Impression to Confirmed Conversion.</span>

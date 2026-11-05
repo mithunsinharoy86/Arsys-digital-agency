@@ -118,7 +118,7 @@ export function AiSecurityShieldSection() {
   return (
     <section className="section bespoke-section ai-shield-section">
       <div className="bespoke-header">
-        <span className="eyebrow">03 / TRUST &amp; SAFETY</span>
+        <span className="eyebrow">TRUST &amp; SAFETY</span>
         <h2>
           The Enterprise AI Security Charter.<br />
           <span>Practical Efficiency Without Data Exposure.</span>

@@ -74,7 +74,7 @@ export function AppBloatVsNativeComparison() {
   return (
     <section className="section bespoke-section app-comparison-section">
       <div className="bespoke-header">
-        <span className="eyebrow">03 / COST &amp; SPEED OPTIMIZATION</span>
+        <span className="eyebrow">COST &amp; SPEED OPTIMIZATION</span>
         <h2>
           Eliminate App Bloat.<br />
           <span>Save Thousands in Recurring Shopify SaaS Fees.</span>

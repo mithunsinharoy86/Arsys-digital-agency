@@ -157,7 +157,7 @@ export function FullStackArchitectureSection() {
   return (
     <section className="section bespoke-section architecture-section">
       <div className="bespoke-header">
-        <span className="eyebrow">02 / FULL-STACK ENGINEERING</span>
+        <span className="eyebrow">FULL-STACK ENGINEERING</span>
         <h2>
           Modern Architecture.<br />
           <span>Built for Decades, Not Months.</span>

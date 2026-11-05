@@ -10,7 +10,7 @@ export function IndustriesSection() {
     <section className="section industry-section">
       <div className="section-heading">
         <div>
-          <span className="eyebrow">03 / YOUR INDUSTRY. UNDERSTOOD.</span>
+          <span className="eyebrow">YOUR INDUSTRY. UNDERSTOOD.</span>
           <h2>
             Different businesses.<br />
             <span>Different possibilities.</span>

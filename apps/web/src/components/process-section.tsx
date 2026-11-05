@@ -9,7 +9,7 @@ export function ProcessSection() {
     <section className="section process-section">
       <div className="section-heading">
         <div>
-          <span className="eyebrow">06 / THE KLYRO WORKS METHODOLOGY &middot; A CLEAR WAY FORWARD</span>
+          <span className="eyebrow">THE KLYRO WORKS METHODOLOGY &middot; A CLEAR WAY FORWARD</span>
           <h2>
             Good work starts<br />
             with <span>a better plan.</span>

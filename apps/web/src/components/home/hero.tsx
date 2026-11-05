@@ -1,5 +1,5 @@
 import { Link } from 'react-router';
-import { ArrowDown, ArrowUpRight, Check } from 'lucide-react';
+import { ArrowUpRight, Check } from 'lucide-react';
 import { GrowthVisual } from '@/components/growth-visual';
 import { useConsultationModal } from '@/components/consultation-modal';
 
@@ -28,7 +28,7 @@ export function Hero() {
             Request a Free Consultation <ArrowUpRight size={18} />
           </button>
           <Link to="/services" className="button secondary">
-            Explore Services &amp; Work <ArrowDown size={17} />
+            Explore Services &amp; Work <ArrowUpRight size={17} />
           </Link>
         </div>
         <div className="hero-trust">
@@ -38,12 +38,6 @@ export function Hero() {
         </div>
       </div>
       <GrowthVisual />
-      <span className="edge-label">SEARCH &middot; DESIGN &middot; PERFORMANCE</span>
-      <div className="hero-bottom">
-        <span>UNRIVALLED DIGITAL EXPERIENCES &middot; MEASURABLE COMMERCIAL VALUE</span>
-        <a href="#value" aria-label="Discover what we do"><ArrowDown size={17} /></a>
-        <span>SCROLL TO EXPLORE</span>
-      </div>
     </section>
   );
 }

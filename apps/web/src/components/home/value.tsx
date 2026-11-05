@@ -7,7 +7,7 @@ export function Value() {
 
   return (
     <section id="value" className="value-section section">
-      <div className="eyebrow">01 / THE BIGGER PICTURE &middot; UNIFIED GROWTH</div>
+      <div className="eyebrow">THE BIGGER PICTURE &middot; UNIFIED GROWTH</div>
       <div className="value-grid">
         <h2>
           Not just digital services.<br />
@@ -30,11 +30,6 @@ export function Value() {
             </Link>
           </div>
         </div>
-      </div>
-      <div className="value-outcomes">
-        <span><b>01</b> Dominate High-Intent Search (Google &amp; AI GEO)</span>
-        <span><b>02</b> Turn Visits into Qualified Commercial Inquiries</span>
-        <span><b>03</b> Automate Workflows &amp; Scale Effortlessly</span>
       </div>
     </section>
   );
