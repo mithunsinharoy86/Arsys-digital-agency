@@ -7,19 +7,19 @@ export function EcommerceFunnelTeardown() {
     {
       step: '01',
       title: 'Sub-Second Product Detail Page (PDP)',
-      metric: '0.9s Mobile LCP',
+      metric: '< 1.2s Target LCP',
       detail: 'Lightning-fast image loading, instant swatch selection without page reload, and clear stock status eliminate bounce rates on high-intent buyers.',
     },
     {
       step: '02',
       title: 'High-Converting Cart Drawer',
-      metric: '+$28 Average Order Value',
+      metric: 'AOV Optimization Architecture',
       detail: 'Dynamic free-shipping calculation bar, tiered volume discount selectors, and complementary product add-ons designed directly into native theme code.',
     },
     {
       step: '03',
       title: '1-Click Express Checkout',
-      metric: '+42% Completion Rate',
+      metric: 'Frictionless Funnel Flow',
       detail: 'Direct Shop Pay, Apple Pay, and Klarna one-click express integrations bypass multi-step address friction and minimize cart abandonment.',
     },
   ];
@@ -116,14 +116,14 @@ export function AppBloatVsNativeComparison() {
         </div>
 
         <div className="app-table-summary">
-          <span className="summary-left">Average Client Savings: <strong>$650/month in recurring fees</strong></span>
-          <span className="summary-right">Mobile Speed Gain: <strong>3.2s faster page load</strong></span>
+          <span className="summary-left">Estimated App Reduction: <strong>Multiple recurring subscriptions eliminated</strong></span>
+          <span className="summary-right">Speed Target: <strong>Sub-second mobile loading</strong></span>
         </div>
       </div>
 
       <div className="bespoke-cta-banner green-glow">
         <div className="cta-banner-text">
-          <h3>Eliminate third-party Shopify apps &amp; reclaim $5,000+/year</h3>
+          <h3>Eliminate third-party Shopify apps &amp; reclaim recurring subscription costs</h3>
           <p>Request a zero-risk storefront code teardown to identify bloated apps and replace them with native features.</p>
         </div>
         <button

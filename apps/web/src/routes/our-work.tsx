@@ -12,9 +12,9 @@ export function meta({ matches, location }: Route.MetaArgs) {
   return seo(
     { matches, location },
     {
-      title: 'Our Work & Production Benchmarks | Klyro Works',
+      title: 'Capabilities & Concept Showcase | Klyro Works',
       description:
-        'Explore bespoke web applications, enterprise platforms, and digital growth experiences engineered by Klyro Works for US and UK businesses. Real architecture, sub-second performance, and verified code ownership.',
+        'Explore illustrative technical blueprints, enterprise web concepts, and digital architectures designed to demonstrate the engineering and design capabilities of Klyro Works.',
       image: images.webDevCorporate,
     }
   );
@@ -22,13 +22,13 @@ export function meta({ matches, location }: Route.MetaArgs) {
 
 export default function WorkPage() {
   const categories = [
-    { label: 'Web Engineering', item: services.find((s) => s.slug === 'website-development') || services[0] },
-    { label: 'Technical SEO', item: services.find((s) => s.slug === 'seo') || services[1] },
+    { label: 'Web Development', item: services.find((s) => s.slug === 'website-development') || services[0] },
+    { label: 'SaaS & Software Development', item: industries.find((s) => s.slug === 'professional-services') || services[0] },
     { label: 'AI Automation', item: services.find((s) => s.slug === 'ai-automation') || services[3] },
-    { label: 'eCommerce Stores', item: services.find((s) => s.slug === 'ecommerce') || services[6] },
-    { label: 'Dental & Healthcare', item: industries.find((s) => s.slug === 'dental-clinics') || industries[1] },
-    { label: 'Real Estate & Property', item: industries.find((s) => s.slug === 'real-estate') || industries[0] },
-    { label: 'Professional Services', item: industries.find((s) => s.slug === 'professional-services') || industries[3] },
+    { label: 'SEO & Digital Growth', item: services.find((s) => s.slug === 'seo') || services[1] },
+    { label: 'eCommerce Development', item: services.find((s) => s.slug === 'ecommerce') || services[6] },
+    { label: 'UI/UX Design', item: services.find((s) => s.slug === 'ui-ux-design') || services[4] },
+    { label: 'Branding & Digital Identity', item: services.find((s) => s.slug === 'branding') || services[5] },
   ];
 
   const [activeIndex, setActiveIndex] = useState(0);
@@ -37,9 +37,9 @@ export default function WorkPage() {
   return (
     <main>
       <PageIntro
-        label="Our Work"
-        title="Bespoke engineering. Measurable commercial results."
-        description="Explore production architectures and client platforms designed and engineered by Klyro Works. Sub-second speed, WCAG AA accessibility, and 100% intellectual property transfer."
+        label="Capabilities &amp; Concept Showcase"
+        title="Demonstrated technical blueprints. Original engineering standards."
+        description="Explore illustrative technical blueprints and production concepts designed to demonstrate the full-stack engineering, performance optimization, and UI/UX capabilities of Klyro Works."
         action
       />
       <div className="section work-category-bar-wrapper">
@@ -53,7 +53,7 @@ export default function WorkPage() {
               onClick={() => setActiveIndex(idx)}
             >
               <span>{cat.label}</span>
-              <span className="work-category-count">3 Cases</span>
+              <span className="work-category-count">3 Blueprints</span>
             </button>
           ))}
         </div>

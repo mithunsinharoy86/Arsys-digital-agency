@@ -29,22 +29,22 @@ export function ServiceProjectsSection({ item }: { item: Offering }) {
     <section
       className="section service-projects-section"
       id="case-studies"
-      aria-label="Production Benchmarks & Real-World Projects"
+      aria-label="Capabilities &amp; Concept Showcase"
     >
       <div className="service-projects-header">
         <div className="section-heading-left">
           <span className="eyebrow project-eyebrow">
-            <Layers size={13} className="inline-icon" /> PRODUCTION ARCHITECTURE &amp; CASE STUDIES
+            <Layers size={13} className="inline-icon" /> CAPABILITIES &amp; CONCEPT SHOWCASE
           </span>
           <h2 className="project-section-title">
             Engineered for Speed.<br />
-            <span>Proven in Production.</span>
+            <span>Designed for Scale.</span>
           </h2>
         </div>
         <div className="section-heading-right">
           <p className="project-lead-text">
-            Explore production architectures and client platforms designed and engineered by Klyro Works.
-            Every build features bespoke code, sub-second edge routing, and complete intellectual property transfer.
+            Explore illustrative technical blueprints and production concepts designed to demonstrate our capabilities.
+            Every concept features bespoke code architecture, sub-second speed targets, and modular engineering.
           </p>
         </div>
       </div>
@@ -110,7 +110,12 @@ export function ServiceProjectsSection({ item }: { item: Offering }) {
             <div className="project-meta-strip">
               <span className="project-category-tag">{activeProject.category}</span>
               <span className="meta-separator">&middot;</span>
-              <span className="project-client-name">{activeProject.client}</span>
+              <span className="project-concept-tag">{activeProject.conceptType || 'Illustrative Technical Blueprint'}</span>
+            </div>
+
+            <div className="project-concept-disclosure">
+              <ShieldCheck size={14} className="disclosure-icon" />
+              <span>This project is an illustrative concept created to demonstrate our design and development capabilities. It is not presented as a completed client engagement or a record of actual client performance.</span>
             </div>
 
             <h3 className="project-spotlight-title">{activeProject.title}</h3>
@@ -220,7 +225,7 @@ export function ServiceProjectsSection({ item }: { item: Offering }) {
               <div className="modal-title-wrap">
                 <span className="modal-badge">{activeProject.category}</span>
                 <h3>{activeProject.title}</h3>
-                <p>{activeProject.client} &mdash; Architecture Reference</p>
+                <p>{activeProject.conceptType || 'Illustrative Technical Blueprint'} &mdash; Architecture Reference</p>
               </div>
               <button
                 className="blueprint-modal-close"
@@ -241,8 +246,13 @@ export function ServiceProjectsSection({ item }: { item: Offering }) {
               </div>
 
               <div className="modal-specs-drawer">
+                <div className="project-concept-disclosure modal-disclosure">
+                  <ShieldCheck size={14} className="disclosure-icon" />
+                  <span>This project is an illustrative concept created to demonstrate our design and development capabilities. It is not presented as a completed client engagement or a record of actual client performance.</span>
+                </div>
+
                 <div className="modal-specs-section">
-                  <h4>Performance &amp; Scale Metrics</h4>
+                  <h4>Target Architectural Benchmarks</h4>
                   <div className="modal-metrics-grid">
                     {activeProject.metrics.map((m) => (
                       <div key={m.label} className="modal-metric-box">
@@ -255,7 +265,7 @@ export function ServiceProjectsSection({ item }: { item: Offering }) {
                 </div>
 
                 <div className="modal-specs-section">
-                  <h4>Architecture Highlights</h4>
+                  <h4>Architectural Specifications</h4>
                   <ul className="modal-features-list">
                     {activeProject.features.map((f, i) => (
                       <li key={i}>

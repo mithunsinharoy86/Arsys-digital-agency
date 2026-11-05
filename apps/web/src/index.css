@@ -607,7 +607,7 @@ h2 > span { color: #64748b; font-weight: 500; }
 .mobile-consult { display: none; }
 
 /* ==================================================== */
-/* HERO SECTION (Go Up & So-Creative Inspired)          */
+/* HERO SECTION                                         */
 /* ==================================================== */
 .hero {
   min-height: calc(100dvh - 84px);
@@ -1397,6 +1397,43 @@ h2 > span { color: #64748b; font-weight: 500; }
 }
 .meta-separator { color: #cbd5e1; }
 .project-client-name { color: #64748b; font-weight: 500; }
+.project-concept-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  background: #eff6ff;
+  border: 1px solid #bfdbfe;
+  color: #1d4ed8;
+  font-size: 11px;
+  font-weight: 600;
+  padding: 2px 8px;
+  border-radius: 4px;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+}
+.project-concept-disclosure {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-left: 3px solid #2563eb;
+  padding: 10px 14px;
+  border-radius: 6px;
+  margin: 12px 0 16px;
+  font-size: 12px;
+  line-height: 1.5;
+  color: #475569;
+}
+.project-concept-disclosure .disclosure-icon {
+  flex-shrink: 0;
+  margin-top: 2px;
+  color: #2563eb;
+}
+.project-concept-disclosure.modal-disclosure {
+  margin: 0 0 16px;
+  background: #f8fafc;
+}
 .project-spotlight-title {
   font-size: 26px;
   font-weight: 700;

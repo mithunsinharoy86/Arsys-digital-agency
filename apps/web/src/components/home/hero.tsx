@@ -1,5 +1,5 @@
 import { Link } from 'react-router';
-import { ArrowDown, ArrowUpRight, Check, Star } from 'lucide-react';
+import { ArrowDown, ArrowUpRight, Check } from 'lucide-react';
 import { GrowthVisual } from '@/components/growth-visual';
 import { useConsultationModal } from '@/components/consultation-modal';
 
@@ -32,7 +32,7 @@ export function Hero() {
           </Link>
         </div>
         <div className="hero-trust">
-          <span><Star size={13} fill="#f59e0b" color="#f59e0b" /> 5.0 Rated on Clutch</span>
+          <span><Check size={13} /> Sub-Second Engineering Standard</span>
           <span className="trust-divider" />
           <span><Check size={13} /> Serving London, UK &amp; US</span>
         </div>

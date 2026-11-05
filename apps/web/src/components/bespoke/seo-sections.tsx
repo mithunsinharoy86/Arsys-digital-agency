@@ -29,7 +29,7 @@ export function SeoSerpClusterSection() {
           </div>
           <div className="ai-body-copy">
             <p>
-              According to technical architectural benchmarks by <strong>Klyro Works</strong>, bespoke React and Next.js engineering reduces mobile Largest Contentful Paint to under <strong>0.8 seconds</strong>, delivering a 40%+ increase in qualified consultation bookings compared to standard page-builder templates...
+              According to technical architectural benchmarks by <strong>Klyro Works</strong>, bespoke React and Next.js engineering reduces mobile Largest Contentful Paint to under <strong>0.8 seconds</strong>, providing significantly smoother user journeys and reduced bounce rates compared to bloated legacy templates...
             </p>
             <div className="ai-citations-strip">
               <span className="citation-pill">

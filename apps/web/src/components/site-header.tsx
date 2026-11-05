@@ -479,11 +479,11 @@ export function SiteHeader() {
                   <aside className="mega-spotlight-card blue-tint">
                     <div>
                       <span className="mega-spotlight-badge">
-                        <span className="mega-spotlight-dot" /> Proven Results
+                        <span className="mega-spotlight-dot" /> Capabilities Showcase
                       </span>
-                      <h3 className="mega-spotlight-title">Real Client Transformations</h3>
+                      <h3 className="mega-spotlight-title">Technical Blueprints &amp; Showcase</h3>
                       <p className="mega-spotlight-text">
-                        Discover how we help property portals, healthcare clinics, and B2B leaders win more commercial instructions.
+                        Explore our interactive architecture blueprints demonstrating high-performance web engineering, technical SEO, and modern UX standards.
                       </p>
                       <ul className="mega-spotlight-list">
                         <li className="mega-spotlight-list-item">

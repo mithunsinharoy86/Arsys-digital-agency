@@ -40,35 +40,35 @@ export function SpeedComparisonSection() {
       <div className="speed-display-grid">
         <div className={`speed-card ${activeTab === 'klyro' ? 'card-highlight-green' : 'card-dimmed'}`}>
           <div className="card-top">
-            <span className="speed-badge green-badge">Klyro Works Production Standard</span>
-            <span className="speed-metric-score green-text">100 / 100</span>
+            <span className="speed-badge green-badge">Target Engineering Benchmark</span>
+            <span className="speed-metric-score green-text">Target: 95+</span>
           </div>
           <h3 className="card-title">Clean SSR &amp; Edge Delivery</h3>
           <ul className="speed-stats-list">
             <li>
               <span className="stat-name">Largest Contentful Paint (LCP)</span>
-              <strong className="stat-val green-text">0.8s (Sub-Second)</strong>
+              <strong className="stat-val green-text">0.8s (Sub-Second Target)</strong>
             </li>
             <li>
               <span className="stat-name">Total Page Payload</span>
-              <strong className="stat-val">180 KB</strong>
+              <strong className="stat-val">&lt; 200 KB Target</strong>
             </li>
             <li>
               <span className="stat-name">HTTP Script Requests</span>
-              <strong className="stat-val">8 Clean Requests</strong>
+              <strong className="stat-val">Clean Modular Scripts</strong>
             </li>
             <li>
               <span className="stat-name">Cumulative Layout Shift (CLS)</span>
-              <strong className="stat-val green-text">0.00 (Zero Shift)</strong>
+              <strong className="stat-val green-text">0.00 (Zero Shift Target)</strong>
             </li>
             <li>
-              <span className="stat-name">Mobile Visitor Retained</span>
-              <strong className="stat-val green-text">88% Completion</strong>
+              <span className="stat-name">Target Accessibility Standard</span>
+              <strong className="stat-val green-text">WCAG 2.1 AA</strong>
             </li>
           </ul>
           <div className="speed-card-footer">
             <Check size={16} className="green-check" />
-            <span>Passed all Google Core Web Vitals thresholds on mobile &amp; desktop.</span>
+            <span>Architected to pass Google Core Web Vitals thresholds on mobile &amp; desktop.</span>
           </div>
         </div>
 

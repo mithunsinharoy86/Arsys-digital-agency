@@ -15,7 +15,7 @@ export function Value() {
         </h2>
         <div>
           <p>
-            Your search visibility, bespoke website and automated operational pipelines shouldn’t operate in silos. Inspired by London’s leading digital agencies, we align high-intent SEO, modern full-stack web engineering, and intelligent AI automations into one high-conversion engine.
+            Your search visibility, bespoke website and automated operational pipelines shouldn’t operate in silos. We align high-intent SEO, modern full-stack web engineering, and intelligent AI automations into one unified high-conversion growth engine.
           </p>
           <div className="value-action-group">
             <button

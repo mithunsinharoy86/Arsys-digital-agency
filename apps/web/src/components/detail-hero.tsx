@@ -1,5 +1,5 @@
 import { Link } from 'react-router';
-import { ArrowUpRight, ChevronRight, Star, Check } from 'lucide-react';
+import { ArrowUpRight, ChevronRight, Check } from 'lucide-react';
 import { GrowthVisual } from '@/components/growth-visual';
 import { images, type Offering } from '@/data/site';
 import { useConsultationModal } from '@/components/consultation-modal';
@@ -53,7 +53,7 @@ export function DetailHero({
         </div>
         <div className="hero-trust">
           <span>
-            <Star size={13} fill="#f59e0b" color="#f59e0b" /> 5.0 Rated on Clutch
+            <Check size={13} /> Sub-Second Performance Standard
           </span>
           <span className="trust-divider" />
           <span>

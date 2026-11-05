@@ -10,7 +10,7 @@ export function AboutStory() {
       <div className="about-visual-col">
         <img
           src={images.team}
-          alt="Original photography of a collaborative digital strategy and engineering workshop"
+          alt="Collaborative digital strategy and engineering workshop"
           width="900"
           height="600"
           loading="lazy"
