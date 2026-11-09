@@ -349,26 +349,6 @@ export function SiteHeader() {
                         );
                       })}
                     </div>
-
-                    <div className="mega-menu-footer-strip">
-                      <div className="mega-menu-footer-links">
-                        <span className="mega-menu-footer-label">More Specialisms:</span>
-                        {secondaryServices.map((item) => {
-                          const Icon = item.icon;
-                          return (
-                            <Link
-                              key={item.href}
-                              to={item.href}
-                              className="mega-menu-footer-link"
-                              onClick={() => setActiveMenu(null)}
-                            >
-                              <Icon size={14} />
-                              <span>{item.title}</span>
-                            </Link>
-                          );
-                        })}
-                      </div>
-                    </div>
                   </div>
 
                   <aside className="mega-spotlight-card">
