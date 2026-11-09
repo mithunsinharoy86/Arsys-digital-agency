@@ -344,7 +344,6 @@ export function SiteHeader() {
                                   <span className="mega-card-badge">{service.badge}</span>
                                 )}
                               </div>
-                              <p className="mega-card-desc">{service.description}</p>
                             </div>
                           </Link>
                         );
@@ -455,10 +454,6 @@ export function SiteHeader() {
                                 {industry.badge && (
                                   <span className="mega-card-badge blue">{industry.badge}</span>
                                 )}
-                              </div>
-                              <p className="mega-card-desc">{industry.description}</p>
-                              <div className="mega-card-highlights">
-                                <span>{industry.highlights}</span>
                               </div>
                             </div>
                           </Link>

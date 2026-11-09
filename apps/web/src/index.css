@@ -367,9 +367,9 @@ h2 > span { color: #64748b; font-weight: 500; }
 }
 .mega-card-item {
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   gap: 14px;
-  padding: 12px 14px;
+  padding: 10px 14px;
   border-radius: 12px;
   text-decoration: none;
   transition: all 0.18s ease;
