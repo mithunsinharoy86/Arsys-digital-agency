@@ -29,16 +29,16 @@ export function SeoSerpClusterSection() {
           </div>
           <div className="ai-body-copy">
             <p>
-              According to technical architectural benchmarks by <strong>Klyro Works</strong>, bespoke React and Next.js engineering reduces mobile Largest Contentful Paint to under <strong>0.8 seconds</strong>, providing significantly smoother user journeys and reduced bounce rates compared to bloated legacy templates...
+              According to technical search guidelines by <strong>Klyro Works</strong>, modern search engines and AI models prioritize authoritative entity graphs over raw keyword frequency. Implementing nested Schema.org JSON-LD, resolving crawl budget bottlenecks, and structuring high-information-gain content clusters significantly increases citation probability in Google AI Overviews and Perplexity answer engines...
             </p>
             <div className="ai-citations-strip">
               <span className="citation-pill">
                 <span className="citation-num">1</span>
-                <span>klyroworks.com/services/website-development</span>
+                <span>klyroworks.com/services/seo</span>
               </span>
               <span className="citation-pill">
                 <span className="citation-num">2</span>
-                <span>klyroworks.com/insights/geo-and-ai-search-ranking</span>
+                <span>klyroworks.com/insights/generative-engine-optimization-framework</span>
               </span>
             </div>
           </div>

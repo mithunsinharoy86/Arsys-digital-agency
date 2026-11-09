@@ -1,2 +1,18 @@
 import { type Offering } from '@/data/site';
-export function DetailOverview({ item }: { item:Offering }) {return <section className="section detail-overview"><div><span className="eyebrow">THE CHALLENGE</span><h2>Start with what<br/>really matters.</h2><p>{item.problem}</p></div><div><span className="eyebrow">OUR APPROACH</span><h2>Purpose before<br/>platforms.</h2><p>{item.approach}</p></div></section>;}
+
+export function DetailOverview({ item }: { item: Offering }) {
+  return (
+    <section className="section detail-overview">
+      <div>
+        <span className="eyebrow">THE CHALLENGE</span>
+        <h2>{item.problemTitle || <>Start with what<br />really matters.</>}</h2>
+        <p>{item.problem}</p>
+      </div>
+      <div>
+        <span className="eyebrow">OUR APPROACH</span>
+        <h2>{item.approachTitle || <>Purpose before<br />platforms.</>}</h2>
+        <p>{item.approach}</p>
+      </div>
+    </section>
+  );
+}

@@ -48,6 +48,11 @@ export type Offering = {
   label: string;
   title: string;
   summary: string;
+  metaTitle?: string;
+  metaDescription?: string;
+  problemTitle?: string;
+  approachTitle?: string;
+  deliverablesTitle?: string;
   color: string;
   visual: string;
   image?: string;
@@ -227,8 +232,13 @@ export const services: Offering[] = [
   {
     slug: 'seo',
     name: 'Search Engine Optimisation',
+    metaTitle: 'Technical SEO & AI Search (GEO) Services | Klyro Works',
+    metaDescription: 'Technical SEO, Schema entity mapping, and AI Search (GEO) strategies for UK & US businesses. Clean code, zero black-hat risks, and transparent reporting.',
     label: 'TECHNICAL, ON-PAGE & LOCAL VISIBILITY',
-    title: 'Commercial Search Visibility Built on Intent, Not Algorithm Chasing.',
+    title: 'Technical SEO & AI Search Visibility Built on Commercial Intent.',
+    problemTitle: 'The Search Bottlenecks Stalling Organic Inquiries',
+    approachTitle: 'Engineered Search: Technical Health Meets Buyer Psychology',
+    deliverablesTitle: 'Technical SEO Scope & Guaranteed Deliverables',
     summary: 'High-impact technical SEO, high-intent keyword mapping, and transparent local search strategies for US and UK businesses. We resolve crawl bottlenecks, structure data with Schema.org, and drive qualified consultation opportunities with zero black-hat risks.',
     color: 'lime',
     visual: 'analytics',
@@ -236,14 +246,14 @@ export const services: Offering[] = [
     problem: 'Most businesses waste months of budget chasing vanity keyword rankings that drive zero commercial enquiries. Search engines reward authoritative, fast, and helpful websites, but legacy SEO agencies frequently obscure their work with opaque link-building schemes, automated low-quality blog posts, and vague monthly reports. When technical crawl barriers, duplicate URL parameters, and poor Core Web Vitals go unaddressed, organic discovery stalls and high-intent prospects land on your competitors’ pages.',
     approach: 'We treat SEO as modern software engineering and customer psychology. We conduct exhaustive technical crawls with Screaming Frog and Sitebulb to eliminate indexation bloat, map structured data schemas (JSON-LD) so AI engines and Google accurately comprehend your entities, and align keyword research strictly with high-converting commercial intent. Every optimization is documented, tracked in Google Search Console, and backed by ethical, white-hat principles aligned with Google’s Search Essentials and UK/US advertising guidelines.',
     deliverables: [
-      'Comprehensive Technical Architecture & Indexation Audit',
-      'High-Intent Commercial Keyword Intelligence & Content Gap Mapping',
-      'On-Page Semantic Optimization & Heading Structure Refinement',
-      'Core Web Vitals & Page Experience Speed Remediation',
-      'Local Google Business Profile & Citation Consistency Management',
-      'Internal Linking Architecture & Information Hierarchy Overhaul',
-      'Search Intent Service Page Copywriting & Conversion Optimization',
-      'Automated Organic Performance Dashboards & Search Console Health',
+      'Comprehensive Technical Architecture & Indexation Audit: Deep crawl identifying crawl loops, 301 chains, canonical conflicts, and orphaned URLs.',
+      'High-Intent Commercial Keyword Intelligence: Targeting decision-stage queries with verified commercial intent rather than vanity traffic.',
+      'On-Page Semantic Optimization: Clean heading hierarchies (H1-H3), keyword density balancing, and meta tag refactoring.',
+      'Core Web Vitals & Page Experience Remediation: Sub-second LCP, minimal CLS, and instant responsiveness to satisfy Google page experience signals.',
+      'Local Google Business Profile & Citation Management: Consistent NAP verification, Google Business Profile optimization, and local entity signals.',
+      'Internal Linking Architecture Overhaul: Hub-and-spoke topic clustering that distributes link equity directly to high-margin service pages.',
+      'Search Intent Service Page Copywriting: Authoritative, E-E-A-T aligned copy engineered to convert organic visitors into consultations.',
+      'Automated Looker Studio Performance Dashboards: Live Google Search Console and GA4 tracking with zero proprietary agency lock-in.',
     ],
     outcomes: [
       'Elimination of critical crawl errors, duplicate parameters, and indexation bottlenecks',

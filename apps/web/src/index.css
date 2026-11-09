@@ -1176,6 +1176,7 @@ h2 > span { color: #64748b; font-weight: 500; }
 .tile-index { color: #2563eb; font-weight: 800; font-size: 15px; }
 .tile-arrow { color: #94a3b8; }
 .tile-title { color: #0f172a; font-size: 15.5px; font-weight: 600; line-height: 1.4; margin: 4px 0 0; }
+.tile-desc { color: #64748b; font-size: 13px; line-height: 1.45; margin: 6px 0 0; }
 .tile-tech-spec {
   font-size: 11px;
   color: #1d4ed8;
