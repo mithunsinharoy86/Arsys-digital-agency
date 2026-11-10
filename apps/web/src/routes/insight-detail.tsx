@@ -1,9 +1,9 @@
-import type { Route } from './+types/insight-detail';
-import { seo, absoluteUrl, siteOriginFrom } from '@/lib/seo';
-import { articles, images } from '@/data/site';
-import { PageIntro } from '@/components/page-intro';
-import { ArticleContent } from '@/components/article-content';
-import { ContactSection } from '@/components/contact-section';
-export function loader({params}:Route.LoaderArgs){const article=articles.find(a=>a.slug===params.slug);if(!article)throw new Response('Guide not found',{status:404});return {article};}
-export function meta({matches,location,loaderData}:Route.MetaArgs){if(!loaderData)return seo({matches,location},{title:'Guide not found | Klyro Works',description:'Explore practical digital strategy guides from Klyro Works.',noindex:true});const {article}=loaderData;const origin=siteOriginFrom(matches);const image=article.visual==='property' ? images.property : article.visual==='dental' ? images.dental : images.team;return seo({matches,location},{title:article.title,description:article.intro,image,type:'article',jsonLd:[{'@context':'https://schema.org','@type':'Article',headline:article.title,description:article.intro,image,author:{'@type':'Organization',name:'Klyro Works'},publisher:{'@type':'Organization',name:'Klyro Works'}},{'@context':'https://schema.org','@type':'BreadcrumbList',itemListElement:[{'@type':'ListItem',position:1,name:'Home',item:absoluteUrl(origin,'/')},{'@type':'ListItem',position:2,name:'Insights',item:absoluteUrl(origin,'/insights')},{'@type':'ListItem',position:3,name:article.title,item:absoluteUrl(origin,location.pathname)}]}]});}
-export default function InsightDetail({loaderData}:Route.ComponentProps){return <main><PageIntro label={loaderData.article.category} title={loaderData.article.title} description={loaderData.article.intro}/><ArticleContent article={loaderData.article}/><ContactSection/></main>;}
+import { redirect, type LoaderFunctionArgs } from 'react-router';
+
+export function loader({ params }: LoaderFunctionArgs) {
+  return redirect(`/blogs/${params.slug || ''}`, 301);
+}
+
+export default function InsightDetailRedirect() {
+  return null;
+}

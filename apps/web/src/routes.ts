@@ -8,6 +8,8 @@ export default [
 	route('industries/:slug', 'routes/industry-detail.tsx'),
 	route('our-work', 'routes/our-work.tsx'),
 	route('about', 'routes/about.tsx'),
+	route('blogs', 'routes/blogs.tsx'),
+	route('blogs/:slug', 'routes/blog-detail.tsx'),
 	route('insights', 'routes/insights.tsx'),
 	route('insights/:slug', 'routes/insight-detail.tsx'),
 	route('contact', 'routes/contact.tsx'),

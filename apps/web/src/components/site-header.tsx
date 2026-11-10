@@ -258,11 +258,11 @@ export function SiteHeader() {
         </NavLink>
 
         <NavLink
-          to="/insights"
+          to="/blogs"
           className={({ isActive }) => `nav-item-link ${isActive ? 'active' : ''}`}
           onClick={() => setActiveMenu(null)}
         >
-          Insights
+          Blogs
         </NavLink>
 
         <NavLink
@@ -625,11 +625,11 @@ export function SiteHeader() {
           </NavLink>
 
           <NavLink
-            to="/insights"
+            to="/blogs"
             className={({ isActive }) => `mobile-nav-link ${isActive ? 'active' : ''}`}
             onClick={() => setMobileOpen(false)}
           >
-            Insights
+            Blogs
           </NavLink>
 
           <NavLink

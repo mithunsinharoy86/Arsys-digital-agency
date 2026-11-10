@@ -7,7 +7,7 @@ type SitemapEntry = {
 	lastmod?: string;
 };
 
-const STATIC_PATHS = ['/', '/services', '/industries', '/our-work', '/about', '/insights', '/contact', '/privacy'];
+const STATIC_PATHS = ['/', '/services', '/industries', '/our-work', '/about', '/blogs', '/contact', '/privacy', '/terms'];
 
 function escapeXml(value: string): string {
 	return value
@@ -47,7 +47,7 @@ async function getDynamicEntries(): Promise<SitemapEntry[]> {
 	return [
 		...services.map(s => ({path: `/services/${s.slug}`})),
 		...industries.map(i => ({path: `/industries/${i.slug}`})),
-		...articles.map(a => ({path: `/insights/${a.slug}`})),
+		...articles.map(a => ({path: `/blogs/${a.slug}`})),
 	];
 }
 

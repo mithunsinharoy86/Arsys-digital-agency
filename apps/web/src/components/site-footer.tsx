@@ -43,7 +43,7 @@ export function SiteFooter() {
           <Link to="/industries">Industries we serve</Link>
           <Link to="/our-work">Our work</Link>
           <Link to="/about">About us</Link>
-          <Link to="/insights">Insights</Link>
+          <Link to="/blogs">Blogs</Link>
           <Link to="/terms">Terms of service</Link>
           <Link to="/privacy">Privacy policy</Link>
         </div>

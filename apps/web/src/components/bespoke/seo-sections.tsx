@@ -38,7 +38,7 @@ export function SeoSerpClusterSection() {
               </span>
               <span className="citation-pill">
                 <span className="citation-num">2</span>
-                <span>klyroworks.com/insights/generative-engine-optimization-framework</span>
+                <span>klyroworks.com/blogs/geo-and-ai-search-ranking</span>
               </span>
             </div>
           </div>
