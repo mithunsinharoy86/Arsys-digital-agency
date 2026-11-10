@@ -75,6 +75,13 @@ export default function BlogDetail({ loaderData }: Route.ComponentProps) {
         label={loaderData.article.category}
         title={loaderData.article.title}
         description={loaderData.article.intro}
+        hideEyebrow={true}
+        centered={true}
+        breadcrumbs={[
+          { label: 'Home', href: '/' },
+          { label: 'Blogs', href: '/blogs' },
+          { label: loaderData.article.category },
+        ]}
       />
       <ArticleContent article={loaderData.article} />
       <ContactSection />

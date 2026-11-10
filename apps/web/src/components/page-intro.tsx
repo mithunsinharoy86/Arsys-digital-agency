@@ -7,26 +7,45 @@ export function PageIntro({
   title,
   description,
   action = false,
+  hideEyebrow = false,
+  centered = false,
+  breadcrumbs,
 }: {
   label: string;
   title: string;
   description: string;
   action?: boolean;
+  hideEyebrow?: boolean;
+  centered?: boolean;
+  breadcrumbs?: Array<{ label: string; href?: string }>;
 }) {
   const { openModal } = useConsultationModal();
 
   return (
-    <section className="page-intro">
+    <section className={`page-intro ${centered ? 'page-intro-centered' : ''}`}>
       <div className="page-intro-aura" />
       <div className="page-intro-container">
         <nav className="breadcrumbs" aria-label="Breadcrumb">
-          <Link to="/">Home</Link>
-          <ChevronRight size={11} className="breadcrumb-separator" />
-          <span>{label}</span>
+          {breadcrumbs && breadcrumbs.length > 0 ? (
+            breadcrumbs.map((b, idx) => (
+              <span key={idx} className="breadcrumb-item-wrap">
+                {idx > 0 && <ChevronRight size={11} className="breadcrumb-separator" />}
+                {b.href ? <Link to={b.href}>{b.label}</Link> : <span>{b.label}</span>}
+              </span>
+            ))
+          ) : (
+            <>
+              <Link to="/">Home</Link>
+              <ChevronRight size={11} className="breadcrumb-separator" />
+              <span>{label}</span>
+            </>
+          )}
         </nav>
-        <div className="eyebrow page-intro-eyebrow">
-          <span className="live-dot" /> KLYRO WORKS &middot; {label.toUpperCase()}
-        </div>
+        {!hideEyebrow && (
+          <div className="eyebrow page-intro-eyebrow">
+            <span className="live-dot" /> KLYRO WORKS &middot; {label.toUpperCase()}
+          </div>
+        )}
         <h1>{title}</h1>
         <p>{description}</p>
         {action && (
