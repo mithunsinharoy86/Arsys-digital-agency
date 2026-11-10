@@ -81,3 +81,4 @@ export default function BlogDetail({ loaderData }: Route.ComponentProps) {
     </main>
   );
 }
+
