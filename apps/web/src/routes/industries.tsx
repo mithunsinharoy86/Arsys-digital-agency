@@ -1,5 +1,5 @@
 import type { Route } from './+types/industries';
-import { seo, absoluteUrl, siteOriginFrom } from '@/lib/seo';
+import { seo, absoluteUrl, siteOriginFrom, breadcrumbSchema } from '@/lib/seo';
 import { images, industries } from '@/data/site';
 import { PageIntro } from '@/components/page-intro';
 import { IndustriesSection } from '@/components/industries-section';
@@ -7,6 +7,7 @@ import { ProcessSection } from '@/components/process-section';
 import { ContactSection } from '@/components/contact-section';
 
 export function meta({ matches, location }: Route.MetaArgs) {
+  const origin = siteOriginFrom(matches);
   return seo(
     { matches, location },
     {
@@ -14,20 +15,23 @@ export function meta({ matches, location }: Route.MetaArgs) {
       description:
         'Industry-focused digital growth for real estate, dental clinics, ecommerce and professional services. Discover solutions for US and UK businesses.',
       image: images.property,
-      jsonLd: {
-        '@context': 'https://schema.org',
-        '@type': 'CollectionPage',
-        name: 'Industries served by Klyro Works',
-        mainEntity: {
-          '@type': 'ItemList',
-          itemListElement: industries.map((s, i) => ({
-            '@type': 'ListItem',
-            position: i + 1,
-            name: s.name,
-            url: absoluteUrl(siteOriginFrom(matches), `/industries/${s.slug}`),
-          })),
+      jsonLd: [
+        breadcrumbSchema(origin, [{ name: 'Industries', path: '/industries' }]),
+        {
+          '@context': 'https://schema.org',
+          '@type': 'CollectionPage',
+          name: 'Industries served by Klyro Works',
+          mainEntity: {
+            '@type': 'ItemList',
+            itemListElement: industries.map((s, i) => ({
+              '@type': 'ListItem',
+              position: i + 1,
+              name: s.name,
+              url: absoluteUrl(origin, `/industries/${s.slug}`),
+            })),
+          },
         },
-      },
+      ],
     }
   );
 }

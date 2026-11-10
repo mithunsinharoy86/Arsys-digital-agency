@@ -1,5 +1,5 @@
 import type { Route } from './+types/blogs';
-import { seo, absoluteUrl, siteOriginFrom } from '@/lib/seo';
+import { seo, absoluteUrl, siteOriginFrom, breadcrumbSchema } from '@/lib/seo';
 import { images, articles } from '@/data/site';
 import { PageIntro } from '@/components/page-intro';
 import { InsightsList } from '@/components/insights-list';
@@ -15,20 +15,23 @@ export function meta({ matches, location }: Route.MetaArgs) {
         'In-depth, 1000+ word guides to conversion-focused web development, local SEO, AI automation, Core Web Vitals, and Generative Engine Optimization (GEO).',
       image: images.webDevCorporate,
       path: '/blogs',
-      jsonLd: {
-        '@context': 'https://schema.org',
-        '@type': 'CollectionPage',
-        name: 'Klyro Works Engineering & Growth Blogs',
-        mainEntity: {
-          '@type': 'ItemList',
-          itemListElement: articles.map((a, i) => ({
-            '@type': 'ListItem',
-            position: i + 1,
-            name: a.title,
-            url: absoluteUrl(origin, `/blogs/${a.slug}`),
-          })),
+      jsonLd: [
+        breadcrumbSchema(origin, [{ name: 'Blogs', path: '/blogs' }]),
+        {
+          '@context': 'https://schema.org',
+          '@type': 'CollectionPage',
+          name: 'Klyro Works Engineering & Growth Blogs',
+          mainEntity: {
+            '@type': 'ItemList',
+            itemListElement: articles.map((a, i) => ({
+              '@type': 'ListItem',
+              position: i + 1,
+              name: a.title,
+              url: absoluteUrl(origin, `/blogs/${a.slug}`),
+            })),
+          },
         },
-      },
+      ],
     }
   );
 }

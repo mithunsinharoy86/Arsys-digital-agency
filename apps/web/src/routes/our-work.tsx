@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import type { Route } from './+types/our-work';
-import { seo } from '@/lib/seo';
+import { seo, siteOriginFrom, breadcrumbSchema } from '@/lib/seo';
 import { images, services, industries } from '@/data/site';
 import { PageIntro } from '@/components/page-intro';
 import { ServiceProjectsSection } from '@/components/service-projects-section';
@@ -9,6 +9,7 @@ import { ProcessSection } from '@/components/process-section';
 import { ContactSection } from '@/components/contact-section';
 
 export function meta({ matches, location }: Route.MetaArgs) {
+  const origin = siteOriginFrom(matches);
   return seo(
     { matches, location },
     {
@@ -16,6 +17,7 @@ export function meta({ matches, location }: Route.MetaArgs) {
       description:
         'Explore illustrative technical blueprints, enterprise web concepts, and digital architectures designed to demonstrate the engineering and design capabilities of Klyro Works.',
       image: images.webDevCorporate,
+      jsonLd: breadcrumbSchema(origin, [{ name: 'Our Work', path: '/our-work' }]),
     }
   );
 }

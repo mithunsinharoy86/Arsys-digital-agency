@@ -12,6 +12,7 @@
  * because SEO audits score the card tags on their own.
  */
 import type { MetaDescriptor } from 'react-router';
+import { images } from '@/data/site';
 
 type RouteMatchLike = { id: string; loaderData: unknown } | undefined;
 
@@ -43,11 +44,13 @@ export type SeoInput = {
 
 const ROOT_ROUTE_ID = 'root';
 
-/** The site's public origin, as published by the root loader. */
+/** The site's public origin, as published by the root loader with robust client & default fallback. */
 export const siteOriginFrom = (matches: readonly RouteMatchLike[]): string => {
 	const root = matches.find(match => match?.id === ROOT_ROUTE_ID);
-
-	return (root?.loaderData as { origin?: string } | undefined)?.origin ?? '';
+	const fromRoot = (root?.loaderData as { origin?: string } | undefined)?.origin;
+	if (fromRoot) return fromRoot;
+	if (typeof window !== 'undefined' && window.location?.origin) return window.location.origin;
+	return 'https://klyroworks.com';
 };
 
 export const absoluteUrl = (origin: string, target: string): string => {
@@ -55,13 +58,76 @@ export const absoluteUrl = (origin: string, target: string): string => {
 		return target;
 	}
 
-	return `${origin}${target.startsWith('/') ? target : `/${target}`}`;
+	const base = origin.replace(/\/$/, '');
+	const path = target.startsWith('/') ? target : `/${target}`;
+	return `${base}${path}`;
 };
+
+/**
+ * High-authority Schema.org Organization descriptor for Klyro Works.
+ */
+export function organizationSchema(origin: string) {
+	const base = origin.replace(/\/$/, '');
+	return {
+		'@context': 'https://schema.org',
+		'@type': 'ProfessionalService',
+		'@id': `${base}/#organization`,
+		name: 'Klyro Works',
+		alternateName: 'Klyro',
+		url: base,
+		logo: `${base}/favicon.png`,
+		image: images.property,
+		description:
+			'Bespoke website engineering, technical SEO, digital marketing, and AI workflow automation agency serving ambitious businesses across the United States and United Kingdom.',
+		email: 'hello@klyroworks.com',
+		telephone: '+44-20-8000-0000',
+		priceRange: '$$$$',
+		areaServed: [
+			{ '@type': 'Country', name: 'United States' },
+			{ '@type': 'Country', name: 'United Kingdom' },
+		],
+		knowsAbout: [
+			'Website Engineering',
+			'Technical SEO',
+			'Generative Engine Optimization (GEO)',
+			'AI Workflow Automation',
+			'UI/UX Design Systems',
+			'Headless Ecommerce',
+		],
+		contactPoint: {
+			'@type': 'ContactPoint',
+			contactType: 'sales and consultations',
+			email: 'hello@klyroworks.com',
+			availableLanguage: ['English'],
+		},
+	};
+}
+
+/**
+ * Standard Schema.org BreadcrumbList generator.
+ */
+export function breadcrumbSchema(origin: string, items: Array<{ name: string; path?: string }>) {
+	const base = origin.replace(/\/$/, '');
+	return {
+		'@context': 'https://schema.org',
+		'@type': 'BreadcrumbList',
+		itemListElement: [
+			{ '@type': 'ListItem', position: 1, name: 'Home', item: `${base}/` },
+			...items.map((item, idx) => ({
+				'@type': 'ListItem',
+				position: idx + 2,
+				name: item.name,
+				...(item.path ? { item: `${base}${item.path.startsWith('/') ? item.path : `/${item.path}`}` } : {}),
+			})),
+		],
+	};
+}
 
 export function seo({ matches, location }: SeoArgs, input: SeoInput): MetaDescriptor[] {
 	const origin = siteOriginFrom(matches);
 	const canonical = absoluteUrl(origin, input.path ?? location.pathname);
-	const imageUrl = input.image ? absoluteUrl(origin, input.image) : '';
+	const rawImage = input.image || images.webDevCorporate;
+	const imageUrl = absoluteUrl(origin, rawImage);
 
 	const tags: MetaDescriptor[] = [
 		{ title: input.title },
@@ -69,21 +135,17 @@ export function seo({ matches, location }: SeoArgs, input: SeoInput): MetaDescri
 		{ property: 'og:title', content: input.title },
 		{ property: 'og:description', content: input.description },
 		{ property: 'og:type', content: input.type ?? 'website' },
-		{ name: 'twitter:card', content: imageUrl ? 'summary_large_image' : 'summary' },
+		{ name: 'twitter:card', content: 'summary_large_image' },
 		{ name: 'twitter:title', content: input.title },
 		{ name: 'twitter:description', content: input.description },
+		{ tagName: 'link', rel: 'canonical', href: canonical },
+		{ property: 'og:url', content: canonical },
+		{ property: 'og:image', content: imageUrl },
+		{ name: 'twitter:image', content: imageUrl },
 	];
 
-	if (origin) {
-		tags.push({ tagName: 'link', rel: 'canonical', href: canonical }, { property: 'og:url', content: canonical });
-	}
-
-	if (imageUrl) {
-		tags.push({ property: 'og:image', content: imageUrl }, { name: 'twitter:image', content: imageUrl });
-	}
-
 	if (input.noindex) {
-		tags.push({ name: 'robots', content: 'noindex' });
+		tags.push({ name: 'robots', content: 'noindex, nofollow' });
 	}
 
 	for (const block of [input.jsonLd ?? []].flat()) {
