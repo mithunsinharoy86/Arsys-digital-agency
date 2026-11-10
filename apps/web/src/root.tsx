@@ -16,6 +16,7 @@ import { SiteHeader } from '@/components/site-header';
 import { SiteFooter } from '@/components/site-footer';
 import { CookieConsent } from '@/components/cookie-consent';
 import { ConsultationModalProvider } from '@/components/consultation-modal';
+import { MobileStickyCta } from '@/components/mobile-sticky-cta';
 
 export const links: Route.LinksFunction = () => [
 	{ rel: 'stylesheet', href: import.meta.env.DEV ? '/src/index.css?direct' : stylesheet },
@@ -115,6 +116,7 @@ export default function App() {
 			</div>
 			<SiteFooter />
 			<CookieConsent />
+			<MobileStickyCta />
 		</ConsultationModalProvider>
 	);
 }
