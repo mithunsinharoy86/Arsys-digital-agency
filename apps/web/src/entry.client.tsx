@@ -11,7 +11,14 @@ if (typeof window !== 'undefined') {
 			}
 			return child;
 		}
-		return originalRemoveChild.call(this, child) as T;
+		try {
+			return originalRemoveChild.call(this, child) as T;
+		} catch (err) {
+			if (typeof console !== 'undefined' && console.warn) {
+				console.warn('DOM removeChild exception suppressed:', err);
+			}
+			return child;
+		}
 	};
 
 	const originalInsertBefore = Node.prototype.insertBefore;
@@ -22,7 +29,14 @@ if (typeof window !== 'undefined') {
 			}
 			return newNode;
 		}
-		return originalInsertBefore.call(this, newNode, referenceNode) as T;
+		try {
+			return originalInsertBefore.call(this, newNode, referenceNode) as T;
+		} catch (err) {
+			if (typeof console !== 'undefined' && console.warn) {
+				console.warn('DOM insertBefore exception suppressed:', err);
+			}
+			return newNode;
+		}
 	};
 }
 
