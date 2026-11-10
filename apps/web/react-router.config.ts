@@ -4,4 +4,7 @@ export default {
 	appDirectory: 'src',
 	buildDirectory: '../../dist/apps/web',
 	ssr: true,
+	routeDiscovery: {
+		mode: 'initial',
+	},
 } satisfies Config;

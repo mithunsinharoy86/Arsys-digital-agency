@@ -1,0 +1,1 @@
+import{D as e}from"./utils-QtLids5q.js";function t(){return e(`/blogs`,301)}export{t as clientLoader};

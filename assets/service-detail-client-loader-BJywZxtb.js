@@ -1,0 +1,1 @@
+import{o as e}from"./site-Bvleqpfc.js";function t({params:t}){let n=e.find(e=>e.slug===t.slug);if(!n)throw new Response(`Service not found`,{status:404});return{item:n}}export{t as clientLoader};

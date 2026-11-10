@@ -34,6 +34,36 @@ if (entryJs) {
 // Ensure all canonical, schema, and meta URLs point to klyroworks.com
 html = html.replace(/http:\/\/localhost:\d+/g, 'https://klyroworks.com');
 
+// Set route discovery to initial mode so React Router doesn't lazy-fetch __manifest
+html = html.replace(/"routeDiscovery":\{"mode":"lazy","manifestPath":"\/__manifest"\}/g, '"routeDiscovery":{"mode":"initial"}');
+
+// Load full manifest with all 22 routes
+const manifestJsPath = path.resolve(__dirname, '../../../assets/manifest-caa19614.js');
+let fullManifest = null;
+if (fs.existsSync(manifestJsPath)) {
+  const content = fs.readFileSync(manifestJsPath, 'utf8').replace(/^window\.__reactRouterManifest=/, '').replace(/;$/, '');
+  try {
+    fullManifest = JSON.parse(content);
+    // Embed full manifest directly into index.html
+    html = html.replace(/window\.__reactRouterManifest\s*=\s*\{[\s\S]*?\};\s*window\.__reactRouterRouteModules/, `window.__reactRouterManifest = ${JSON.stringify(fullManifest)};\n  window.__reactRouterRouteModules`);
+  } catch (e) {
+    console.error('Failed to parse full manifest:', e);
+  }
+}
+
+// Generate assets/manifest.json and static __manifest file
+if (fullManifest) {
+  const manifestJsonStr = JSON.stringify({ routes: fullManifest.routes }, null, 2);
+  fs.writeFileSync(path.join(repoRootDir, 'assets/manifest.json'), manifestJsonStr, 'utf8');
+  fs.writeFileSync(path.join(repoRootDir, '__manifest'), manifestJsonStr, 'utf8');
+  if (fs.existsSync(rootDistDir)) {
+    const distAssets = path.join(rootDistDir, 'assets');
+    if (!fs.existsSync(distAssets)) fs.mkdirSync(distAssets, { recursive: true });
+    fs.writeFileSync(path.join(distAssets, 'manifest.json'), manifestJsonStr, 'utf8');
+    fs.writeFileSync(path.join(rootDistDir, '__manifest'), manifestJsonStr, 'utf8');
+  }
+}
+
 // 1. Write to nested client dir: dist/apps/web/client/
 fs.writeFileSync(path.join(clientDir, 'index.html'), html, 'utf8');
 fs.writeFileSync(path.join(clientDir, '404.html'), html, 'utf8');

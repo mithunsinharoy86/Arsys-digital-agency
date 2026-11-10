@@ -6,12 +6,20 @@
   RewriteCond %{HTTPS} !=on
   RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
 
+  # Serve __manifest as JSON for React Router
+  RewriteRule ^__manifest$ assets/manifest.json [L,T=application/json]
+
   # Don't rewrite real files or directories
   RewriteRule ^index\.html$ - [L]
-  RewriteCond %{REQUEST_FILENAME} !-f
-  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteCond %{REQUEST_FILENAME} -f [OR]
+  RewriteCond %{REQUEST_FILENAME} -d
+  RewriteRule ^ - [L]
 
-  # SPA Fallback for all inner routes (/services, /contact, etc.)
+  # Route directory to directory/index.html if exists
+  RewriteCond %{DOCUMENT_ROOT}/$1/index.html -f
+  RewriteRule ^(.*)/?$ $1/index.html [L]
+
+  # SPA Fallback for client routing
   RewriteRule . /index.html [L]
 </IfModule>
 
