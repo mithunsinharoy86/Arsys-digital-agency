@@ -48,7 +48,7 @@ export function UiUxDesignSystemSection() {
             </div>
           </div>
           <p className="token-desc">
-            All text and surface combinations tested rigorously against WCAG 2.1 AA and AAA standards to guarantee legibility for all users.
+            All text and surface combinations tested rigorously against WCAG 2.1 AA and AAA standards to meet rigorous contrast and legibility guidelines.
           </p>
         </div>
 

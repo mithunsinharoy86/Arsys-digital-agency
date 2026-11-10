@@ -145,10 +145,10 @@ export const services: Offering[] = [
       { label: 'Target Load Speed', value: '< 1.2s Target', detail: 'Sub-second LCP benchmark on real-world mobile 4G networks' },
       { label: 'Accessibility Standard', value: 'WCAG 2.1 AA', detail: 'High-contrast, keyboard-navigable semantic architecture' },
       { label: 'Code Ownership', value: '100%', detail: 'Complete intellectual property assignment upon milestone completion' },
-      { label: 'Post-Launch Warranty', value: '30 Days', detail: 'Dedicated engineering support to guarantee defect-free operation' },
+      { label: 'Post-Launch Warranty', value: '30 Days', detail: 'Dedicated engineering support to remediate code defects' },
     ],
     complianceGuarantees: [
-      'WCAG 2.1 AA Accessible (Accessible color contrast, keyboard navigable, screen-reader verified)',
+      'WCAG 2.1 AA Standards Alignment (Accessible color contrast, keyboard navigable, screen-reader tested)',
       'UK & EU GDPR Ready (Explicit consent, cookie banner, data minimization)',
       'US CCPA/CPRA Compliant (Notice at collection, no selling of consumer data)',
       '100% IP Code Ownership Transfer on final milestone payment',
@@ -731,11 +731,11 @@ export const services: Offering[] = [
       { label: 'Dev Handoff Standard', value: 'Production-Ready', detail: 'Standardized design tokens and clean developer specs' },
     ],
     complianceGuarantees: [
-      'WCAG 2.1 AA Compliant (Strict 4.5:1 text contrast and 3:1 interface element contrast ratios)',
+      'WCAG 2.1 AA Standards (Strict 4.5:1 text contrast and 3:1 interface element contrast ratios)',
       '100% Client Ownership of all Figma files, design system components, prototypes, and vector assets',
       'Inclusive Design Best Practices adhering to UK Equality Act and US Section 508 / ADA standards',
       'Zero proprietary design locks; all assets exported in open, universally supported web formats',
-      'Annotated developer handoff documentation guaranteeing accurate implementation',
+      'Annotated developer handoff documentation ensuring accurate implementation',
     ],
     questions: [
       {
@@ -885,7 +885,7 @@ export const services: Offering[] = [
       'Full Worldwide Copyright & IP Ownership Assignment executed upon final milestone settlement',
       'Commercial Font Licensing Guidance (Specifying exact webfont and desktop licenses required)',
       'Trademark Clearance-Ready vector files formatted for USPTO and UK Intellectual Property Office filing',
-      'Brand consistency guarantee across digital, web, mobile, and physical print mediums',
+      'Brand consistency guidelines across digital, web, mobile, and physical print mediums',
     ],
     questions: [
       {

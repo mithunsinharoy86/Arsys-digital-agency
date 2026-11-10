@@ -15,8 +15,8 @@ export function TermsContent() {
             <strong>United States &amp; United Kingdom</strong>
           </div>
           <div>
-            <span className="eyebrow">LEGAL ENTITIES</span>
-            <strong>Klyro Works Ltd &amp; Klyro Works LLC</strong>
+            <span className="eyebrow">COMMERCIAL BRAND</span>
+            <strong>Klyro Works (UK &amp; US)</strong>
           </div>
           <div>
             <span className="eyebrow">INQUIRIES</span>
@@ -30,7 +30,7 @@ export function TermsContent() {
       <div className="compliance-notice-box">
         <Shield size={20} className="compliance-notice-icon" />
         <p>
-          These Terms of Service govern professional digital services provided by <b>Klyro Works</b> (comprising <b>Klyro Works Ltd</b> in the UK and <b>Klyro Works LLC</b> in the USA). By engaging our services, requesting a consultation, or executing a Statement of Work (SOW), you agree to these commercial terms.
+          These Terms of Service govern professional digital services provided by <b>Klyro Works</b> (&ldquo;the Agency&rdquo;) to commercial clients across the United Kingdom, United States, and international jurisdictions. By engaging our services, requesting a consultation, or executing a Statement of Work (SOW), you agree to these commercial terms.
         </p>
       </div>
 
@@ -71,6 +71,7 @@ export function TermsContent() {
         <li><b>Custom Deliverables:</b> Upon full and final settlement of all agreed invoices, Klyro Works assigns to the Client all worldwide rights, title, and intellectual property in the bespoke visual designs, custom copy, and unique frontend code developed specifically for the Client.</li>
         <li><b>Pre-Existing Frameworks &amp; Tools:</b> Klyro Works retains ownership of its proprietary methodologies, pre-existing software boilerplates, generic code libraries, and internal automation scripts (&ldquo;Agency Background IP&rdquo;). The Client is granted an irrevocable, perpetual, royalty-free license to use such Background IP solely in connection with the delivered website or application.</li>
         <li><b>Open Source Components:</b> Third-party open-source software (such as React, Tailwind CSS, or React Router) remains subject to its respective open-source license agreements.</li>
+        <li><b>Third-Party Trademarks &amp; Nominative Fair Use:</b> All third-party product names, logos, service marks, and trademarks mentioned on this website (including Shopify, WordPress, React, Next.js, Figma, Google, Microsoft, LinkedIn, HubSpot, Salesforce, and others) are the property of their respective owners. Any reference to these entities is solely for nominative technical identification and compatibility purposes, and does not imply any affiliation, sponsorship, or endorsement.</li>
       </ul>
 
       <h2>5. Performance Disclaimers &amp; Advertising Compliance</h2>
@@ -131,13 +132,13 @@ export function TermsContent() {
         <li><b>Informal Negotiation:</b> Before initiating formal legal arbitration or court proceedings, both parties commit to engaging in good-faith executive negotiations for a minimum period of thirty (30) days.</li>
       </ul>
 
-      <h2>12. Legal Entity Information &amp; Notices</h2>
+      <h2>12. Commercial Inquiries &amp; Notices</h2>
       <div className="terms-entity-cards">
         <div className="terms-entity-box">
           <Building2 size={18} className="terms-box-icon" />
-          <strong>United Kingdom Entity</strong>
+          <strong>United Kingdom Commercial Office</strong>
           <p>
-            Klyro Works Ltd<br />
+            Klyro Works (UK Operations)<br />
             128 City Road<br />
             London, EC1V 2NX<br />
             United Kingdom<br />
@@ -146,9 +147,9 @@ export function TermsContent() {
         </div>
         <div className="terms-entity-box">
           <Building2 size={18} className="terms-box-icon" />
-          <strong>United States Entity</strong>
+          <strong>United States Commercial Office</strong>
           <p>
-            Klyro Works LLC<br />
+            Klyro Works (US Operations)<br />
             1309 Coffeen Avenue STE 1200<br />
             Sheridan, WY 82801<br />
             United States<br />

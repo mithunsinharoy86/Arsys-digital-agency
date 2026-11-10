@@ -16,7 +16,7 @@ export function PrivacyContent() {
           </div>
           <div>
             <span className="eyebrow">DATA CONTROLLER</span>
-            <strong>Klyro Works Ltd &amp; Klyro Works LLC</strong>
+            <strong>Klyro Works (UK &amp; US Operations)</strong>
           </div>
           <div>
             <span className="eyebrow">PRIVACY OFFICE</span>
@@ -41,13 +41,13 @@ export function PrivacyContent() {
       <div className="terms-entity-cards">
         <div className="terms-entity-box">
           <Building2 size={18} className="terms-box-icon" />
-          <strong>United Kingdom Controller</strong>
+          <strong>United Kingdom Data Controller</strong>
           <p>
-            Klyro Works Ltd<br />
+            Klyro Works (UK Operations)<br />
             128 City Road<br />
             London, EC1V 2NX<br />
             United Kingdom<br />
-            ICO Registration: In progress / Maintained<br />
+            Supervisory Authority: UK Information Commissioner&rsquo;s Office (ICO) Guidelines<br />
             Email: <a href="mailto:admin@klyroworks.com">admin@klyroworks.com</a>
           </p>
         </div>
@@ -55,7 +55,7 @@ export function PrivacyContent() {
           <Building2 size={18} className="terms-box-icon" />
           <strong>United States Business</strong>
           <p>
-            Klyro Works LLC<br />
+            Klyro Works (US Operations)<br />
             1309 Coffeen Avenue STE 1200<br />
             Sheridan, WY 82801<br />
             United States<br />

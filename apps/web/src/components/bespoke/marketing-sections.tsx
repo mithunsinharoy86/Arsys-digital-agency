@@ -75,7 +75,7 @@ export function SocialLeadershipSection() {
     {
       day: 'Monthly Pillar',
       title: 'Authentic Video & Case Walkthroughs',
-      detail: 'Real-world studio and field video clips highlighting the people, thinking, and engineering behind client transformations.',
+      detail: 'Real-world studio and field video clips highlighting the people, thinking, and engineering behind production blueprints and brand systems.',
     },
   ];
 

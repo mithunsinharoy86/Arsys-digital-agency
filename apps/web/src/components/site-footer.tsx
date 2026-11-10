@@ -25,7 +25,7 @@ export function SiteFooter() {
           </p>
           <span className="eyebrow">UNITED STATES &middot; UNITED KINGDOM</span>
           <div className="footer-entity-note">
-            Klyro Works Ltd (UK) &middot; Klyro Works LLC (US)
+            Klyro Works &middot; London (UK) &amp; United States
           </div>
         </div>
 

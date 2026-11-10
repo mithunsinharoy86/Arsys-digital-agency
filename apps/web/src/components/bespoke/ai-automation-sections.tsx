@@ -18,7 +18,7 @@ export function AiWorkflowCanvasSection() {
       type: 'Semantic Reasoning',
       desc: 'Analyzes intent, extracts budget, validates lead criteria, and flags urgency.',
       icon: Cpu,
-      badge: 'Zero Hallucinations',
+      badge: 'Deterministic Validation',
     },
     {
       id: 'n3',
