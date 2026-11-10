@@ -71,4 +71,21 @@ if (fs.existsSync(imagesDir)) {
   fs.cpSync(imagesDir, repoImagesDir, { recursive: true });
 }
 
-console.log('✓ [postbuild] Generated index.html, 404.html, and assets across ALL possible web roots');
+// Copy route directories (about, blogs, contact, industries, our-work, privacy, services, terms)
+const routeDirs = ['about', 'blogs', 'contact', 'industries', 'our-work', 'privacy', 'services', 'terms'];
+for (const dir of routeDirs) {
+  const src = path.join(clientDir, dir);
+  if (fs.existsSync(src)) {
+    fs.cpSync(src, path.join(rootDistDir, dir), { recursive: true });
+    fs.cpSync(src, path.join(repoRootDir, dir), { recursive: true });
+  }
+}
+
+// Copy .data files if present
+const dataFiles = fs.readdirSync(clientDir).filter(f => f.endsWith('.data'));
+for (const f of dataFiles) {
+  fs.copyFileSync(path.join(clientDir, f), path.join(rootDistDir, f));
+  fs.copyFileSync(path.join(clientDir, f), path.join(repoRootDir, f));
+}
+
+console.log('✓ [postbuild] Generated index.html, 404.html, and route folders across ALL possible web roots');

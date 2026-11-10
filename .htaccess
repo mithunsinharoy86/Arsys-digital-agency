@@ -6,20 +6,16 @@
   RewriteCond %{HTTPS} !=on
   RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
 
-  # Serve existing files and directories directly
-  RewriteCond %{REQUEST_FILENAME} -f [OR]
-  RewriteCond %{REQUEST_FILENAME} -d
-  RewriteRule ^ - [L]
+  # Don't rewrite real files or directories
+  RewriteRule ^index\.html$ - [L]
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME} !-d
 
-  # Route subfolder index.html if present
-  RewriteCond %{DOCUMENT_ROOT}/$1/index.html -f
-  RewriteRule ^(.*)/?$ $1/index.html [L]
-
-  # SPA fallback to root index.html
-  RewriteRule ^ index.html [L]
+  # SPA Fallback for all inner routes (/services, /contact, etc.)
+  RewriteRule . /index.html [L]
 </IfModule>
 
-# Disable directory browsing (prevents 403 Forbidden)
+# Disable directory browsing
 Options -Indexes
 
 # Security headers
@@ -27,4 +23,3 @@ Options -Indexes
   Header set X-Content-Type-Options "nosniff"
   Header set X-Frame-Options "SAMEORIGIN"
 </IfModule>
-
