@@ -1,5 +1,5 @@
 import { articles, images } from '@/data/site';
-import { Clock, ShieldCheck, UserCheck, CheckCircle2 } from 'lucide-react';
+import { Clock, UserCheck, CheckCircle2 } from 'lucide-react';
 
 const visualMap: Record<string, string> = {
   property: images.property,
@@ -41,9 +41,8 @@ export function ArticleContent({ article }: { article: typeof articles[number] }
       </div>
 
       <div className="article-sections-flow">
-        {article.sections.map((s, idx) => (
+        {article.sections.map((s) => (
           <section key={s.title} className="article-section-block">
-            <div className="article-section-index">PHASE 0{idx + 1}</div>
             <h2>{s.title}</h2>
 
             {/* Paragraphs */}
@@ -114,11 +113,19 @@ export function ArticleContent({ article }: { article: typeof articles[number] }
       </div>
 
       <div className="article-editorial-footer">
-        <ShieldCheck size={20} className="editorial-footer-icon" />
+        <div className="article-editorial-logo-circle" aria-hidden="true">
+          <img
+            src="/favicon.png"
+            alt="Klyro Works Logo"
+            className="article-editorial-logo-img"
+            width="52"
+            height="52"
+          />
+        </div>
         <div>
           <strong>Editorial Standards &amp; Compliance Notice</strong>
           <p>
-            Authored by Klyro Works. This publication provides actionable strategic frameworks based on UK, US, and international digital engineering best practices. We do not make unsubstantiated commercial guarantees.
+            Authored by Klyro Works Senior Strategy &amp; Engineering Team. This publication provides actionable strategic frameworks based on UK, US, and international digital engineering best practices. We do not make unsubstantiated commercial guarantees.
           </p>
         </div>
       </div>
