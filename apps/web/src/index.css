@@ -2391,10 +2391,14 @@ details[open] .faq-plus { transform: rotate(45deg); color: #ea580c; }
 }
 .contact-split-form-wrap {
   padding: 44px 44px;
-  background: #ffffff;
+  background: rgba(255, 255, 255, 0.68);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
   display: flex;
   flex-direction: column;
   justify-content: center;
+  border-left: 1px solid rgba(255, 255, 255, 0.7);
+  box-shadow: inset 1px 0 1px 0 rgba(255, 255, 255, 0.9);
 }
 .split-form-header h3 {
   font-size: 26px;
@@ -2420,29 +2424,38 @@ details[open] .faq-plus { transform: rotate(45deg); color: #ea580c; }
 .split-form select,
 .split-form textarea {
   width: 100%;
-  background: #f8fafc;
-  border: 1px solid #cbd5e1;
-  border-radius: 8px;
-  padding: 11px 14px;
+  background: rgba(255, 255, 255, 0.55);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(203, 213, 225, 0.75);
+  box-shadow: inset 0 1px 3px rgba(15, 23, 42, 0.02), 0 1px 2px rgba(255, 255, 255, 0.8);
+  border-radius: 10px;
+  padding: 12px 15px;
   font-size: 14px;
   color: #0f172a;
   outline: none;
-  transition: border-color 0.2s, box-shadow 0.2s, background-color 0.2s;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
   margin-bottom: 12px;
+}
+.split-form input:hover,
+.split-form select:hover,
+.split-form textarea:hover {
+  background: rgba(255, 255, 255, 0.8);
+  border-color: rgba(148, 163, 184, 0.9);
 }
 .split-form input:focus,
 .split-form select:focus,
 .split-form textarea:focus {
-  background: #ffffff;
+  background: rgba(255, 255, 255, 0.95);
   border-color: #146844;
-  box-shadow: 0 0 0 3px rgba(20, 104, 68, 0.12);
+  box-shadow: 0 0 0 4px rgba(20, 104, 68, 0.12), 0 2px 6px rgba(20, 104, 68, 0.05);
 }
 /* Modern Web Guidance: Validate only after user interaction */
 .split-form input:user-invalid,
 .split-form select:user-invalid,
 .split-form textarea:user-invalid {
   border-color: #e11d48;
-  background-color: #fff1f2;
+  background-color: rgba(255, 241, 242, 0.8);
 }
 .split-form input:user-invalid:focus,
 .split-form select:user-invalid:focus,
@@ -2455,7 +2468,7 @@ details[open] .faq-plus { transform: rotate(45deg); color: #ea580c; }
 .split-form textarea:user-valid:not(:placeholder-shown) {
   border-color: #10b981;
 }
-.split-form textarea { resize: vertical; min-height: 80px; }
+.split-form textarea { resize: vertical; min-height: 85px; }
 .split-form .form-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -2466,19 +2479,18 @@ details[open] .faq-plus { transform: rotate(45deg); color: #ea580c; }
   width: 100%;
   justify-content: center;
   padding: 14px 22px;
-  font-size: 14px;
+  font-size: 14.5px;
   font-weight: 700;
-  border-radius: 10px;
+  border-radius: 12px;
   margin-top: 6px;
+  background: linear-gradient(135deg, #146844 0%, #0d4d31 100%);
+  box-shadow: 0 8px 24px -4px rgba(20, 104, 68, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.25);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
 }
-.form-secure-note {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 6px;
-  font-size: 11.5px;
-  color: #64748b;
-  margin-top: 14px;
+.split-submit-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 12px 28px -4px rgba(20, 104, 68, 0.42), inset 0 1px 0 rgba(255, 255, 255, 0.3);
 }
 .honeypot {
   display: none !important;
@@ -2605,10 +2617,6 @@ details[open] .faq-plus { transform: rotate(45deg); color: #ea580c; }
     border-radius: 12px;
     padding: 14px;
     margin-top: 6px;
-  }
-  .form-secure-note {
-    font-size: 11px;
-    margin-top: 12px;
   }
 }
 

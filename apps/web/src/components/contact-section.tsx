@@ -1,6 +1,6 @@
 import { useState, type FormEvent } from 'react';
 import { Link, useSearchParams } from 'react-router';
-import { ArrowUpRight, CheckCircle2, LoaderCircle, Check, ShieldCheck, Lock } from 'lucide-react';
+import { ArrowUpRight, CheckCircle2, LoaderCircle, Check, ShieldCheck } from 'lucide-react';
 import { services, images } from '@/data/site';
 
 export function ContactSection({
@@ -166,7 +166,6 @@ export function ContactSection({
                     name="name"
                     maxLength={100}
                     autoComplete="name"
-                    placeholder="e.g. Eleanor Vance"
                   />
                 </label>
 
@@ -178,7 +177,6 @@ export function ContactSection({
                     type="email"
                     maxLength={100}
                     autoComplete="email"
-                    placeholder="eleanor@company.com"
                   />
                 </label>
 
@@ -188,7 +186,6 @@ export function ContactSection({
                     name="company"
                     maxLength={100}
                     autoComplete="organization"
-                    placeholder="Your business name"
                   />
                 </label>
 
@@ -231,7 +228,6 @@ export function ContactSection({
                   minLength={10}
                   maxLength={5000}
                   rows={3}
-                  placeholder="Tell us about your current digital obstacles, goals, or upcoming launch timeline..."
                 />
               </label>
 
@@ -273,11 +269,6 @@ export function ContactSection({
                   </>
                 )}
               </button>
-
-              <div className="form-secure-note">
-                <Lock size={12} />
-                <span>Strictly confidential &middot; 24h senior review &middot; No spam</span>
-              </div>
             </form>
           )}
         </div>
