@@ -440,15 +440,6 @@ export function SiteHeader() {
                         );
                       })}
                     </div>
-
-                    <div className="mega-menu-footer-strip">
-                      <div className="mega-menu-footer-links">
-                        <span className="mega-menu-footer-label">Engineering Standards:</span>
-                        <span className="mega-guarantee-pill">&lt; 1.2s Target LCP</span>
-                        <span className="mega-guarantee-pill">100% Code Ownership</span>
-                        <span className="mega-guarantee-pill">Dual US/UK SOW Protection</span>
-                      </div>
-                    </div>
                   </div>
 
                   <aside className="mega-spotlight-card blue-tint">
