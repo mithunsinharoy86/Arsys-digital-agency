@@ -48,6 +48,7 @@
   html {
     scroll-behavior: smooth;
     scroll-padding-top: 90px;
+    interpolate-size: allow-keywords;
   }
   ::selection {
     background: #dbeafe;
@@ -2435,6 +2436,24 @@ details[open] .faq-plus { transform: rotate(45deg); color: #ea580c; }
   background: #ffffff;
   border-color: #146844;
   box-shadow: 0 0 0 3px rgba(20, 104, 68, 0.12);
+}
+/* Modern Web Guidance: Validate only after user interaction */
+.split-form input:user-invalid,
+.split-form select:user-invalid,
+.split-form textarea:user-invalid {
+  border-color: #e11d48;
+  background-color: #fff1f2;
+}
+.split-form input:user-invalid:focus,
+.split-form select:user-invalid:focus,
+.split-form textarea:user-invalid:focus {
+  border-color: #be123c;
+  box-shadow: 0 0 0 3px rgba(225, 29, 72, 0.15);
+}
+.split-form input:user-valid:not(:placeholder-shown),
+.split-form select:user-valid,
+.split-form textarea:user-valid:not(:placeholder-shown) {
+  border-color: #10b981;
 }
 .split-form textarea { resize: vertical; min-height: 80px; }
 .split-form .form-grid {

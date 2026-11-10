@@ -76,6 +76,26 @@ export function Layout({ children }: { children: React.ReactNode }) {
 				<Meta />
 				<Links />
 				<HorizonsPreviewScripts />
+				{/* Modern Web Guidance: Speculation Rules API for instant same-origin link prefetching */}
+				<script
+					type="speculationrules"
+					dangerouslySetInnerHTML={{
+						__html: JSON.stringify({
+							prefetch: [
+								{
+									where: {
+										and: [
+											{ href_matches: '/*' },
+											{ not: { href_matches: '/api/*' } },
+											{ not: { selector_matches: '[rel~=nofollow]' } },
+										],
+									},
+									eagerness: 'moderate',
+								},
+							],
+						}),
+					}}
+				/>
 			</head>
 			<body translate="no" className="notranslate" suppressHydrationWarning>
 				<div id="root">{children}</div>
