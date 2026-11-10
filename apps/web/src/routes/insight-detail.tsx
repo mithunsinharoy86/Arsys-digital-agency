@@ -1,7 +1,8 @@
 import { redirect, type LoaderFunctionArgs } from 'react-router';
 
 export function loader({ params }: LoaderFunctionArgs) {
-  return redirect(`/blogs/${params.slug || ''}`, 301);
+  const safeSlug = (params.slug || '').replace(/[^a-zA-Z0-9-_]/g, '');
+  return redirect(`/blogs/${safeSlug}`, 301);
 }
 
 export default function InsightDetailRedirect() {

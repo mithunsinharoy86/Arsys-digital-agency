@@ -80,6 +80,12 @@ export default function handleRequest(
 					const stream = createReadableStreamFromReadable(body);
 
 					responseHeaders.set('Content-Type', 'text/html');
+					responseHeaders.set('X-Content-Type-Options', 'nosniff');
+					responseHeaders.set('X-Frame-Options', 'SAMEORIGIN');
+					responseHeaders.set('Referrer-Policy', 'strict-origin-when-cross-origin');
+					responseHeaders.set('Permissions-Policy', 'camera=(), microphone=(), geolocation=(), payment=()');
+					responseHeaders.set('Strict-Transport-Security', 'max-age=31536000; includeSubDomains');
+					responseHeaders.set('Cross-Origin-Opener-Policy', 'same-origin-allow-popups');
 
 					pipe(body);
 

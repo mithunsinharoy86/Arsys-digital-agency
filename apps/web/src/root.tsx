@@ -54,7 +54,14 @@ export function loader({ request }: Route.LoaderArgs) {
  * there rather than returning only that route's own headers.
  */
 export function headers({ loaderHeaders }: Route.HeadersArgs) {
-	return loaderHeaders;
+	const headers = new Headers(loaderHeaders);
+	headers.set('X-Content-Type-Options', 'nosniff');
+	headers.set('X-Frame-Options', 'SAMEORIGIN');
+	headers.set('Referrer-Policy', 'strict-origin-when-cross-origin');
+	headers.set('Permissions-Policy', 'camera=(), microphone=(), geolocation=(), payment=()');
+	headers.set('Strict-Transport-Security', 'max-age=31536000; includeSubDomains');
+	headers.set('Cross-Origin-Opener-Policy', 'same-origin-allow-popups');
+	return headers;
 }
 
 export function Layout({ children }: { children: React.ReactNode }) {
