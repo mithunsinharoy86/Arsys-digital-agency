@@ -8,6 +8,7 @@ const assetsDir = path.join(clientDir, 'assets');
 const templatePath = path.resolve(__dirname, '../index.html.template');
 
 const rootDistDir = path.resolve(__dirname, '../../../dist');
+const repoRootDir = path.resolve(__dirname, '../../..');
 
 if (!fs.existsSync(clientDir)) {
   console.error('Client dir not found:', clientDir);
@@ -37,25 +38,37 @@ html = html.replace(/http:\/\/localhost:\d+/g, 'https://klyroworks.com');
 fs.writeFileSync(path.join(clientDir, 'index.html'), html, 'utf8');
 fs.writeFileSync(path.join(clientDir, '404.html'), html, 'utf8');
 
-// 2. Also write to root dist/: dist/ (in case Hostinger output directory is just "dist")
+// 2. Write to root dist/: dist/ (if Hostinger Output directory is "dist")
 fs.writeFileSync(path.join(rootDistDir, 'index.html'), html, 'utf8');
 fs.writeFileSync(path.join(rootDistDir, '404.html'), html, 'utf8');
 
-// Copy .htaccess to root dist
+// 3. Write to repository root: ./ (if Hostinger Output directory is "none" or root)
+fs.writeFileSync(path.join(repoRootDir, 'index.html'), html, 'utf8');
+fs.writeFileSync(path.join(repoRootDir, '404.html'), html, 'utf8');
+
+// Copy .htaccess to all locations
 const htaccessPath = path.resolve(__dirname, '../public/.htaccess');
 if (fs.existsSync(htaccessPath)) {
   fs.copyFileSync(htaccessPath, path.join(rootDistDir, '.htaccess'));
+  fs.copyFileSync(htaccessPath, path.join(repoRootDir, '.htaccess'));
 }
 
-// Copy assets and images to root dist
+// Copy assets and images to root dist and repo root
 const rootAssetsDir = path.join(rootDistDir, 'assets');
 if (!fs.existsSync(rootAssetsDir)) {
   fs.cpSync(assetsDir, rootAssetsDir, { recursive: true });
 }
+const repoAssetsDir = path.join(repoRootDir, 'assets');
+fs.cpSync(assetsDir, repoAssetsDir, { recursive: true });
+
 const imagesDir = path.join(clientDir, 'images');
 const rootImagesDir = path.join(rootDistDir, 'images');
 if (fs.existsSync(imagesDir) && !fs.existsSync(rootImagesDir)) {
   fs.cpSync(imagesDir, rootImagesDir, { recursive: true });
 }
+const repoImagesDir = path.join(repoRootDir, 'images');
+if (fs.existsSync(imagesDir)) {
+  fs.cpSync(imagesDir, repoImagesDir, { recursive: true });
+}
 
-console.log('✓ [postbuild] Generated index.html, 404.html, and .htaccess in BOTH dist/ and dist/apps/web/client/');
+console.log('✓ [postbuild] Generated index.html, 404.html, and assets across ALL possible web roots');

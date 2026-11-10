@@ -1,0 +1,1 @@
+import{h as e}from"./consultation-modal-BD20sg1p.js";var t=e(`ChevronRight`,[[`path`,{d:`m9 18 6-6-6-6`,key:`mthhwq`}]]);export{t};
