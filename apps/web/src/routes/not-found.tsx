@@ -3,9 +3,10 @@ import { seo } from '@/lib/seo';
 import { Link } from 'react-router';
 import { ArrowUpRight, Home, Globe, Building2, BookOpen, Mail } from 'lucide-react';
 
-export function loader() {
-  throw new Response('Page not found', { status: 404, statusText: 'Not Found' });
+export function clientLoader() {
+  return null;
 }
+clientLoader.hydrate = true;
 
 export function meta({ matches, location }: Route.MetaArgs) {
   return seo(

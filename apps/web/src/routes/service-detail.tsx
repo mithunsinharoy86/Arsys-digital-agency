@@ -25,17 +25,12 @@ import {
   ContentClusterPyramidSection,
 } from '@/components/bespoke/marketing-sections';
 
-export function loader({ params }: Route.LoaderArgs) {
-  const item = services.find((s) => s.slug === params.slug);
-  if (!item) throw new Response('Service not found', { status: 404 });
-  return { item };
-}
-
 export function clientLoader({ params }: Route.ClientLoaderArgs) {
   const item = services.find((s) => s.slug === params.slug);
   if (!item) throw new Response('Service not found', { status: 404 });
   return { item };
 }
+clientLoader.hydrate = true;
 
 export function meta({ matches, location, loaderData }: Route.MetaArgs) {
   if (!loaderData)

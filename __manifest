@@ -6,11 +6,11 @@
       "hasAction": false,
       "hasLoader": true,
       "hasClientAction": false,
-      "hasClientLoader": false,
+      "hasClientLoader": true,
       "hasClientMiddleware": false,
       "hasDefaultExport": true,
       "hasErrorBoundary": true,
-      "module": "/assets/root-BebxojDP.js",
+      "module": "/assets/root-C2WKDPJ3.js",
       "imports": [
         "/assets/utils-QtLids5q.js",
         "/assets/jsx-runtime-DmUZTrwO.js",
@@ -107,13 +107,13 @@
       "parentId": "root",
       "path": "services/:slug",
       "hasAction": false,
-      "hasLoader": true,
+      "hasLoader": false,
       "hasClientAction": false,
       "hasClientLoader": true,
       "hasClientMiddleware": false,
       "hasDefaultExport": true,
       "hasErrorBoundary": false,
-      "module": "/assets/service-detail-main-zq-hzAdJ.js",
+      "module": "/assets/service-detail-main-D-1vez7T.js",
       "imports": [
         "/assets/utils-QtLids5q.js",
         "/assets/jsx-runtime-DmUZTrwO.js",
@@ -134,14 +134,14 @@
         "/assets/seo-CdHHGtkD.js",
         "/assets/faq-section-CJWDj8UL.js",
         "/assets/contact-section-Crv0T_dm.js",
-        "/assets/service-detail-client-loader-BJywZxtb.js",
+        "/assets/service-detail-client-loader-DpdqNMA0.js",
         "/assets/chevron-right-BohetwR-.js",
         "/assets/growth-visual-DIXNnSPy.js",
         "/assets/site-Bvleqpfc.js",
         "/assets/message-circle-DK8896JR.js"
       ],
       "css": [],
-      "clientLoaderModule": "/assets/service-detail-client-loader-BJywZxtb.js"
+      "clientLoaderModule": "/assets/service-detail-client-loader-DpdqNMA0.js"
     },
     "routes/industries": {
       "id": "routes/industries",
@@ -177,13 +177,13 @@
       "parentId": "root",
       "path": "industries/:slug",
       "hasAction": false,
-      "hasLoader": true,
+      "hasLoader": false,
       "hasClientAction": false,
       "hasClientLoader": true,
       "hasClientMiddleware": false,
       "hasDefaultExport": true,
       "hasErrorBoundary": false,
-      "module": "/assets/industry-detail-main-DAsSxqSS.js",
+      "module": "/assets/industry-detail-main-DW-lyK-C.js",
       "imports": [
         "/assets/jsx-runtime-DmUZTrwO.js",
         "/assets/components-BQfalXLl.js",
@@ -198,7 +198,7 @@
         "/assets/seo-CdHHGtkD.js",
         "/assets/faq-section-CJWDj8UL.js",
         "/assets/contact-section-Crv0T_dm.js",
-        "/assets/industry-detail-client-loader-DQrkZJhC.js",
+        "/assets/industry-detail-client-loader-BxULz0p6.js",
         "/assets/utils-QtLids5q.js",
         "/assets/chevron-right-BohetwR-.js",
         "/assets/growth-visual-DIXNnSPy.js",
@@ -208,7 +208,7 @@
         "/assets/message-circle-DK8896JR.js"
       ],
       "css": [],
-      "clientLoaderModule": "/assets/industry-detail-client-loader-DQrkZJhC.js"
+      "clientLoaderModule": "/assets/industry-detail-client-loader-BxULz0p6.js"
     },
     "routes/our-work": {
       "id": "routes/our-work",
@@ -303,13 +303,13 @@
       "parentId": "root",
       "path": "blogs/:slug",
       "hasAction": false,
-      "hasLoader": true,
+      "hasLoader": false,
       "hasClientAction": false,
       "hasClientLoader": true,
       "hasClientMiddleware": false,
       "hasDefaultExport": true,
       "hasErrorBoundary": false,
-      "module": "/assets/blog-detail-main-Cu_coZuA.js",
+      "module": "/assets/blog-detail-main-C_UQdCrB.js",
       "imports": [
         "/assets/jsx-runtime-DmUZTrwO.js",
         "/assets/components-BQfalXLl.js",
@@ -321,51 +321,53 @@
         "/assets/seo-CdHHGtkD.js",
         "/assets/contact-section-Crv0T_dm.js",
         "/assets/page-intro-DqJKC4tX.js",
-        "/assets/blog-detail-client-loader-BTU9iEzg.js",
+        "/assets/blog-detail-client-loader-CHPuYWHB.js",
         "/assets/utils-QtLids5q.js",
         "/assets/shield-check-CeeCp1G7.js",
         "/assets/chevron-right-BohetwR-.js"
       ],
       "css": [],
-      "clientLoaderModule": "/assets/blog-detail-client-loader-BTU9iEzg.js"
+      "clientLoaderModule": "/assets/blog-detail-client-loader-CHPuYWHB.js"
     },
     "routes/insights": {
       "id": "routes/insights",
       "parentId": "root",
       "path": "insights",
       "hasAction": false,
-      "hasLoader": true,
+      "hasLoader": false,
       "hasClientAction": false,
       "hasClientLoader": true,
       "hasClientMiddleware": false,
       "hasDefaultExport": true,
       "hasErrorBoundary": false,
-      "module": "/assets/insights-main-0kUvICud.js",
+      "module": "/assets/insights-main-DBmcsNL0.js",
       "imports": [
         "/assets/components-BQfalXLl.js",
+        "/assets/insights-client-loader-CcGOCKoo.js",
         "/assets/utils-QtLids5q.js"
       ],
       "css": [],
-      "clientLoaderModule": "/assets/insights-client-loader-Cskl3xL1.js"
+      "clientLoaderModule": "/assets/insights-client-loader-CcGOCKoo.js"
     },
     "routes/insight-detail": {
       "id": "routes/insight-detail",
       "parentId": "root",
       "path": "insights/:slug",
       "hasAction": false,
-      "hasLoader": true,
+      "hasLoader": false,
       "hasClientAction": false,
       "hasClientLoader": true,
       "hasClientMiddleware": false,
       "hasDefaultExport": true,
       "hasErrorBoundary": false,
-      "module": "/assets/insight-detail-main-0kUvICud.js",
+      "module": "/assets/insight-detail-main-nFRZqVLL.js",
       "imports": [
         "/assets/components-BQfalXLl.js",
+        "/assets/insight-detail-client-loader-BIwCujFj.js",
         "/assets/utils-QtLids5q.js"
       ],
       "css": [],
-      "clientLoaderModule": "/assets/insight-detail-client-loader-DYpKDEiP.js"
+      "clientLoaderModule": "/assets/insight-detail-client-loader-BIwCujFj.js"
     },
     "routes/contact": {
       "id": "routes/contact",
@@ -469,13 +471,13 @@
       "parentId": "root",
       "path": "*",
       "hasAction": false,
-      "hasLoader": true,
+      "hasLoader": false,
       "hasClientAction": false,
-      "hasClientLoader": false,
+      "hasClientLoader": true,
       "hasClientMiddleware": false,
       "hasDefaultExport": true,
       "hasErrorBoundary": true,
-      "module": "/assets/not-found-CNbrJMRO.js",
+      "module": "/assets/not-found-main-DuXNr8Ma.js",
       "imports": [
         "/assets/jsx-runtime-DmUZTrwO.js",
         "/assets/components-BQfalXLl.js",
@@ -485,10 +487,12 @@
         "/assets/globe-CxpE_Mez.js",
         "/assets/house-B7dj6Der.js",
         "/assets/seo-CdHHGtkD.js",
+        "/assets/not-found-client-loader-BEKAcOAX.js",
         "/assets/utils-QtLids5q.js",
         "/assets/site-Bvleqpfc.js"
       ],
-      "css": []
+      "css": [],
+      "clientLoaderModule": "/assets/not-found-client-loader-BEKAcOAX.js"
     },
     "routes/sitemap.xml": {
       "id": "routes/sitemap.xml",

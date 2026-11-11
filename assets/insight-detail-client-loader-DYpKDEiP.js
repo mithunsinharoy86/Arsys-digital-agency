@@ -1,1 +1,0 @@
-import{D as e}from"./utils-QtLids5q.js";function t({params:t}){let n=(t.slug||``).replace(/[^a-zA-Z0-9-_]/g,``);return e(`/blogs/${n}`,301)}export{t as clientLoader};

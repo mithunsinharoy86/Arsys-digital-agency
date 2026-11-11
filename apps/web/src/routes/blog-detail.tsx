@@ -5,17 +5,12 @@ import { PageIntro } from '@/components/page-intro';
 import { ArticleContent } from '@/components/article-content';
 import { ContactSection } from '@/components/contact-section';
 
-export function loader({ params }: Route.LoaderArgs) {
-  const article = articles.find((a) => a.slug === params.slug);
-  if (!article) throw new Response('Blog post not found', { status: 404 });
-  return { article };
-}
-
 export function clientLoader({ params }: Route.ClientLoaderArgs) {
   const article = articles.find((a) => a.slug === params.slug);
   if (!article) throw new Response('Blog post not found', { status: 404 });
   return { article };
 }
+clientLoader.hydrate = true;
 
 export function meta({ matches, location, loaderData }: Route.MetaArgs) {
   if (!loaderData)

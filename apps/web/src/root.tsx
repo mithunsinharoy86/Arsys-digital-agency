@@ -50,6 +50,12 @@ export function loader({ request }: Route.LoaderArgs) {
 	);
 }
 
+export function clientLoader() {
+	const origin = typeof window !== 'undefined' ? window.location.origin : 'https://klyroworks.com';
+	return { origin };
+}
+clientLoader.hydrate = true;
+
 /**
  * A page route that exports `headers` replaces this one, so merge `parentHeaders`
  * there rather than returning only that route's own headers.
@@ -99,7 +105,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
 				/>
 			</head>
 			<body translate="no" className="notranslate" suppressHydrationWarning>
-				<div id="root">{children}</div>
+				<div id="root" suppressHydrationWarning>{children}</div>
 				<ScrollRestoration />
 				<Scripts />
 			</body>
@@ -122,6 +128,9 @@ export default function App() {
 }
 
 export function ErrorBoundary({ error }: Route.ErrorBoundaryProps) {
+	if (typeof console !== 'undefined' && console.error) {
+		console.error('[Root ErrorBoundary caught]:', error);
+	}
 	let title = 'Something went wrong';
 	let details = 'An unexpected error occurred while loading this view. Please refresh or return to the homepage.';
 	let stack: string | undefined;
@@ -132,7 +141,7 @@ export function ErrorBoundary({ error }: Route.ErrorBoundaryProps) {
 			error.status === 404
 				? 'The requested page could not be found or may have been moved.'
 				: error.statusText || details;
-	} else if (import.meta.env.DEV && error && error instanceof Error) {
+	} else if (error && error instanceof Error) {
 		details = error.message;
 		stack = error.stack;
 	}
