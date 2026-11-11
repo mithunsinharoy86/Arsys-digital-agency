@@ -131,16 +131,6 @@ if (fs.existsSync(imagesDir)) {
   fs.cpSync(imagesDir, repoImagesDir, { recursive: true });
 }
 
-// Copy route directories
-const routeDirs = ['about', 'blogs', 'contact', 'industries', 'our-work', 'privacy', 'services', 'terms'];
-for (const dir of routeDirs) {
-  const src = path.join(clientDir, dir);
-  if (fs.existsSync(src)) {
-    fs.cpSync(src, path.join(rootDistDir, dir), { recursive: true });
-    fs.cpSync(src, path.join(repoRootDir, dir), { recursive: true });
-  }
-}
-
 // Copy manifest endpoints
 fs.writeFileSync(path.join(repoRootDir, '__manifest'), manifestJsonStr, 'utf8');
 fs.writeFileSync(path.join(rootDistDir, '__manifest'), manifestJsonStr, 'utf8');

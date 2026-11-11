@@ -15,9 +15,10 @@
   RewriteCond %{REQUEST_FILENAME} -d
   RewriteRule ^ - [L]
 
-  # Route directory to directory/index.html if exists
-  RewriteCond %{DOCUMENT_ROOT}/$1/index.html -f
-  RewriteRule ^(.*)/?$ $1/index.html [L]
+  # Return 404 for missing static assets instead of serving index.html
+  RewriteCond %{REQUEST_URI} \.(js|css|png|jpg|jpeg|gif|svg|ico|webp|woff|woff2|ttf|eot|json|map)$ [NC]
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteRule ^ - [R=404,L]
 
   # SPA Fallback for client routing
   RewriteRule . /index.html [L]
@@ -26,8 +27,20 @@
 # Disable directory browsing
 Options -Indexes
 
-# Security headers
+# Security headers & cache control
 <IfModule mod_headers.c>
   Header set X-Content-Type-Options "nosniff"
   Header set X-Frame-Options "SAMEORIGIN"
+
+  # Ensure index.html and __manifest are never cached indefinitely by browsers
+  <FilesMatch "(index\.html|__manifest|manifest\.json)$">
+    Header set Cache-Control "no-cache, no-store, must-revalidate"
+    Header set Pragma "no-cache"
+    Header set Expires 0
+  </FilesMatch>
+
+  # Cache immutable assets with hashes
+  <FilesMatch "\.(js|css|webp|png|jpg|svg|woff2)$">
+    Header set Cache-Control "public, max-age=31536000, immutable"
+  </FilesMatch>
 </IfModule>
