@@ -6,7 +6,6 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const clientDir = path.resolve(__dirname, '../../../dist/apps/web/client');
 const assetsDir = path.join(clientDir, 'assets');
 const templatePath = path.resolve(__dirname, '../index.html.template');
-
 const rootDistDir = path.resolve(__dirname, '../../../dist');
 const repoRootDir = path.resolve(__dirname, '../../..');
 
@@ -16,92 +15,123 @@ if (!fs.existsSync(clientDir)) {
 }
 
 const files = fs.readdirSync(assetsDir);
-const cssFile = files.find((f) => f.startsWith('index-') && f.endsWith('.css'));
-const entryJs = files.find((f) => f.startsWith('entry.client-') && f.endsWith('.js'));
 
-console.log(`[postbuild] Found built assets: CSS = ${cssFile}, JS = ${entryJs}`);
+const cssFiles = files
+  .filter((f) => f.startsWith('index-') && f.endsWith('.css'))
+  .map((f) => ({ name: f, time: fs.statSync(path.join(assetsDir, f)).mtimeMs }))
+  .sort((a, b) => b.time - a.time);
+
+const entryJsFiles = files
+  .filter((f) => f.startsWith('entry.client-') && f.endsWith('.js'))
+  .map((f) => ({ name: f, time: fs.statSync(path.join(assetsDir, f)).mtimeMs }))
+  .sort((a, b) => b.time - a.time);
+
+const manifestFiles = files
+  .filter((f) => f.startsWith('manifest-') && f.endsWith('.js'))
+  .map((f) => ({ name: f, time: fs.statSync(path.join(assetsDir, f)).mtimeMs }))
+  .sort((a, b) => b.time - a.time);
+
+const cssFile = cssFiles[0]?.name;
+const entryJs = entryJsFiles[0]?.name;
+const manifestFile = manifestFiles[0]?.name;
+
+console.log(`[postbuild] Assets: CSS = ${cssFile}, JS = ${entryJs}, Manifest = ${manifestFile}`);
+
+if (!manifestFile) {
+  console.error('No manifest file found in assets!');
+  process.exit(1);
+}
+
+const manifestContent = fs
+  .readFileSync(path.join(assetsDir, manifestFile), 'utf8')
+  .replace(/^window\.__reactRouterManifest=/, '')
+  .replace(/;$/, '');
+
+const fullManifest = JSON.parse(manifestContent);
+const rootModule = fullManifest.routes.root.module;
+const homeModule = fullManifest.routes['routes/home'].module;
+const entryModule = fullManifest.entry.module;
 
 let html = fs.readFileSync(templatePath, 'utf8');
 
+// 1. Point to correct CSS file
 if (cssFile) {
   html = html.replace(/\/assets\/index-[a-zA-Z0-9_-]+\.css/g, `/assets/${cssFile}`);
 }
 
-if (entryJs) {
-  html = html.replace(/\/assets\/entry\.client-[a-zA-Z0-9_-]+\.js/g, `/assets/${entryJs}`);
-}
+// 2. Remove all stale modulepreload links so no mismatched/duplicate React instances load
+html = html.replace(/<link\s+rel="modulepreload"[^>]+>/g, '');
 
-// Ensure all canonical, schema, and meta URLs point to klyroworks.com
+// 3. Ensure all domain URLs point to klyroworks.com
 html = html.replace(/http:\/\/localhost:\d+/g, 'https://klyroworks.com');
 
-// Set route discovery to initial mode so React Router doesn't lazy-fetch __manifest
+// 4. Force initial route discovery
 html = html.replace(/"routeDiscovery":\{"mode":"lazy","manifestPath":"\/__manifest"\}/g, '"routeDiscovery":{"mode":"initial"}');
 
-// Load full manifest with all 22 routes
-const manifestJsPath = path.resolve(__dirname, '../../../assets/manifest-caa19614.js');
-let fullManifest = null;
-if (fs.existsSync(manifestJsPath)) {
-  const content = fs.readFileSync(manifestJsPath, 'utf8').replace(/^window\.__reactRouterManifest=/, '').replace(/;$/, '');
-  try {
-    fullManifest = JSON.parse(content);
-    // Embed full manifest directly into index.html
-    html = html.replace(/window\.__reactRouterManifest\s*=\s*\{[\s\S]*?\};\s*window\.__reactRouterRouteModules/, `window.__reactRouterManifest = ${JSON.stringify(fullManifest)};\n  window.__reactRouterRouteModules`);
-  } catch (e) {
-    console.error('Failed to parse full manifest:', e);
-  }
+// 5. Replace inline module script with exact matching modules from the current build
+const moduleScriptRegex = /<script\s+type="module"[^>]*>[\s\S]*?import\("\/assets\/entry\.client-[^"]+"\);<\/script>/;
+const newModuleScript = `<script type="module">
+import * as route0 from "${rootModule}";
+import * as route1 from "${homeModule}";
+window.__reactRouterManifest = ${JSON.stringify(fullManifest)};
+window.__reactRouterRouteModules = {"root": route0, "routes/home": route1};
+import("${entryModule}");
+</script>`;
+
+if (moduleScriptRegex.test(html)) {
+  html = html.replace(moduleScriptRegex, newModuleScript);
+} else {
+  // If regex didn't match, inject before </body>
+  html = html.replace('</body>', `${newModuleScript}\n</body>`);
 }
 
-// Generate assets/manifest.json and static __manifest file
-if (fullManifest) {
-  const manifestJsonStr = JSON.stringify({ routes: fullManifest.routes }, null, 2);
-  fs.writeFileSync(path.join(repoRootDir, 'assets/manifest.json'), manifestJsonStr, 'utf8');
-  fs.writeFileSync(path.join(repoRootDir, '__manifest'), manifestJsonStr, 'utf8');
-  if (fs.existsSync(rootDistDir)) {
-    const distAssets = path.join(rootDistDir, 'assets');
-    if (!fs.existsSync(distAssets)) fs.mkdirSync(distAssets, { recursive: true });
-    fs.writeFileSync(path.join(distAssets, 'manifest.json'), manifestJsonStr, 'utf8');
-    fs.writeFileSync(path.join(rootDistDir, '__manifest'), manifestJsonStr, 'utf8');
-  }
-}
+// 6. Generate manifest.json & __manifest
+const manifestJsonStr = JSON.stringify({ routes: fullManifest.routes }, null, 2);
+fs.writeFileSync(path.join(assetsDir, 'manifest.json'), manifestJsonStr, 'utf8');
 
-// 1. Write to nested client dir: dist/apps/web/client/
+// 7. Write index.html & 404.html to clientDir, rootDistDir, and repoRootDir
 fs.writeFileSync(path.join(clientDir, 'index.html'), html, 'utf8');
 fs.writeFileSync(path.join(clientDir, '404.html'), html, 'utf8');
 
-// 2. Write to root dist/: dist/ (if Hostinger Output directory is "dist")
 fs.writeFileSync(path.join(rootDistDir, 'index.html'), html, 'utf8');
 fs.writeFileSync(path.join(rootDistDir, '404.html'), html, 'utf8');
 
-// 3. Write to repository root: ./ (if Hostinger Output directory is "none" or root)
 fs.writeFileSync(path.join(repoRootDir, 'index.html'), html, 'utf8');
 fs.writeFileSync(path.join(repoRootDir, '404.html'), html, 'utf8');
 
-// Copy .htaccess to all locations
+// 8. Copy .htaccess everywhere
 const htaccessPath = path.resolve(__dirname, '../public/.htaccess');
 if (fs.existsSync(htaccessPath)) {
+  fs.copyFileSync(htaccessPath, path.join(clientDir, '.htaccess'));
   fs.copyFileSync(htaccessPath, path.join(rootDistDir, '.htaccess'));
   fs.copyFileSync(htaccessPath, path.join(repoRootDir, '.htaccess'));
 }
 
-// Copy assets and images to root dist and repo root
-const rootAssetsDir = path.join(rootDistDir, 'assets');
-if (!fs.existsSync(rootAssetsDir)) {
-  fs.cpSync(assetsDir, rootAssetsDir, { recursive: true });
-}
+// 9. Sync clean assets to root dist and repo root (clean stale files first!)
 const repoAssetsDir = path.join(repoRootDir, 'assets');
+if (fs.existsSync(repoAssetsDir)) {
+  fs.rmSync(repoAssetsDir, { recursive: true, force: true });
+}
+fs.mkdirSync(repoAssetsDir, { recursive: true });
 fs.cpSync(assetsDir, repoAssetsDir, { recursive: true });
 
+const rootAssetsDir = path.join(rootDistDir, 'assets');
+if (fs.existsSync(rootAssetsDir)) {
+  fs.rmSync(rootAssetsDir, { recursive: true, force: true });
+}
+fs.mkdirSync(rootAssetsDir, { recursive: true });
+fs.cpSync(assetsDir, rootAssetsDir, { recursive: true });
+
+// Copy images
 const imagesDir = path.join(clientDir, 'images');
 const rootImagesDir = path.join(rootDistDir, 'images');
-if (fs.existsSync(imagesDir) && !fs.existsSync(rootImagesDir)) {
-  fs.cpSync(imagesDir, rootImagesDir, { recursive: true });
-}
 const repoImagesDir = path.join(repoRootDir, 'images');
 if (fs.existsSync(imagesDir)) {
+  fs.cpSync(imagesDir, rootImagesDir, { recursive: true });
   fs.cpSync(imagesDir, repoImagesDir, { recursive: true });
 }
 
-// Copy route directories (about, blogs, contact, industries, our-work, privacy, services, terms)
+// Copy route directories
 const routeDirs = ['about', 'blogs', 'contact', 'industries', 'our-work', 'privacy', 'services', 'terms'];
 for (const dir of routeDirs) {
   const src = path.join(clientDir, dir);
@@ -111,11 +141,8 @@ for (const dir of routeDirs) {
   }
 }
 
-// Copy .data files if present
-const dataFiles = fs.readdirSync(clientDir).filter(f => f.endsWith('.data'));
-for (const f of dataFiles) {
-  fs.copyFileSync(path.join(clientDir, f), path.join(rootDistDir, f));
-  fs.copyFileSync(path.join(clientDir, f), path.join(repoRootDir, f));
-}
+// Copy manifest endpoints
+fs.writeFileSync(path.join(repoRootDir, '__manifest'), manifestJsonStr, 'utf8');
+fs.writeFileSync(path.join(rootDistDir, '__manifest'), manifestJsonStr, 'utf8');
 
-console.log('✓ [postbuild] Generated index.html, 404.html, and route folders across ALL possible web roots');
+console.log('✓ [postbuild] Cleaned and synchronized matching assets across all web roots');
