@@ -16,9 +16,9 @@ export function meta({ matches, location }: Route.MetaArgs) {
   return seo(
     { matches, location },
     {
-      title: 'Klyro Works | Digital Growth, Websites & AI',
+      title: 'Klyro Works | Web Design, SEO & AI Automation Agency',
       description:
-        'Website development, SEO, digital marketing and AI automation for US and UK businesses. Connect your digital presence with your business goals.',
+        'Klyro Works helps businesses in the US, UK and India grow with bespoke website development, SEO, digital marketing, UI/UX design and AI automation.',
       image: images.property,
       jsonLd: [
         {

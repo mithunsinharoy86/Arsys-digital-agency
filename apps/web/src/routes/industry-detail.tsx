@@ -41,8 +41,8 @@ export function meta({ matches, location, loaderData }: Route.MetaArgs) {
   return seo(
     { matches, location },
     {
-      title: `Digital Growth for ${item.name} | Klyro Works`,
-      description: item.summary,
+      title: item.metaTitle || `Digital Growth for ${item.name} | Klyro Works`,
+      description: item.metaDescription || item.summary,
       image: offeringImage(item),
       jsonLd: offeringSchema(item, siteOriginFrom(matches), location.pathname, true),
     }

@@ -71,6 +71,8 @@ export const services: Offering[] = [
   {
     slug: 'website-development',
     name: 'Website Development',
+    metaTitle: 'Website Development Agency | Custom Web Design – Klyro Works',
+    metaDescription: 'Build a faster, high-performing website with Klyro Works. We deliver custom website development, responsive web design and scalable digital solutions for businesses.',
     label: 'BESPOKE ENGINEERING & CONVERSION ARCHITECTURE',
     title: 'High-Performance Websites Engineered to Convert & Scale.',
     summary: 'Fast, accessible, and conversion-focused business websites designed for US & UK brands. We build sub-second loading digital experiences with clean code, modern UX, and 100% intellectual property transfer.',
@@ -232,8 +234,8 @@ export const services: Offering[] = [
   {
     slug: 'seo',
     name: 'Search Engine Optimisation',
-    metaTitle: 'Technical SEO & AI Search (GEO) Services | Klyro Works',
-    metaDescription: 'Technical SEO, Schema entity mapping, and AI Search (GEO) strategies for UK & US businesses. Clean code, zero black-hat risks, and transparent reporting.',
+    metaTitle: 'SEO Agency | Technical SEO & Organic Growth – Klyro Works',
+    metaDescription: 'Grow your organic visibility with Klyro Works. Our SEO services include technical SEO, keyword research, local SEO and AI search optimisation for business growth.',
     label: 'TECHNICAL, ON-PAGE & LOCAL VISIBILITY',
     title: 'Technical SEO & AI Search Visibility Built on Commercial Intent.',
     problemTitle: 'The Search Bottlenecks Stalling Organic Inquiries',
@@ -387,6 +389,8 @@ export const services: Offering[] = [
   {
     slug: 'digital-marketing',
     name: 'Digital Marketing & Paid Search',
+    metaTitle: 'Digital Marketing Agency | Google Ads & PPC – Klyro Works',
+    metaDescription: 'Drive qualified leads with Klyro Works digital marketing services. We provide Google Ads management, PPC campaigns and conversion optimisation for growing businesses.',
     label: 'COMMERCIAL PAID SEARCH & CONVERSION OPTIMIZATION',
     title: 'High-Intent PPC & Paid Campaigns Built for Revenue, Not Wasted Clicks.',
     summary: 'Data-driven Google Ads management, Performance Max architecture, and landing page conversion rate optimization for UK and US businesses. We eliminate wasted ad spend, sculpt negative keywords, and connect media investment directly to qualified commercial pipeline.',
@@ -537,6 +541,8 @@ export const services: Offering[] = [
   {
     slug: 'ai-automation',
     name: 'AI Automation & Workflows',
+    metaTitle: 'AI Automation Agency | Business Process Automation – Klyro Works',
+    metaDescription: 'Automate business operations with Klyro Works. We build AI-powered workflows, lead qualification systems, CRM integrations and intelligent business automation solutions.',
     label: 'CONNECT. QUALIFY. AUTOMATE.',
     title: 'Practical Business AI & Automated Workflows that Eliminate Repetitive Admin.',
     summary: 'Tailored AI solutions, intelligent lead qualification engines, and connected CRM architectures for growing US and UK businesses. We streamline operations, eliminate data entry silos, and keep people in control of sensitive commercial decisions.',
@@ -687,6 +693,8 @@ export const services: Offering[] = [
   {
     slug: 'ui-ux-design',
     name: 'UI/UX Design & Product Strategy',
+    metaTitle: 'UI/UX Design Agency | Web & Product Design – Klyro Works',
+    metaDescription: 'Create better digital experiences with Klyro Works. Our UI/UX design services include website interfaces, product design, user research and accessible design systems.',
     label: 'CLARITY AT EVERY CLICK · CONVERSION UX',
     title: 'Bespoke UI/UX Design Engineered for Human Clarity & Commercial Conversion.',
     summary: 'Human-centred digital product design, web application interfaces, and accessible design systems for ambitious UK and US brands. We turn complex user journeys into intuitive, high-converting digital experiences backed by WCAG 2.1 AA accessibility and rigorous usability testing.',
@@ -837,6 +845,8 @@ export const services: Offering[] = [
   {
     slug: 'branding',
     name: 'Branding & Creative Design',
+    metaTitle: 'Branding Agency | Brand Identity & Creative Design – Klyro Works',
+    metaDescription: 'Build a distinctive brand with Klyro Works. We offer brand strategy, visual identity, logo design, typography and creative branding solutions for ambitious businesses.',
     label: 'DISTINCTIVE IDENTITY & CORPORATE DESIGN SYSTEMS',
     title: 'Strategic Brand Identities Engineered to Stand Out, Build Authority & Endure.',
     summary: 'Corporate brand positioning, distinctive visual identities, typography systems, and comprehensive brand guidelines for ambitious US and UK businesses. We create memorable brands that command premium pricing and foster enduring commercial trust.',
@@ -1439,6 +1449,8 @@ export const industries: Offering[] = [
   {
     slug: 'real-estate',
     name: 'Real Estate & Property',
+    metaTitle: 'Real Estate Website Design & SEO Agency – Klyro Works',
+    metaDescription: 'Generate more property enquiries with Klyro Works. We build real estate websites, property portals, local SEO strategies and automated lead generation systems.',
     label: 'PROPERTY ACQUISITION & VALUATION ARCHITECTURE',
     title: 'High-Converting Real Estate Websites, Local SEO & MLS/IDX Engines.',
     summary: 'Tailored digital experiences for UK estate agents, US realtors, and luxury property developers. We engineer sub-second property discovery portals, automated valuation booking funnels, and hyper-local SEO campaigns that generate qualified buyer and vendor instructions.',

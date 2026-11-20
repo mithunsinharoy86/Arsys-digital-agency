@@ -11,9 +11,9 @@ export function meta({ matches, location }: Route.MetaArgs) {
   return seo(
     { matches, location },
     {
-      title: 'About Klyro Works | Your Connected Digital Growth Partner',
+      title: 'About Klyro Works | Digital Growth & Technology Agency',
       description:
-        'Meet the thinking behind Klyro Works: business-first strategy, thoughtful design and practical technology for companies across the US and UK.',
+        'Meet Klyro Works, a digital growth partner combining website engineering, SEO, digital marketing and AI automation to help ambitious businesses scale.',
       image: images.team,
       jsonLd: breadcrumbSchema(origin, [{ name: 'About Us', path: '/about' }]),
     }

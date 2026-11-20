@@ -11,9 +11,9 @@ export function meta({ matches, location }: Route.MetaArgs) {
   return seo(
     { matches, location },
     {
-      title: 'Industries We Help | Real Estate, Dental & More | Klyro Works',
+      title: 'Industries We Serve | Digital Solutions – Klyro Works',
       description:
-        'Industry-focused digital growth for real estate, dental clinics, ecommerce and professional services. Discover solutions for US and UK businesses.',
+        'Discover industry-focused digital solutions from Klyro Works. We help real estate, dental, healthcare, ecommerce and professional service businesses grow online.',
       image: images.property,
       jsonLd: [
         breadcrumbSchema(origin, [{ name: 'Industries', path: '/industries' }]),

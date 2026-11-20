@@ -10,9 +10,9 @@ export function meta({ matches, location }: Route.MetaArgs) {
   return seo(
     { matches, location },
     {
-      title: 'Digital Engineering & Growth Blogs | Klyro Works',
+      title: 'Digital Marketing & AI Insights Blog – Klyro Works',
       description:
-        'In-depth, 1000+ word guides to conversion-focused web development, local SEO, AI automation, Core Web Vitals, and Generative Engine Optimization (GEO).',
+        'Explore expert insights on SEO, website development, AI automation, digital marketing, branding and emerging technologies from Klyro Works.',
       image: images.webDevCorporate,
       path: '/blogs',
       jsonLd: [

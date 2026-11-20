@@ -10,7 +10,7 @@ export function meta({ matches, location }: SeoArgs) {
     {
       title: 'Terms of Service | Klyro Works',
       description:
-        'Official commercial terms of service, intellectual property ownership, milestone agreements, and client protections for Klyro Works in the US and UK.',
+        'Review the Klyro Works Terms of Service covering website usage, services, intellectual property, responsibilities and applicable terms and conditions.',
       image: images.team,
       jsonLd: breadcrumbSchema(origin, [{ name: 'Terms of Service', path: '/terms' }]),
     }

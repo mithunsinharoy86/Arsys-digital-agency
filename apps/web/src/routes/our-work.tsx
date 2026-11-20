@@ -13,9 +13,9 @@ export function meta({ matches, location }: Route.MetaArgs) {
   return seo(
     { matches, location },
     {
-      title: 'Capabilities & Concept Showcase | Klyro Works',
+      title: 'Our Work | Website Design & Digital Projects – Klyro Works',
       description:
-        'Explore illustrative technical blueprints, enterprise web concepts, and digital architectures designed to demonstrate the engineering and design capabilities of Klyro Works.',
+        'Explore Klyro Works projects across website development, UI/UX design, digital experiences and ecommerce. Discover our approach to building digital solutions.',
       image: images.webDevCorporate,
       jsonLd: breadcrumbSchema(origin, [{ name: 'Our Work', path: '/our-work' }]),
     }

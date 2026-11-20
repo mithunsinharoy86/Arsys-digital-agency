@@ -11,7 +11,7 @@ export function meta({ matches, location }: Route.MetaArgs) {
     {
       title: 'Privacy Policy | Klyro Works',
       description:
-        'Learn how Klyro Works collects and handles consultation enquiry information, and how to request access, correction or deletion of your details.',
+        'Read the Klyro Works Privacy Policy to understand how we collect, use, protect and manage personal information and website visitor data.',
       image: images.team,
       jsonLd: breadcrumbSchema(origin, [{ name: 'Privacy Policy', path: '/privacy' }]),
     }
