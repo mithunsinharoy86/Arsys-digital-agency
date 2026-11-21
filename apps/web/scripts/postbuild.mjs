@@ -1,6 +1,6 @@
 import fs from 'node:fs';
 import path from 'node:path';
-import { fileURLToPath } from 'node:url';
+import { fileURLToPath, pathToFileURL } from 'node:url';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const clientDir = path.resolve(__dirname, '../../../dist/apps/web/client');
@@ -307,3 +307,83 @@ for (const target of staticTargets) {
 console.log('✓ [postbuild] Generated physical robots.txt, sitemap.xml, and llms.txt');
 
 console.log('✓ [postbuild] Cleaned and synchronized matching assets across all web roots');
+
+// 11. Static Site Pre-rendering (SSG) for all 27 routes + 404
+// Eliminates the SPA Duplicate Content trap by generating dedicated physical index.html files
+console.log('\n[postbuild] Starting Static Site Pre-rendering (SSG) for all routes...');
+const serverBuildPath = path.resolve(__dirname, '../../../dist/apps/web/server/index.js');
+
+if (fs.existsSync(serverBuildPath)) {
+  const { createRequestHandler } = await import('react-router');
+  const serverBuild = await import(pathToFileURL(serverBuildPath).href);
+  const handler = createRequestHandler(serverBuild, 'production');
+
+  let successCount = 0;
+  for (const route of staticRoutes) {
+    const pageUrl = `${origin}${route.path}`;
+    const req = new Request(pageUrl, {
+      headers: {
+        'user-agent': 'Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)',
+        'accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+      },
+    });
+
+    try {
+      const res = await handler(req);
+      if (res.status === 200) {
+        let pageHtml = await res.text();
+        pageHtml = pageHtml.replace(/http:\/\/localhost:\d+/g, origin);
+
+        const relativePath = route.path === '/'
+          ? 'index.html'
+          : path.join(route.path.replace(/^\//, ''), 'index.html');
+
+        const targets = [
+          path.join(clientDir, relativePath),
+          path.join(rootDistDir, relativePath),
+          path.join(repoRootDir, relativePath),
+        ];
+
+        for (const targetFile of targets) {
+          fs.mkdirSync(path.dirname(targetFile), { recursive: true });
+          fs.writeFileSync(targetFile, pageHtml, 'utf8');
+        }
+
+        successCount++;
+        console.log(`  ✓ Pre-rendered [200]: ${route.path} -> ${relativePath} (${(pageHtml.length / 1024).toFixed(1)} KB)`);
+      } else {
+        console.warn(`  ⚠ Route ${route.path} returned status ${res.status}`);
+      }
+    } catch (err) {
+      console.error(`  ✗ Error pre-rendering ${route.path}:`, err);
+    }
+  }
+
+  // Pre-render dedicated 404 page
+  try {
+    const notFoundReq = new Request(`${origin}/not-found`, {
+      headers: { 'user-agent': 'Googlebot/2.1' },
+    });
+    const notFoundRes = await handler(notFoundReq);
+    let notFoundHtml = await notFoundRes.text();
+    notFoundHtml = notFoundHtml.replace(/http:\/\/localhost:\d+/g, origin);
+
+    const notFoundTargets = [
+      path.join(clientDir, '404.html'),
+      path.join(rootDistDir, '404.html'),
+      path.join(repoRootDir, '404.html'),
+    ];
+
+    for (const targetFile of notFoundTargets) {
+      fs.writeFileSync(targetFile, notFoundHtml, 'utf8');
+    }
+    console.log(`  ✓ Pre-rendered [404]: /not-found -> 404.html (${(notFoundHtml.length / 1024).toFixed(1)} KB)`);
+  } catch (err) {
+    console.error('  ✗ Error pre-rendering 404.html:', err);
+  }
+
+  console.log(`\n✓ [postbuild] Pre-rendering complete! ${successCount}/${staticRoutes.length} routes pre-rendered into dedicated static index.html files.\n`);
+} else {
+  console.warn('[postbuild] Server build not found at', serverBuildPath, '- skipping static prerender.');
+}
+
