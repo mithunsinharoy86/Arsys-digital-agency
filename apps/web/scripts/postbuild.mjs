@@ -135,4 +135,175 @@ if (fs.existsSync(imagesDir)) {
 fs.writeFileSync(path.join(repoRootDir, '__manifest'), manifestJsonStr, 'utf8');
 fs.writeFileSync(path.join(rootDistDir, '__manifest'), manifestJsonStr, 'utf8');
 
+
+// 10. Generate static sitemap.xml, robots.txt, and llms.txt for static Apache/Nginx hosting
+const origin = 'https://klyroworks.com';
+const robotsTxt = `User-agent: *
+Content-Signal: search=yes, ai-input=yes, ai-train=no
+Allow: /
+
+User-agent: OAI-SearchBot
+Content-Signal: search=yes, ai-input=yes, ai-train=no
+Allow: /
+
+User-agent: ChatGPT-User
+Content-Signal: search=yes, ai-input=yes, ai-train=no
+Allow: /
+
+User-agent: Claude-SearchBot
+Content-Signal: search=yes, ai-input=yes, ai-train=no
+Allow: /
+
+User-agent: Claude-User
+Content-Signal: search=yes, ai-input=yes, ai-train=no
+Allow: /
+
+User-agent: PerplexityBot
+Content-Signal: search=yes, ai-input=yes, ai-train=no
+Allow: /
+
+User-agent: Perplexity-User
+Content-Signal: search=yes, ai-input=yes, ai-train=no
+Allow: /
+
+User-agent: DuckAssistBot
+Content-Signal: search=yes, ai-input=yes, ai-train=no
+Allow: /
+
+User-agent: MistralAI-User
+Content-Signal: search=yes, ai-input=yes, ai-train=no
+Allow: /
+
+User-agent: meta-webindexer
+Content-Signal: search=yes, ai-input=yes, ai-train=no
+Allow: /
+
+User-agent: meta-externalfetcher
+Content-Signal: search=yes, ai-input=yes, ai-train=no
+Allow: /
+
+User-agent: Amzn-SearchBot
+Content-Signal: search=yes, ai-input=yes, ai-train=no
+Allow: /
+
+User-agent: Amzn-User
+Content-Signal: search=yes, ai-input=yes, ai-train=no
+Allow: /
+
+User-agent: GPTBot
+Disallow: /
+
+User-agent: ClaudeBot
+Disallow: /
+
+User-agent: Google-Extended
+Disallow: /
+
+User-agent: Applebot-Extended
+Disallow: /
+
+User-agent: meta-externalagent
+Disallow: /
+
+User-agent: Amazonbot
+Disallow: /
+
+User-agent: Bytespider
+Disallow: /
+
+Sitemap: ${origin}/sitemap.xml
+`;
+
+const staticRoutes = [
+  { path: '/', priority: '1.0', changefreq: 'weekly' },
+  { path: '/services', priority: '0.9', changefreq: 'weekly' },
+  { path: '/services/website-development', priority: '0.9', changefreq: 'weekly' },
+  { path: '/services/seo', priority: '0.9', changefreq: 'weekly' },
+  { path: '/services/digital-marketing', priority: '0.9', changefreq: 'weekly' },
+  { path: '/services/ai-automation', priority: '0.9', changefreq: 'weekly' },
+  { path: '/services/ui-ux-design', priority: '0.9', changefreq: 'weekly' },
+  { path: '/services/branding', priority: '0.9', changefreq: 'weekly' },
+  { path: '/services/ecommerce', priority: '0.8', changefreq: 'weekly' },
+  { path: '/services/social-media-marketing', priority: '0.8', changefreq: 'weekly' },
+  { path: '/services/content-marketing', priority: '0.8', changefreq: 'weekly' },
+  { path: '/industries', priority: '0.9', changefreq: 'weekly' },
+  { path: '/industries/real-estate', priority: '0.9', changefreq: 'weekly' },
+  { path: '/industries/dental-clinics', priority: '0.8', changefreq: 'weekly' },
+  { path: '/industries/ecommerce', priority: '0.8', changefreq: 'weekly' },
+  { path: '/industries/professional-services', priority: '0.8', changefreq: 'weekly' },
+  { path: '/our-work', priority: '0.8', changefreq: 'weekly' },
+  { path: '/about', priority: '0.8', changefreq: 'monthly' },
+  { path: '/blogs', priority: '0.9', changefreq: 'daily' },
+  { path: '/blogs/conversion-focused-website', priority: '0.8', changefreq: 'monthly' },
+  { path: '/blogs/local-seo-for-service-businesses', priority: '0.8', changefreq: 'monthly' },
+  { path: '/blogs/first-business-automation', priority: '0.8', changefreq: 'monthly' },
+  { path: '/blogs/geo-and-ai-search-ranking', priority: '0.8', changefreq: 'monthly' },
+  { path: '/blogs/core-web-vitals-business-impact', priority: '0.8', changefreq: 'monthly' },
+  { path: '/contact', priority: '0.8', changefreq: 'monthly' },
+  { path: '/privacy', priority: '0.3', changefreq: 'yearly' },
+  { path: '/terms', priority: '0.3', changefreq: 'yearly' },
+];
+
+const sitemapXml = `<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+${staticRoutes
+  .map(
+    (r) => `  <url>
+    <loc>${origin}${r.path}</loc>
+    <changefreq>${r.changefreq}</changefreq>
+    <priority>${r.priority}</priority>
+  </url>`
+  )
+  .join('\n')}
+</urlset>
+`;
+
+const llmsTxt = `# Klyro Works
+
+> A digital growth and technology agency serving businesses across the United States, United Kingdom, and India.
+
+## Agency
+- [About](${origin}/about): Our business-first strategy and approach.
+- [Contact](${origin}/contact): Request a free initial consultation.
+- [Design explorations](${origin}/our-work): Illustrative concepts, blueprints, and capabilities.
+
+## Services
+- [Website Development](${origin}/services/website-development): Custom web engineering and sub-second platforms.
+- [SEO](${origin}/services/seo): Technical SEO, Schema entity mapping, and AI Search (GEO).
+- [Digital Marketing](${origin}/services/digital-marketing): Data-driven Google Ads and PPC management.
+- [AI Automation](${origin}/services/ai-automation): Tailored business AI workflows and CRM integrations.
+- [UI/UX Design](${origin}/services/ui-ux-design): Human-centred web and digital product design.
+- [Branding](${origin}/services/branding): Distinctive visual brand identities and systems.
+- [Ecommerce](${origin}/services/ecommerce): Scalable Shopify and custom checkout solutions.
+- [Social Media](${origin}/services/social-media-marketing): Commercial paid and organic social growth.
+- [Content Marketing](${origin}/services/content-marketing): Authority content and conversion copywriting.
+
+## Industries
+- [Real Estate](${origin}/industries/real-estate): Property discovery and local valuation engines.
+- [Dental Clinics](${origin}/industries/dental-clinics): Healthcare websites and patient booking.
+- [Ecommerce DTC](${origin}/industries/ecommerce): High-conversion shopping experiences.
+- [Professional Services](${origin}/industries/professional-services): B2B lead generation architecture.
+
+## Blogs
+- [Conversion-Focused Website](${origin}/blogs/conversion-focused-website): What makes a website convert in 2026.
+- [Local SEO Guide](${origin}/blogs/local-seo-for-service-businesses): Dominate local search in the US and UK.
+- [Business Automation](${origin}/blogs/first-business-automation): Where to start without wasting budget.
+- [GEO & AI Search](${origin}/blogs/geo-and-ai-search-ranking): How to rank on Perplexity, ChatGPT and Gemini.
+- [Core Web Vitals Impact](${origin}/blogs/core-web-vitals-business-impact): Real commercial ROI of sub-second speed.
+`;
+
+const staticTargets = [
+  path.resolve(__dirname, '../public'),
+  clientDir,
+  rootDistDir,
+  repoRootDir,
+];
+
+for (const target of staticTargets) {
+  fs.writeFileSync(path.join(target, 'robots.txt'), robotsTxt, 'utf8');
+  fs.writeFileSync(path.join(target, 'sitemap.xml'), sitemapXml, 'utf8');
+  fs.writeFileSync(path.join(target, 'llms.txt'), llmsTxt, 'utf8');
+}
+console.log('✓ [postbuild] Generated physical robots.txt, sitemap.xml, and llms.txt');
+
 console.log('✓ [postbuild] Cleaned and synchronized matching assets across all web roots');

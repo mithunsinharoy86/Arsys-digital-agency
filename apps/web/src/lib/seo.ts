@@ -32,6 +32,12 @@ export type SeoInput = {
 	image?: string;
 	/** `article` for blog posts and news, `website` for everything else. */
 	type?: 'website' | 'article';
+	/** Article author, for og:article */
+	author?: string;
+	/** Article section/category, for og:article */
+	section?: string;
+	/** Article published time ISO string */
+	publishedTime?: string;
 	/**
 	 * Keeps the page out of search results while still letting crawlers follow
 	 * its links. Not access control. Add `nofollow` as an extra descriptor when
@@ -78,13 +84,14 @@ export function organizationSchema(origin: string) {
 		logo: `${base}/favicon.png`,
 		image: images.property,
 		description:
-			'Bespoke website engineering, technical SEO, digital marketing, and AI workflow automation agency serving ambitious businesses across the United States and United Kingdom.',
+			'Bespoke website engineering, technical SEO, digital marketing, and AI workflow automation agency serving ambitious businesses across the United States, United Kingdom, and India.',
 		email: 'hello@klyroworks.com',
 		telephone: '+44-20-8000-0000',
 		priceRange: '$$$$',
 		areaServed: [
 			{ '@type': 'Country', name: 'United States' },
 			{ '@type': 'Country', name: 'United Kingdom' },
+			{ '@type': 'Country', name: 'India' },
 		],
 		knowsAbout: [
 			'Website Engineering',
@@ -125,27 +132,63 @@ export function breadcrumbSchema(origin: string, items: Array<{ name: string; pa
 
 export function seo({ matches, location }: SeoArgs, input: SeoInput): MetaDescriptor[] {
 	const origin = siteOriginFrom(matches);
-	const canonical = absoluteUrl(origin, input.path ?? location.pathname);
+	const rawPath = input.path ?? location.pathname;
+	const cleanPath = rawPath.length > 1 && rawPath.endsWith('/') ? rawPath.slice(0, -1) : rawPath;
+	const canonical = absoluteUrl(origin, cleanPath);
 	const rawImage = input.image || images.webDevCorporate;
 	const imageUrl = absoluteUrl(origin, rawImage);
 
 	const tags: MetaDescriptor[] = [
 		{ title: input.title },
 		{ name: 'description', content: input.description },
+		{ property: 'og:site_name', content: 'Klyro Works' },
 		{ property: 'og:title', content: input.title },
 		{ property: 'og:description', content: input.description },
 		{ property: 'og:type', content: input.type ?? 'website' },
-		{ name: 'twitter:card', content: 'summary_large_image' },
-		{ name: 'twitter:title', content: input.title },
-		{ name: 'twitter:description', content: input.description },
-		{ tagName: 'link', rel: 'canonical', href: canonical },
 		{ property: 'og:url', content: canonical },
 		{ property: 'og:image', content: imageUrl },
+		{ property: 'og:image:secure_url', content: imageUrl },
+		{ property: 'og:image:width', content: '1200' },
+		{ property: 'og:image:height', content: '630' },
+		{ property: 'og:image:alt', content: input.title },
+		{ property: 'og:locale', content: 'en_US' },
+		{ property: 'og:locale:alternate', content: 'en_GB' },
+		{ property: 'og:locale:alternate', content: 'en_IN' },
+		{ name: 'twitter:card', content: 'summary_large_image' },
+		{ name: 'twitter:site', content: '@klyroworks' },
+		{ name: 'twitter:creator', content: '@klyroworks' },
+		{ name: 'twitter:title', content: input.title },
+		{ name: 'twitter:description', content: input.description },
 		{ name: 'twitter:image', content: imageUrl },
+		{ name: 'twitter:image:alt', content: input.title },
+		{ tagName: 'link', rel: 'canonical', href: canonical },
+		{ name: 'geo.region', content: 'US;GB;IN' },
 	];
+
+	if (input.type === 'article') {
+		tags.push({ property: 'article:publisher', content: origin });
+		if (input.author) tags.push({ property: 'article:author', content: input.author });
+		if (input.section) tags.push({ property: 'article:section', content: input.section });
+		if (input.publishedTime) tags.push({ property: 'article:published_time', content: input.publishedTime });
+	}
 
 	if (input.noindex) {
 		tags.push({ name: 'robots', content: 'noindex, nofollow' });
+		tags.push({ name: 'googlebot', content: 'noindex, nofollow' });
+		tags.push({ name: 'bingbot', content: 'noindex, nofollow' });
+	} else {
+		tags.push({
+			name: 'robots',
+			content: 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1',
+		});
+		tags.push({
+			name: 'googlebot',
+			content: 'index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1',
+		});
+		tags.push({
+			name: 'bingbot',
+			content: 'index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1',
+		});
 	}
 
 	for (const block of [input.jsonLd ?? []].flat()) {

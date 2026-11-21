@@ -44,6 +44,8 @@ export function meta({ matches, location, loaderData }: Route.MetaArgs) {
       description: article.intro,
       image,
       type: 'article',
+      section: article.category,
+      author: 'Klyro Works',
       path: `/blogs/${article.slug}`,
       jsonLd: [
         {

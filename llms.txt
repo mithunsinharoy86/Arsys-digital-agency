@@ -1,0 +1,32 @@
+# Klyro Works
+
+> A digital growth and technology agency serving businesses across the United States, United Kingdom, and India.
+
+## Agency
+- [About](https://klyroworks.com/about): Our business-first strategy and approach.
+- [Contact](https://klyroworks.com/contact): Request a free initial consultation.
+- [Design explorations](https://klyroworks.com/our-work): Illustrative concepts, blueprints, and capabilities.
+
+## Services
+- [Website Development](https://klyroworks.com/services/website-development): Custom web engineering and sub-second platforms.
+- [SEO](https://klyroworks.com/services/seo): Technical SEO, Schema entity mapping, and AI Search (GEO).
+- [Digital Marketing](https://klyroworks.com/services/digital-marketing): Data-driven Google Ads and PPC management.
+- [AI Automation](https://klyroworks.com/services/ai-automation): Tailored business AI workflows and CRM integrations.
+- [UI/UX Design](https://klyroworks.com/services/ui-ux-design): Human-centred web and digital product design.
+- [Branding](https://klyroworks.com/services/branding): Distinctive visual brand identities and systems.
+- [Ecommerce](https://klyroworks.com/services/ecommerce): Scalable Shopify and custom checkout solutions.
+- [Social Media](https://klyroworks.com/services/social-media-marketing): Commercial paid and organic social growth.
+- [Content Marketing](https://klyroworks.com/services/content-marketing): Authority content and conversion copywriting.
+
+## Industries
+- [Real Estate](https://klyroworks.com/industries/real-estate): Property discovery and local valuation engines.
+- [Dental Clinics](https://klyroworks.com/industries/dental-clinics): Healthcare websites and patient booking.
+- [Ecommerce DTC](https://klyroworks.com/industries/ecommerce): High-conversion shopping experiences.
+- [Professional Services](https://klyroworks.com/industries/professional-services): B2B lead generation architecture.
+
+## Blogs
+- [Conversion-Focused Website](https://klyroworks.com/blogs/conversion-focused-website): What makes a website convert in 2026.
+- [Local SEO Guide](https://klyroworks.com/blogs/local-seo-for-service-businesses): Dominate local search in the US and UK.
+- [Business Automation](https://klyroworks.com/blogs/first-business-automation): Where to start without wasting budget.
+- [GEO & AI Search](https://klyroworks.com/blogs/geo-and-ai-search-ranking): How to rank on Perplexity, ChatGPT and Gemini.
+- [Core Web Vitals Impact](https://klyroworks.com/blogs/core-web-vitals-business-impact): Real commercial ROI of sub-second speed.
