@@ -131,6 +131,15 @@ if (fs.existsSync(imagesDir)) {
   fs.cpSync(imagesDir, repoImagesDir, { recursive: true });
 }
 
+// Copy api endpoints (e.g. PHP handlers)
+const apiDir = path.join(clientDir, 'api');
+const rootApiDir = path.join(rootDistDir, 'api');
+const repoApiDir = path.join(repoRootDir, 'api');
+if (fs.existsSync(apiDir)) {
+  fs.cpSync(apiDir, rootApiDir, { recursive: true });
+  fs.cpSync(apiDir, repoApiDir, { recursive: true });
+}
+
 // Copy manifest endpoints
 fs.writeFileSync(path.join(repoRootDir, '__manifest'), manifestJsonStr, 'utf8');
 fs.writeFileSync(path.join(rootDistDir, '__manifest'), manifestJsonStr, 'utf8');

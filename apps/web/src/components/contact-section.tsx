@@ -1,6 +1,6 @@
-import { useState, type FormEvent } from 'react';
+import { useState, useRef, type FormEvent } from 'react';
 import { Link, useSearchParams } from 'react-router';
-import { ArrowUpRight, CheckCircle2, LoaderCircle, Check, ShieldCheck } from 'lucide-react';
+import { ArrowUpRight, CheckCircle2, LoaderCircle, Check, ShieldCheck, Mail } from 'lucide-react';
 import { services, images } from '@/data/site';
 
 export function ContactSection({
@@ -15,6 +15,15 @@ export function ContactSection({
     services.find((s) => s.slug === searchParams.get('service'))?.name ||
     initialService;
   const [status, setStatus] = useState<'idle' | 'sending' | 'success' | 'error'>('idle');
+  const [errorMessage, setErrorMessage] = useState('');
+  const lastPayloadRef = useRef<{
+    name: string;
+    email: string;
+    company: string;
+    service: string;
+    market: string;
+    message: string;
+  } | null>(null);
 
   async function submit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -25,6 +34,7 @@ export function ContactSection({
     if (values.get('website_url') || values.get('company_website_url')) return;
 
     setStatus('sending');
+    setErrorMessage('');
 
     const enquiryPayload = {
       recipient: 'admin@klyroworks.com',
@@ -37,23 +47,33 @@ export function ContactSection({
       consent: true,
       timestamp: new Date().toISOString(),
     };
+    lastPayloadRef.current = enquiryPayload;
 
     try {
-      // Primary: submit to /api/consultation endpoint
+      // Primary: submit to /api/consultation endpoint (handled by PHP on Hostinger)
       const response = await fetch('/api/consultation', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+        },
         body: JSON.stringify(enquiryPayload),
       });
 
       if (!response.ok) {
-        throw new Error('API returned non-200');
+        throw new Error(`API returned HTTP ${response.status}`);
       }
+
+      const data = await response.json().catch(() => null);
+      if (!data || data.ok === false) {
+        throw new Error(data?.error || 'Failed to submit enquiry');
+      }
+
       setStatus('success');
       form.reset();
-    } catch (err) {
-      // Graceful offline fallback: log and record locally so prospect inquiries are never lost
-      console.warn('PocketBase storage offline, capturing enquiry in local fallback store for admin@klyroworks.com:', err);
+    } catch (err: unknown) {
+      console.error('Contact form error:', err);
+      // Graceful offline fallback: save locally so prospect inquiries are never lost
       try {
         const stored = JSON.parse(localStorage.getItem('klyro_enquiries_fallback') || '[]');
         stored.push(enquiryPayload);
@@ -61,8 +81,8 @@ export function ContactSection({
       } catch (localErr) {
         console.warn('LocalStorage unavailable', localErr);
       }
-      setStatus('success');
-      form.reset();
+      setErrorMessage(err instanceof Error ? err.message : 'We could not reach the server.');
+      setStatus('error');
     }
   }
 
@@ -248,10 +268,20 @@ export function ContactSection({
               </label>
 
               {status === 'error' && (
-                <p className="form-error" role="alert">
-                  We encountered an issue submitting your inquiry. Please try again or email us directly at{' '}
-                  <a href="mailto:admin@klyroworks.com">admin@klyroworks.com</a>.
-                </p>
+                <div className="form-error-fallback" role="alert" style={{ background: 'rgba(239, 68, 68, 0.08)', border: '1px solid rgba(239, 68, 68, 0.3)', borderRadius: '8px', padding: '14px 16px', margin: '14px 0' }}>
+                  <p style={{ color: '#ef4444', margin: '0 0 10px 0', fontSize: '13px', fontWeight: 600 }}>
+                    {errorMessage || 'We encountered an issue submitting your inquiry online.'} You can dispatch your message directly via email with one click:
+                  </p>
+                  <a
+                    href={`mailto:admin@klyroworks.com?subject=${encodeURIComponent('Consultation Inquiry: ' + (lastPayloadRef.current?.service || 'New Project'))}&body=${encodeURIComponent(
+                      `Name: ${lastPayloadRef.current?.name || ''}\nEmail: ${lastPayloadRef.current?.email || ''}\nCompany: ${lastPayloadRef.current?.company || ''}\nMarket: ${lastPayloadRef.current?.market || ''}\nService: ${lastPayloadRef.current?.service || ''}\n\nProject Goals & Challenges:\n${lastPayloadRef.current?.message || ''}`
+                    )}`}
+                    className="button secondary"
+                    style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', padding: '8px 16px', fontSize: '13px' }}
+                  >
+                    <Mail size={15} /> Send via Email Directly to admin@klyroworks.com
+                  </a>
+                </div>
               )}
 
               <button

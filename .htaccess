@@ -11,6 +11,9 @@ DirectoryIndex index.html
   # Serve __manifest as JSON for React Router
   RewriteRule ^__manifest$ assets/manifest.json [L,T=application/json]
 
+  # Route /api/consultation to native PHP handler
+  RewriteRule ^api/consultation/?$ api/consultation.php [L]
+
   # Don't rewrite real files
   RewriteRule ^index\.html$ - [L]
   RewriteCond %{REQUEST_FILENAME} -f

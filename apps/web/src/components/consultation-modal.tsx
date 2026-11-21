@@ -79,8 +79,17 @@ export function ConsultationModalProvider({ children }: { children: React.ReactN
 
 function ConsultationModalDialog({ service, onClose }: { service: string; onClose: () => void }) {
   const [selectedService, setSelectedService] = useState(service || 'Website Development');
-  const [status, setStatus] = useState<'idle' | 'sending' | 'success'>('idle');
+  const [status, setStatus] = useState<'idle' | 'sending' | 'success' | 'error'>('idle');
+  const [errorMessage, setErrorMessage] = useState('');
   const [submittedName, setSubmittedName] = useState('');
+  const lastPayloadRef = React.useRef<{
+    name: string;
+    email: string;
+    company: string;
+    service: string;
+    market: string;
+    message: string;
+  } | null>(null);
 
   useEffect(() => {
     if (service) setSelectedService(service);
@@ -95,6 +104,7 @@ function ConsultationModalDialog({ service, onClose }: { service: string; onClos
     if (data.get('company_website_url')) return;
 
     setStatus('sending');
+    setErrorMessage('');
     const name = data.get('name') as string;
     setSubmittedName(name);
 
@@ -108,19 +118,31 @@ function ConsultationModalDialog({ service, onClose }: { service: string; onClos
       message: data.get('message') as string,
       timestamp: new Date().toISOString(),
     };
+    lastPayloadRef.current = payload;
 
     try {
       const response = await fetch('/api/consultation', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+        },
         body: JSON.stringify(payload),
       });
 
       if (!response.ok) {
-        throw new Error('Server returned non-200');
+        throw new Error(`Server returned HTTP ${response.status}`);
       }
-    } catch (err) {
-      console.warn('Fallback: saving consultation locally and routing to admin@klyroworks.com:', err);
+
+      const resData = await response.json().catch(() => null);
+      if (!resData || resData.ok === false) {
+        throw new Error(resData?.error || 'Failed to submit enquiry');
+      }
+
+      setStatus('success');
+      form.reset();
+    } catch (err: unknown) {
+      console.error('Modal consultation error:', err);
       try {
         const stored = JSON.parse(localStorage.getItem('klyro_enquiries_fallback') || '[]');
         stored.push(payload);
@@ -128,10 +150,9 @@ function ConsultationModalDialog({ service, onClose }: { service: string; onClos
       } catch (localErr) {
         console.warn('LocalStorage unavailable', localErr);
       }
+      setErrorMessage(err instanceof Error ? err.message : 'Could not reach server directly.');
+      setStatus('error');
     }
-
-    setStatus('success');
-    form.reset();
   }
 
   const allOfferings = [
@@ -301,6 +322,23 @@ function ConsultationModalDialog({ service, onClose }: { service: string; onClos
                   I consent to Klyro Works storing this enquiry to respond directly to me via <strong>admin@klyroworks.com</strong> in accordance with the Privacy Policy.
                 </label>
               </div>
+
+              {status === 'error' && (
+                <div className="modal-error-box" role="alert" style={{ background: 'rgba(239, 68, 68, 0.1)', border: '1px solid rgba(239, 68, 68, 0.3)', borderRadius: '8px', padding: '12px 14px', margin: '12px 0' }}>
+                  <p style={{ color: '#ef4444', margin: '0 0 8px 0', fontSize: '13px', fontWeight: 600 }}>
+                    {errorMessage || 'Unable to submit enquiry online.'} You can email us directly:
+                  </p>
+                  <a
+                    href={`mailto:admin@klyroworks.com?subject=${encodeURIComponent('Consultation Request: ' + (lastPayloadRef.current?.service || 'New Project'))}&body=${encodeURIComponent(
+                      `Name: ${lastPayloadRef.current?.name || ''}\nEmail: ${lastPayloadRef.current?.email || ''}\nCompany: ${lastPayloadRef.current?.company || ''}\nMarket: ${lastPayloadRef.current?.market || ''}\nService: ${lastPayloadRef.current?.service || ''}\n\nProject Goals:\n${lastPayloadRef.current?.message || ''}`
+                    )}`}
+                    className="button secondary"
+                    style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', padding: '6px 14px', fontSize: '12px' }}
+                  >
+                    <Mail size={14} /> Send via Email Directly
+                  </a>
+                </div>
+              )}
 
               <div className="modal-actions-row">
                 <button
