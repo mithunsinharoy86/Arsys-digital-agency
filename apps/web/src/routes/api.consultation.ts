@@ -1,7 +1,6 @@
 import type { Route } from './+types/api.consultation';
 import { apiError, json, withApi } from '@/lib/api.server';
 import { clientIdentifier, createRateLimiter } from '@/lib/rate-limit.server';
-import { pocketbaseClient } from '@/lib/pocketbase-client';
 
 // Dedicated form submission rate limiter: max 5 consultation submissions per 10 minutes per IP
 const consultationLimiter = createRateLimiter({
@@ -118,12 +117,6 @@ export const action = withApi(async ({ request }: Route.ActionArgs) => {
       market: payload.market,
       timestamp: payload.timestamp,
     });
-
-    try {
-      await pocketbaseClient.collection('enquiries').create(payload);
-    } catch (pbErr) {
-      console.warn('[Klyro Works] PocketBase storage bypassed, logged locally for admin@klyroworks.com:', pbErr);
-    }
 
     return json({
       ok: true,

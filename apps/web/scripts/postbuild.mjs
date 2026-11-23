@@ -122,11 +122,11 @@ if (fs.existsSync(rootAssetsDir)) {
 fs.mkdirSync(rootAssetsDir, { recursive: true });
 fs.cpSync(assetsDir, rootAssetsDir, { recursive: true });
 
-// Copy images
+// Copy images (if present and not empty)
 const imagesDir = path.join(clientDir, 'images');
 const rootImagesDir = path.join(rootDistDir, 'images');
 const repoImagesDir = path.join(repoRootDir, 'images');
-if (fs.existsSync(imagesDir)) {
+if (fs.existsSync(imagesDir) && fs.readdirSync(imagesDir).length > 0) {
   fs.cpSync(imagesDir, rootImagesDir, { recursive: true });
   fs.cpSync(imagesDir, repoImagesDir, { recursive: true });
 }
