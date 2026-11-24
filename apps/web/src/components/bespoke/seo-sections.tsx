@@ -49,7 +49,7 @@ export function SeoSerpClusterSection() {
           <div className="serp-site-info">
             <div className="serp-favicon">K</div>
             <div>
-              <span className="serp-domain">https://www.klyroworks.com &rsaquo; services &rsaquo; seo</span>
+              <span className="serp-domain">https://klyroworks.com &rsaquo; services &rsaquo; seo</span>
               <span className="serp-brand-label">Klyro Works &middot; London &amp; US</span>
             </div>
           </div>
