@@ -77,6 +77,13 @@ export function Layout({ children }: { children: React.ReactNode }) {
 		// and theme scripts before hydration; attribute-only, one element deep. Keep both.
 		<html lang="en" translate="no" className="notranslate" suppressHydrationWarning>
 			<head>
+				{/* Google Tag Manager */}
+				<script async src="https://www.googletagmanager.com/gtm.js?id=GTM-MDGF4G75" />
+				<script
+					dangerouslySetInnerHTML={{
+						__html: `window.dataLayer = window.dataLayer || [];\nfunction gtag(){dataLayer.push(arguments);}\ngtag('js', new Date());`,
+					}}
+				/>
 				<meta charSet="utf-8" />
 				<meta name="viewport" content="width=device-width, initial-scale=1" />
 				<meta name="google" content="notranslate" />
@@ -105,6 +112,15 @@ export function Layout({ children }: { children: React.ReactNode }) {
 				/>
 			</head>
 			<body translate="no" className="notranslate" suppressHydrationWarning>
+				{/* Google Tag Manager (noscript) */}
+				<noscript>
+					<iframe
+						src="https://www.googletagmanager.com/ns.html?id=GTM-MDGF4G75"
+						height="0"
+						width="0"
+						style={{ display: 'none', visibility: 'hidden' }}
+					/>
+				</noscript>
 				<div id="root" suppressHydrationWarning>{children}</div>
 				<ScrollRestoration />
 				<Scripts />
