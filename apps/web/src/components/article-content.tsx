@@ -85,9 +85,9 @@ export function ArticleContent({ article }: { article: typeof articles[number] }
                   {para}
                 </p>
               ))
-            ) : (
-              'text' in s && s.text && <p className="article-para">{s.text}</p>
-            )}
+            ) : 'text' in s && typeof s.text === 'string' && s.text ? (
+              <p className="article-para">{s.text}</p>
+            ) : null}
 
             {/* Bullet points if present */}
             {'bullets' in s && Array.isArray(s.bullets) && s.bullets.length > 0 && (

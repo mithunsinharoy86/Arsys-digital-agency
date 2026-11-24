@@ -113,10 +113,12 @@ const runHandler = async (handler: ApiHandler, args: ApiArgs): Promise<Response>
  * 500 shape — so handlers can `throw new Error(...)` instead of building error
  * responses.
  */
-export const withApi = (handler: ApiHandler): ((args: ApiArgs) => Promise<Response>) => {
-	return async (args: ApiArgs) => {
+export const withApi = <T extends ApiArgs = ApiArgs>(
+	handler: (args: T) => unknown,
+): ((args: T) => Promise<Response>) => {
+	return async (args: T) => {
 		const startedAt = Date.now();
-		const response = await runHandler(handler, args);
+		const response = await runHandler(handler as ApiHandler, args);
 		const { pathname } = new URL(args.request.url);
 
 		logger.info(`${args.request.method} ${pathname} ${response.status} ${Date.now() - startedAt}ms`);

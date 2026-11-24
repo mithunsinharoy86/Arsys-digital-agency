@@ -1,0 +1,1 @@
+import{a as e}from"./components-CNsSTC7O.js";import"./insight-detail-client-loader-BCtdPLDw.js";var t=e(function(){return null});export{t as default};

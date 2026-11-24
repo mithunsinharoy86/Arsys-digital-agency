@@ -1,0 +1,1 @@
+import{D as e}from"./utils-DrTEVi0z.js";function t(){return e(`/blogs`,301)}t.hydrate=!0;export{t as clientLoader};
