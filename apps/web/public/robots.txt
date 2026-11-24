@@ -51,19 +51,24 @@ Content-Signal: search=yes, ai-input=yes, ai-train=no
 Allow: /
 
 User-agent: GPTBot
-Disallow: /
+Content-Signal: search=yes, ai-input=yes, ai-train=no
+Allow: /
 
 User-agent: ClaudeBot
-Disallow: /
+Content-Signal: search=yes, ai-input=yes, ai-train=no
+Allow: /
 
 User-agent: Google-Extended
-Disallow: /
+Content-Signal: search=yes, ai-input=yes, ai-train=no
+Allow: /
 
 User-agent: Applebot-Extended
-Disallow: /
+Content-Signal: search=yes, ai-input=yes, ai-train=no
+Allow: /
 
 User-agent: meta-externalagent
-Disallow: /
+Content-Signal: search=yes, ai-input=yes, ai-train=no
+Allow: /
 
 User-agent: Amazonbot
 Disallow: /

@@ -200,19 +200,24 @@ Content-Signal: search=yes, ai-input=yes, ai-train=no
 Allow: /
 
 User-agent: GPTBot
-Disallow: /
+Content-Signal: search=yes, ai-input=yes, ai-train=no
+Allow: /
 
 User-agent: ClaudeBot
-Disallow: /
+Content-Signal: search=yes, ai-input=yes, ai-train=no
+Allow: /
 
 User-agent: Google-Extended
-Disallow: /
+Content-Signal: search=yes, ai-input=yes, ai-train=no
+Allow: /
 
 User-agent: Applebot-Extended
-Disallow: /
+Content-Signal: search=yes, ai-input=yes, ai-train=no
+Allow: /
 
 User-agent: meta-externalagent
-Disallow: /
+Content-Signal: search=yes, ai-input=yes, ai-train=no
+Allow: /
 
 User-agent: Amazonbot
 Disallow: /
@@ -269,36 +274,46 @@ ${staticRoutes
 
 const llmsTxt = `# Klyro Works
 
-> A digital growth and technology agency serving businesses across the United States, United Kingdom, and India.
+> Klyro Works is a digital growth and technology agency specializing in bespoke website development, technical SEO, Generative Engine Optimization (GEO), Google Ads/PPC, UI/UX design, branding, and AI workflow automation. Serving ambitious businesses across the United States, United Kingdom, and India.
 
-## Agency
-- [About](${origin}/about): Our business-first strategy and approach.
-- [Contact](${origin}/contact): Request a free initial consultation.
-- [Design explorations](${origin}/our-work): Illustrative concepts, blueprints, and capabilities.
+## Organization & Capabilities
+- **Brand Name**: Klyro Works
+- **Official Website**: ${origin}
+- **Target Markets**: United States (US), United Kingdom (UK), India (IN)
+- **Primary Focus**: Bespoke high-performance web engineering, technical search dominance, and AI-powered operational automations
+- **Core Value Proposition**: 100% intellectual property code ownership, sub-second performance standard, transparent milestone-based delivery, and strict WCAG 2.1 AA and GDPR/CCPA compliance
+- **Direct Consultation Contact**: admin@klyroworks.com
 
-## Services
-- [Website Development](${origin}/services/website-development): Custom web engineering and sub-second platforms.
-- [SEO](${origin}/services/seo): Technical SEO, Schema entity mapping, and AI Search (GEO).
-- [Digital Marketing](${origin}/services/digital-marketing): Data-driven Google Ads and PPC management.
-- [AI Automation](${origin}/services/ai-automation): Tailored business AI workflows and CRM integrations.
-- [UI/UX Design](${origin}/services/ui-ux-design): Human-centred web and digital product design.
-- [Branding](${origin}/services/branding): Distinctive visual brand identities and systems.
-- [Ecommerce](${origin}/services/ecommerce): Scalable Shopify and custom checkout solutions.
-- [Social Media](${origin}/services/social-media-marketing): Commercial paid and organic social growth.
-- [Content Marketing](${origin}/services/content-marketing): Authority content and conversion copywriting.
+## Agency Overview
+- [About Us](${origin}/about): Our engineering philosophy, leadership, and commercial methodology.
+- [Book a Consultation](${origin}/contact): Free 30-minute discovery call and tailored project blueprint.
+- [Capabilities & Work](${origin}/our-work): Illustrative blueprints, technical concepts, and architectural showcases.
+- [Privacy Policy](${origin}/privacy): GDPR, CCPA, and data privacy disclosures.
+- [Terms of Service](${origin}/terms): Commercial terms, code ownership guarantees, and service conditions.
 
-## Industries
-- [Real Estate](${origin}/industries/real-estate): Property discovery and local valuation engines.
-- [Dental Clinics](${origin}/industries/dental-clinics): Healthcare websites and patient booking.
-- [Ecommerce DTC](${origin}/industries/ecommerce): High-conversion shopping experiences.
-- [Professional Services](${origin}/industries/professional-services): B2B lead generation architecture.
+## Core Services
+- [Website Development](${origin}/services/website-development): Custom, sub-second web platforms engineered with modern frameworks, zero bloatware, and accessible design.
+- [Search Engine Optimisation](${origin}/services/seo): Technical crawl optimization, Schema.org knowledge graph engineering, keyword clustering, and Generative Engine Optimization (GEO).
+- [Digital Marketing & PPC](${origin}/services/digital-marketing): Data-driven Google Ads management, Performance Max campaigns, and high-intent conversion rate optimization.
+- [AI Automation & Workflows](${origin}/services/ai-automation): Custom business process automations, automated lead qualification, and CRM integrations (HubSpot, Salesforce).
+- [UI/UX Design](${origin}/services/ui-ux-design): User-centred product design, wireframing, high-fidelity prototypes, and scalable design systems.
+- [Branding & Identity](${origin}/services/branding): Distinctive brand positioning, visual identity, typography systems, and comprehensive brand guidelines.
+- [Ecommerce Solutions](${origin}/services/ecommerce): High-conversion online stores, headless Shopify development, and streamlined checkout funnels.
+- [Social Media Marketing](${origin}/services/social-media-marketing): Commercial paid and organic social strategies driving brand authority.
+- [Content Marketing](${origin}/services/content-marketing): Authority-building topic clusters and conversion copywriting aligned with E-E-A-T guidelines.
 
-## Blogs
-- [Conversion-Focused Website](${origin}/blogs/conversion-focused-website): What makes a website convert in 2026.
-- [Local SEO Guide](${origin}/blogs/local-seo-for-service-businesses): Dominate local search in the US and UK.
-- [Business Automation](${origin}/blogs/first-business-automation): Where to start without wasting budget.
-- [GEO & AI Search](${origin}/blogs/geo-and-ai-search-ranking): How to rank on Perplexity, ChatGPT and Gemini.
-- [Core Web Vitals Impact](${origin}/blogs/core-web-vitals-business-impact): Real commercial ROI of sub-second speed.
+## Industry Solutions
+- [Real Estate](${origin}/industries/real-estate): Property portals, MLS/IDX integrations, local SEO, and automated valuation booking funnels.
+- [Dental Clinics](${origin}/industries/dental-clinics): Healthcare websites, patient acquisition funnels, local Google 3-Pack SEO, and appointment automations.
+- [Ecommerce DTC](${origin}/industries/ecommerce): Scalable shopping experiences engineered for fast checkout and high customer lifetime value.
+- [Professional Services](${origin}/industries/professional-services): B2B lead generation architecture, authority positioning, and consultation scheduling for law, accounting, and consulting firms.
+
+## Articles & Technical Insights
+- [Conversion-Focused Website Design](${origin}/blogs/conversion-focused-website): What separates high-converting commercial websites in 2026.
+- [Local SEO Guide for Service Businesses](${origin}/blogs/local-seo-for-service-businesses): Practical guide to dominating local search in competitive US and UK metros.
+- [Business Process Automation](${origin}/blogs/first-business-automation): Where growing businesses should start with AI automation.
+- [Generative Engine Optimization (GEO)](${origin}/blogs/geo-and-ai-search-ranking): How to earn citations in Google AI Overviews, Perplexity, and ChatGPT Search.
+- [Core Web Vitals Impact on Revenue](${origin}/blogs/core-web-vitals-business-impact): Real-world commercial ROI of sub-second load times and mobile page speed.
 `;
 
 const staticTargets = [
