@@ -82,6 +82,7 @@ function ConsultationModalDialog({ service, onClose }: { service: string; onClos
   const [status, setStatus] = useState<'idle' | 'sending' | 'success' | 'error'>('idle');
   const [errorMessage, setErrorMessage] = useState('');
   const [submittedName, setSubmittedName] = useState('');
+  const formRenderedAt = React.useRef(Date.now());
   const lastPayloadRef = React.useRef<{
     name: string;
     email: string;
@@ -100,8 +101,16 @@ function ConsultationModalDialog({ service, onClose }: { service: string; onClos
     const form = e.currentTarget;
     const data = new FormData(form);
 
-    // Anti-spam honeypot
-    if (data.get('company_website_url')) return;
+    // Multi-layer anti-spam honeypot (silent success)
+    if (
+      data.get('website_url') ||
+      data.get('company_website_url') ||
+      data.get('phone_verify') ||
+      data.get('secondary_email')
+    ) {
+      setStatus('success');
+      return;
+    }
 
     setStatus('sending');
     setErrorMessage('');
@@ -116,6 +125,7 @@ function ConsultationModalDialog({ service, onClose }: { service: string; onClos
       service: (data.get('service') as string) || selectedService,
       market: data.get('market') as string,
       message: data.get('message') as string,
+      _form_rendered_at: formRenderedAt.current,
       timestamp: new Date().toISOString(),
     };
     lastPayloadRef.current = payload;
@@ -228,9 +238,12 @@ function ConsultationModalDialog({ service, onClose }: { service: string; onClos
             </div>
 
             <form onSubmit={handleSubmit} className="modal-form">
-              {/* Honeypot field */}
-              <div style={{ display: 'none' }} aria-hidden="true">
+              {/* Multi-honeypot anti-spam gate */}
+              <div className="honeypot" aria-hidden="true">
+                <input type="text" name="website_url" tabIndex={-1} autoComplete="off" />
                 <input type="text" name="company_website_url" tabIndex={-1} autoComplete="off" />
+                <input type="text" name="phone_verify" tabIndex={-1} autoComplete="off" />
+                <input type="text" name="secondary_email" tabIndex={-1} autoComplete="off" />
               </div>
 
               <div className="modal-form-grid">

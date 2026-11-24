@@ -64,11 +64,28 @@ export const action = withApi(async ({ request }: Route.ActionArgs) => {
     const body = await request.json();
 
     // 4. Honeypot check (silently drop automated bot submissions)
-    if (body.website_url || body.company_website_url) {
+    if (
+      body.website_url ||
+      body.company_website_url ||
+      body.phone_verify ||
+      body.secondary_email
+    ) {
       return json({
         ok: true,
         message: 'Consultation enquiry received successfully.',
       });
+    }
+
+    // 5. Anti-bot submission speed trap (minimum 2.5 seconds to fill form)
+    if (body._form_rendered_at) {
+      const renderedAt = Number(body._form_rendered_at);
+      const diffMs = Date.now() - renderedAt;
+      if (diffMs < 2500 || diffMs > 4 * 3600 * 1000) {
+        return json({
+          ok: true,
+          message: 'Consultation enquiry received successfully.',
+        });
+      }
     }
 
     const rawName = body.name;
@@ -78,7 +95,25 @@ export const action = withApi(async ({ request }: Route.ActionArgs) => {
     const rawMarket = body.market;
     const rawMessage = body.message;
 
-    // 5. Input Sanitization & Validation
+    // 6. Content Spam Heuristics (links count, Cyrillic flood)
+    if (typeof rawMessage === 'string') {
+      const linkMatches = rawMessage.match(/(https?:\/\/|www\.|\[url|<a\s+href)/gi) || [];
+      if (linkMatches.length > 2) {
+        return json({
+          ok: true,
+          message: 'Consultation enquiry received successfully.',
+        });
+      }
+      const cyrillicMatches = rawMessage.match(/[\u0400-\u04FF]/g) || [];
+      if (rawMessage.length > 0 && cyrillicMatches.length / rawMessage.length > 0.15) {
+        return json({
+          ok: true,
+          message: 'Consultation enquiry received successfully.',
+        });
+      }
+    }
+
+    // 7. Input Sanitization & Validation
     const cleanName = sanitizeString(rawName, 100);
     const cleanEmail = sanitizeString(rawEmail, 100);
     const cleanCompany = sanitizeString(rawCompany, 100);

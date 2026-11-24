@@ -8,13 +8,23 @@ DirectoryIndex index.html
   RewriteCond %{HTTP_HOST} ^www\.(.+)$ [NC]
   RewriteRule ^ https://%1%{REQUEST_URI} [R=301,L]
 
-  # 2. Force HTTPS
+  # 2. Force HTTPS (supports direct SSL and CDN/proxy headers)
   RewriteCond %{HTTPS} !=on
   RewriteCond %{HTTP:X-Forwarded-Proto} !https [NC]
   RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
 
-  # Serve __manifest as JSON for React Router
+  # 3. Block access to hidden files and directories (.git, .env, .htaccess, etc.)
+  RewriteRule (?:^|/)\. - [F,L]
+
+  # 4. Block access to private directories, backend source code, and data
+  RewriteRule ^(data|apps|scripts|node_modules|build|\.git)(/.*)?$ - [F,L,NC]
+
+  # 5. Manifest exceptions (must remain readable for React Router)
+  RewriteRule ^assets/manifest\.json$ - [L]
   RewriteRule ^__manifest$ assets/manifest.json [L,T=application/json]
+
+  # 6. Block sensitive file types/extensions (protect configs, backups, logs, package files)
+  RewriteRule \.(json|log|env|lock|md|ts|tsx|mjs|cjs|sql|sh|template|yml|yaml|bak|backup|config)$ - [F,L,NC]
 
   # Route /api/consultation to native PHP handler
   RewriteRule ^api/consultation/?$ api/consultation.php [L]

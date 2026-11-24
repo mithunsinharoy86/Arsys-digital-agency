@@ -16,6 +16,7 @@ export function ContactSection({
     initialService;
   const [status, setStatus] = useState<'idle' | 'sending' | 'success' | 'error'>('idle');
   const [errorMessage, setErrorMessage] = useState('');
+  const formRenderedAt = useRef(Date.now());
   const lastPayloadRef = useRef<{
     name: string;
     email: string;
@@ -30,8 +31,17 @@ export function ContactSection({
     const form = event.currentTarget;
     const values = new FormData(form);
 
-    // Anti-spam honeypot
-    if (values.get('website_url') || values.get('company_website_url')) return;
+    // Multi-layer anti-spam honeypot (silent success)
+    if (
+      values.get('website_url') ||
+      values.get('company_website_url') ||
+      values.get('phone_verify') ||
+      values.get('secondary_email')
+    ) {
+      setStatus('success');
+      form.reset();
+      return;
+    }
 
     setStatus('sending');
     setErrorMessage('');
@@ -45,6 +55,7 @@ export function ContactSection({
       market: values.get('market') as string,
       message: values.get('message') as string,
       consent: true,
+      _form_rendered_at: formRenderedAt.current,
       timestamp: new Date().toISOString(),
     };
     lastPayloadRef.current = enquiryPayload;
@@ -251,10 +262,12 @@ export function ContactSection({
                 />
               </label>
 
-              {/* Anti-spam honeypot hidden from view */}
-              <div className="honeypot" style={{ display: 'none' }} aria-hidden="true">
+              {/* Multi-honeypot anti-spam gate */}
+              <div className="honeypot" aria-hidden="true">
                 <input name="website_url" tabIndex={-1} autoComplete="off" />
                 <input name="company_website_url" tabIndex={-1} autoComplete="off" />
+                <input name="phone_verify" tabIndex={-1} autoComplete="off" />
+                <input name="secondary_email" tabIndex={-1} autoComplete="off" />
               </div>
 
               {/* Explicit GDPR/CCPA Consent Checkbox */}
