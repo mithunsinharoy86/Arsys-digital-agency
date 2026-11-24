@@ -6,7 +6,9 @@ import {
 	Outlet,
 	Scripts,
 	ScrollRestoration,
+	useLocation,
 } from 'react-router';
+import { useEffect } from 'react';
 import type { Route } from './+types/root';
 import stylesheet from '@/index.css?url';
 import '@/index.css';
@@ -81,7 +83,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
 				<script async src="https://www.googletagmanager.com/gtm.js?id=GTM-MDGF4G75" />
 				<script
 					dangerouslySetInnerHTML={{
-						__html: `window.dataLayer = window.dataLayer || [];\nfunction gtag(){dataLayer.push(arguments);}\ngtag('js', new Date());`,
+						__html: `window.dataLayer = window.dataLayer || [];\nwindow.dataLayer.push({'gtm.start': new Date().getTime(), event: 'gtm.js'});\nfunction gtag(){dataLayer.push(arguments);}\ngtag('js', new Date());`,
 					}}
 				/>
 				<meta charSet="utf-8" />
@@ -129,9 +131,48 @@ export function Layout({ children }: { children: React.ReactNode }) {
 	);
 }
 
+function GtmRouteTracker() {
+	const location = useLocation();
+
+	useEffect(() => {
+		if (typeof window === 'undefined') return;
+
+		// Defer to allow the new page's document.title and meta to settle
+		const timer = setTimeout(() => {
+			const pagePath = location.pathname + location.search;
+			const pageTitle = document.title;
+			const pageLocation = window.location.href;
+
+			// Push to GTM dataLayer for custom triggers and GA4 integration
+			const dl = (window as unknown as { dataLayer?: Record<string, unknown>[] }).dataLayer || [];
+			dl.push({
+				event: 'page_view',
+				page_path: pagePath,
+				page_title: pageTitle,
+				page_location: pageLocation,
+			});
+
+			// If gtag is available, also notify gtag directly
+			const win = window as unknown as { gtag?: (...args: unknown[]) => void };
+			if (typeof win.gtag === 'function') {
+				win.gtag('event', 'page_view', {
+					page_path: pagePath,
+					page_title: pageTitle,
+					page_location: pageLocation,
+				});
+			}
+		}, 60);
+
+		return () => clearTimeout(timer);
+	}, [location]);
+
+	return null;
+}
+
 export default function App() {
 	return (
 		<ConsultationModalProvider>
+			<GtmRouteTracker />
 			<SiteHeader />
 			<div id="main-content">
 				<Outlet />
