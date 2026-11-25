@@ -1,1 +1,0 @@
-import{t as e}from"./site-Doqbeo3n.js";function t({params:t}){let n=e.find(e=>e.slug===t.slug);if(!n)throw new Response(`Blog post not found`,{status:404});return{article:n}}t.hydrate=!0;export{t as clientLoader};

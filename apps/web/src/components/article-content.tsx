@@ -1,6 +1,7 @@
+import React from 'react';
 import { Link } from 'react-router';
 import { articles, images } from '@/data/site';
-import { Clock, UserCheck, CheckCircle2, ArrowUpRight } from 'lucide-react';
+import { Clock, UserCheck, CheckCircle2, ArrowUpRight, HelpCircle } from 'lucide-react';
 
 const visualMap: Record<string, string> = {
   property: images.property,
@@ -9,6 +10,11 @@ const visualMap: Record<string, string> = {
   seo: images.seoAudit,
   ai: images.aiAutomation,
   web: images.webDevCorporate,
+  marketing: images.digitalMarketing,
+  ecommerce: images.ecommerceStore,
+  design: images.uiUxDesign,
+  branding: images.brandingIdentity,
+  healthcare: images.dentalAesthetic,
 };
 
 const serviceLinkMap: Record<string, { title: string; href: string; label: string }> = {
@@ -37,12 +43,84 @@ const serviceLinkMap: Record<string, { title: string; href: string; label: strin
     href: '/services/website-development',
     label: 'Connected Core Service',
   },
+  'b2b-google-ads-ppc-scaling-playbook': {
+    title: 'Data-Driven Google Ads & PPC Management',
+    href: '/services/digital-marketing',
+    label: 'Connected Core Service',
+  },
+  'ai-lead-qualification-and-crm-automation': {
+    title: 'AI Workflow Automation & CRM Sync',
+    href: '/services/ai-automation',
+    label: 'Connected Core Service',
+  },
+  'headless-ecommerce-shopify-growth-architecture': {
+    title: 'High-Performance Headless Ecommerce',
+    href: '/services/ecommerce',
+    label: 'Connected Core Service',
+  },
+  'b2b-website-redesign-strategy-and-roi': {
+    title: 'Enterprise Corporate Web Development',
+    href: '/services/website-development',
+    label: 'Connected Core Service',
+  },
+  'healthcare-patient-acquisition-funnels': {
+    title: 'Healthcare & Dental Practice Growth',
+    href: '/industries/dental-clinics',
+    label: 'Connected Core Service',
+  },
 };
+
+/**
+ * Parses markdown-style links [Anchor Text](/path) or [Anchor Text](https://...)
+ * into accessible internal React Router <Link> or external <a> elements.
+ */
+function renderRichText(text: string): React.ReactNode {
+  if (!text || typeof text !== 'string') return text;
+  const regex = /\[([^\]]+)\]\(([^)]+)\)/g;
+  if (!regex.test(text)) return text;
+  regex.lastIndex = 0;
+
+  const parts: React.ReactNode[] = [];
+  let lastIndex = 0;
+  let match: RegExpExecArray | null;
+
+  while ((match = regex.exec(text)) !== null) {
+    if (match.index > lastIndex) {
+      parts.push(text.slice(lastIndex, match.index));
+    }
+    const label = match[1];
+    const href = match[2];
+
+    if (href.startsWith('/')) {
+      parts.push(
+        <Link key={match.index} to={href} className="article-inline-link">
+          {label}
+        </Link>
+      );
+    } else {
+      parts.push(
+        <a key={match.index} href={href} target="_blank" rel="noopener noreferrer" className="article-inline-link">
+          {label}
+        </a>
+      );
+    }
+    lastIndex = regex.lastIndex;
+  }
+
+  if (lastIndex < text.length) {
+    parts.push(text.slice(lastIndex));
+  }
+
+  return parts;
+}
 
 export function ArticleContent({ article }: { article: typeof articles[number] }) {
   const coverImage = visualMap[article.visual] || images.team;
   const relatedService = serviceLinkMap[article.slug];
   const companionArticles = articles.filter((a) => a.slug !== article.slug).slice(0, 2);
+
+  // Type helper for rich fields that may exist on extended articles
+  const artAny = article as Record<string, any>;
 
   return (
     <article className="article-body">
@@ -62,7 +140,7 @@ export function ArticleContent({ article }: { article: typeof articles[number] }
           </span>
           <span>·</span>
           <span>
-            <Clock size={14} /> 8&ndash;10 Min Read (1,000+ Words)
+            <Clock size={14} /> 10&ndash;14 Min Read (1,200+ Words)
           </span>
           <span>·</span>
           <span>Updated Q4 2026</span>
@@ -70,23 +148,39 @@ export function ArticleContent({ article }: { article: typeof articles[number] }
       </div>
 
       <div className="article-intro-lead">
-        <p>{article.intro}</p>
+        <p>{renderRichText(article.intro)}</p>
       </div>
 
       <div className="article-sections-flow">
-        {article.sections.map((s) => (
-          <section key={s.title} className="article-section-block">
+        {article.sections.map((s: any, sIdx: number) => (
+          <section key={s.title || sIdx} className="article-section-block">
             <h2>{s.title}</h2>
+
+            {/* In-between Section Image if present */}
+            {s.image && s.image.src && (
+              <figure className="article-mid-image-wrap">
+                <img
+                  src={s.image.src}
+                  alt={s.image.alt || s.title}
+                  loading="lazy"
+                  decoding="async"
+                  className="article-mid-image"
+                />
+                {s.image.caption && (
+                  <figcaption className="article-mid-caption">{s.image.caption}</figcaption>
+                )}
+              </figure>
+            )}
 
             {/* Paragraphs */}
             {'paragraphs' in s && Array.isArray(s.paragraphs) ? (
               s.paragraphs.map((para: string, pIdx: number) => (
                 <p key={pIdx} className="article-para">
-                  {para}
+                  {renderRichText(para)}
                 </p>
               ))
             ) : 'text' in s && typeof s.text === 'string' && s.text ? (
-              <p className="article-para">{s.text}</p>
+              <p className="article-para">{renderRichText(s.text)}</p>
             ) : null}
 
             {/* Bullet points if present */}
@@ -95,7 +189,7 @@ export function ArticleContent({ article }: { article: typeof articles[number] }
                 {s.bullets.map((bullet: string, bIdx: number) => (
                   <li key={bIdx} className="article-bullet-item">
                     <CheckCircle2 size={16} className="bullet-check-icon" />
-                    <span>{bullet}</span>
+                    <span>{renderRichText(bullet)}</span>
                   </li>
                 ))}
               </ul>
@@ -116,7 +210,7 @@ export function ArticleContent({ article }: { article: typeof articles[number] }
                     {s.table.rows.map((row: string[], rIdx: number) => (
                       <tr key={rIdx}>
                         {row.map((cell: string, cIdx: number) => (
-                          <td key={cIdx}>{cell}</td>
+                          <td key={cIdx}>{renderRichText(cell)}</td>
                         ))}
                       </tr>
                     ))}
@@ -129,21 +223,75 @@ export function ArticleContent({ article }: { article: typeof articles[number] }
             {'paragraphs_after' in s && Array.isArray(s.paragraphs_after) && (
               s.paragraphs_after.map((para: string, pIdx: number) => (
                 <p key={`after-${pIdx}`} className="article-para">
-                  {para}
+                  {renderRichText(para)}
                 </p>
               ))
+            )}
+
+            {/* Mid-Article Call to Action Card if present */}
+            {s.cta && (
+              <div className="article-mid-cta-card">
+                <div className="article-mid-cta-content">
+                  {s.cta.badge && <span className="article-mid-cta-badge">{s.cta.badge}</span>}
+                  <h4>{s.cta.title}</h4>
+                  <p>{s.cta.description}</p>
+                </div>
+                <Link to={s.cta.buttonHref || '/contact'} className="article-mid-cta-btn">
+                  {s.cta.buttonText || 'Schedule Free Architecture Call'} <ArrowUpRight size={16} />
+                </Link>
+              </div>
             )}
 
             {/* Strategic Callout Takeaway */}
             {'callout' in s && s.callout && (
               <div className="article-callout-card">
                 <strong>Strategic Framework Takeaway</strong>
-                <p>{s.callout}</p>
+                <p>{renderRichText(s.callout)}</p>
               </div>
             )}
           </section>
         ))}
       </div>
+
+      {/* Structured Conclusion Section if present */}
+      {artAny.conclusion && (
+        <section className="article-conclusion-block">
+          <h2>{artAny.conclusion.title || 'Strategic Conclusion & Implementation Roadmap'}</h2>
+          {Array.isArray(artAny.conclusion.paragraphs) &&
+            artAny.conclusion.paragraphs.map((cPara: string, cIdx: number) => (
+              <p key={cIdx} className="article-para">
+                {renderRichText(cPara)}
+              </p>
+            ))}
+          {artAny.conclusion.takeaway && (
+            <div className="article-callout-card" style={{ marginTop: '20px' }}>
+              <strong>Key Executive Takeaway</strong>
+              <p>{renderRichText(artAny.conclusion.takeaway)}</p>
+            </div>
+          )}
+        </section>
+      )}
+
+      {/* Frequently Asked Questions (FAQs) Section if present */}
+      {artAny.faqs && Array.isArray(artAny.faqs) && artAny.faqs.length > 0 && (
+        <section className="article-faqs-section">
+          <div className="article-faqs-header">
+            <span className="eyebrow">COMMON CLIENT INQUIRIES &middot; STRATEGIC FAQS</span>
+            <h2>Frequently Asked Questions</h2>
+            <p>Direct answers to technical, operational, and commercial questions regarding this implementation.</p>
+          </div>
+          <div className="article-faqs-list">
+            {artAny.faqs.map((faq: { question: string; answer: string }, fIdx: number) => (
+              <div key={fIdx} className="article-faq-item">
+                <h3>
+                  <HelpCircle size={18} className="faq-question-icon" /> {faq.question}
+                </h3>
+                <p>{renderRichText(faq.answer)}</p>
+              </div>
+            ))}
+          </div>
+        </section>
+      )}
 
       {/* Internal Links Hub */}
       <div className="article-internal-links-hub">

@@ -40,3 +40,8 @@
 - [Business Process Automation](https://klyroworks.com/blogs/first-business-automation): Where growing businesses should start with AI automation.
 - [Generative Engine Optimization (GEO)](https://klyroworks.com/blogs/geo-and-ai-search-ranking): How to earn citations in Google AI Overviews, Perplexity, and ChatGPT Search.
 - [Core Web Vitals Impact on Revenue](https://klyroworks.com/blogs/core-web-vitals-business-impact): Real-world commercial ROI of sub-second load times and mobile page speed.
+- [B2B Google Ads & PPC Scaling Playbook](https://klyroworks.com/blogs/b2b-google-ads-ppc-scaling-playbook): How high-growth companies generate qualified commercial inquiries at scale.
+- [Zero-Lag AI Lead Qualification](https://klyroworks.com/blogs/ai-lead-qualification-and-crm-automation): How AI agents and CRM automation eliminate speed-to-lead drop-off.
+- [Headless Ecommerce vs Monolithic Shopify](https://klyroworks.com/blogs/headless-ecommerce-shopify-growth-architecture): The engineering and revenue blueprint for scaling DTC brands.
+- [Executive Guide to B2B Website Redesign](https://klyroworks.com/blogs/b2b-website-redesign-strategy-and-roi): Scope, milestones, SEO protection, and revenue ROI.
+- [Healthcare & Dental Patient Acquisition Engine](https://klyroworks.com/blogs/healthcare-patient-acquisition-funnels): High-trust web design, Google Local 3-Pack, and automated booking.

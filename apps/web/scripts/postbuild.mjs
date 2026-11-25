@@ -253,6 +253,11 @@ const staticRoutes = [
   { path: '/blogs/first-business-automation', priority: '0.8', changefreq: 'monthly' },
   { path: '/blogs/geo-and-ai-search-ranking', priority: '0.8', changefreq: 'monthly' },
   { path: '/blogs/core-web-vitals-business-impact', priority: '0.8', changefreq: 'monthly' },
+  { path: '/blogs/b2b-google-ads-ppc-scaling-playbook', priority: '0.8', changefreq: 'monthly' },
+  { path: '/blogs/ai-lead-qualification-and-crm-automation', priority: '0.8', changefreq: 'monthly' },
+  { path: '/blogs/headless-ecommerce-shopify-growth-architecture', priority: '0.8', changefreq: 'monthly' },
+  { path: '/blogs/b2b-website-redesign-strategy-and-roi', priority: '0.8', changefreq: 'monthly' },
+  { path: '/blogs/healthcare-patient-acquisition-funnels', priority: '0.8', changefreq: 'monthly' },
   { path: '/contact', priority: '0.8', changefreq: 'monthly' },
   { path: '/privacy', priority: '0.3', changefreq: 'yearly' },
   { path: '/terms', priority: '0.3', changefreq: 'yearly' },
@@ -314,6 +319,11 @@ const llmsTxt = `# Klyro Works
 - [Business Process Automation](${origin}/blogs/first-business-automation): Where growing businesses should start with AI automation.
 - [Generative Engine Optimization (GEO)](${origin}/blogs/geo-and-ai-search-ranking): How to earn citations in Google AI Overviews, Perplexity, and ChatGPT Search.
 - [Core Web Vitals Impact on Revenue](${origin}/blogs/core-web-vitals-business-impact): Real-world commercial ROI of sub-second load times and mobile page speed.
+- [B2B Google Ads & PPC Scaling Playbook](${origin}/blogs/b2b-google-ads-ppc-scaling-playbook): How high-growth companies generate qualified commercial inquiries at scale.
+- [Zero-Lag AI Lead Qualification](${origin}/blogs/ai-lead-qualification-and-crm-automation): How AI agents and CRM automation eliminate speed-to-lead drop-off.
+- [Headless Ecommerce vs Monolithic Shopify](${origin}/blogs/headless-ecommerce-shopify-growth-architecture): The engineering and revenue blueprint for scaling DTC brands.
+- [Executive Guide to B2B Website Redesign](${origin}/blogs/b2b-website-redesign-strategy-and-roi): Scope, milestones, SEO protection, and revenue ROI.
+- [Healthcare & Dental Patient Acquisition Engine](${origin}/blogs/healthcare-patient-acquisition-funnels): High-trust web design, Google Local 3-Pack, and automated booking.
 `;
 
 const staticTargets = [
@@ -332,7 +342,7 @@ console.log('✓ [postbuild] Generated physical robots.txt, sitemap.xml, and llm
 
 console.log('✓ [postbuild] Cleaned and synchronized matching assets across all web roots');
 
-// 11. Static Site Pre-rendering (SSG) for all 27 routes + 404
+// 11. Static Site Pre-rendering (SSG) for all 32 routes + 404
 // Eliminates the SPA Duplicate Content trap by generating dedicated physical index.html files
 console.log('\n[postbuild] Starting Static Site Pre-rendering (SSG) for all routes...');
 const serverBuildPath = path.resolve(__dirname, '../../../dist/apps/web/server/index.js');

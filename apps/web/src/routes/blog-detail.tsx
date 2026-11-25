@@ -41,7 +41,36 @@ export function meta({ matches, location, loaderData }: Route.MetaArgs) {
       ? images.webDevCorporate
       : article.visual === 'ai'
       ? images.aiAutomation
+      : article.visual === 'marketing'
+      ? images.digitalMarketing
+      : article.visual === 'ecommerce'
+      ? images.ecommerceStore
+      : article.visual === 'design'
+      ? images.uiUxDesign
+      : article.visual === 'branding'
+      ? images.brandingIdentity
+      : article.visual === 'healthcare'
+      ? images.dentalAesthetic
       : images.team;
+
+  const artAny = article as Record<string, any>;
+  const faqSchema =
+    artAny.faqs && Array.isArray(artAny.faqs) && artAny.faqs.length > 0
+      ? [
+          {
+            '@context': 'https://schema.org',
+            '@type': 'FAQPage',
+            mainEntity: artAny.faqs.map((f: { question: string; answer: string }) => ({
+              '@type': 'Question',
+              name: f.question,
+              acceptedAnswer: {
+                '@type': 'Answer',
+                text: f.answer.replace(/\[([^\]]+)\]\([^)]+\)/g, '$1'),
+              },
+            })),
+          },
+        ]
+      : [];
 
   return seo(
     { matches, location },
@@ -72,6 +101,7 @@ export function meta({ matches, location, loaderData }: Route.MetaArgs) {
             { '@type': 'ListItem', position: 3, name: article.title, item: absoluteUrl(origin, `/blogs/${article.slug}`) },
           ],
         },
+        ...faqSchema,
       ],
     }
   );

@@ -8,6 +8,11 @@ const readingTimes: Record<string, string> = {
   'first-business-automation': '8 min read (1,080 words)',
   'geo-and-ai-search-ranking': '10 min read (1,200 words)',
   'core-web-vitals-business-impact': '9 min read (1,140 words)',
+  'b2b-google-ads-ppc-scaling-playbook': '11 min read (1,380 words)',
+  'ai-lead-qualification-and-crm-automation': '12 min read (1,420 words)',
+  'headless-ecommerce-shopify-growth-architecture': '12 min read (1,450 words)',
+  'b2b-website-redesign-strategy-and-roi': '11 min read (1,390 words)',
+  'healthcare-patient-acquisition-funnels': '11 min read (1,360 words)',
 };
 
 const visualMap: Record<string, string> = {
@@ -17,6 +22,11 @@ const visualMap: Record<string, string> = {
   seo: images.seoAudit,
   ai: images.aiAutomation,
   web: images.webDevCorporate,
+  marketing: images.digitalMarketing,
+  ecommerce: images.ecommerceStore,
+  design: images.uiUxDesign,
+  branding: images.brandingIdentity,
+  healthcare: images.dentalAesthetic,
 };
 
 export function InsightsList() {
