@@ -1,5 +1,5 @@
 import type { Route } from './+types/about';
-import { seo, siteOriginFrom, breadcrumbSchema } from '@/lib/seo';
+import { seo, siteOriginFrom, breadcrumbSchema, organizationSchema } from '@/lib/seo';
 import { images } from '@/data/site';
 import { PageIntro } from '@/components/page-intro';
 import { AboutStory } from '@/components/about-story';
@@ -15,7 +15,10 @@ export function meta({ matches, location }: Route.MetaArgs) {
       description:
         'Meet Klyro Works, a digital growth partner combining website engineering, SEO, digital marketing and AI automation to help ambitious businesses scale.',
       image: images.team,
-      jsonLd: breadcrumbSchema(origin, [{ name: 'About Us', path: '/about' }]),
+      jsonLd: [
+        breadcrumbSchema(origin, [{ name: 'About Us', path: '/about' }]),
+        organizationSchema(origin),
+      ],
     }
   );
 }

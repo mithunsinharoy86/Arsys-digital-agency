@@ -1,0 +1,44 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "name": "klyroworks-mcp-server",
+  "version": "1.0.0",
+  "description": "Model Context Protocol (MCP) server for Klyro Works digital engineering, services catalog, and consultation scheduling.",
+  "homepage": "https://klyroworks.com",
+  "endpoint": "https://klyroworks.com/.well-known/mcp",
+  "transport": {
+    "type": "http",
+    "url": "https://klyroworks.com/api/consultation"
+  },
+  "capabilities": {
+    "tools": {
+      "list": [
+        {
+          "name": "get_agency_capabilities",
+          "description": "Returns verified agency services, engineering tech stack, delivery frameworks, and target markets."
+        },
+        {
+          "name": "schedule_consultation",
+          "description": "Enables prospective clients and autonomous agents to request a 30-minute discovery call and architecture audit."
+        }
+      ]
+    },
+    "resources": {
+      "list": [
+        {
+          "uri": "https://klyroworks.com/llms.txt",
+          "name": "LLM & AI Agent Context Documentation",
+          "mimeType": "text/markdown"
+        },
+        {
+          "uri": "https://klyroworks.com/sitemap.xml",
+          "name": "Complete XML Sitemap",
+          "mimeType": "application/xml"
+        }
+      ]
+    }
+  },
+  "contact": {
+    "email": "admin@klyroworks.com",
+    "url": "https://klyroworks.com/contact"
+  }
+}

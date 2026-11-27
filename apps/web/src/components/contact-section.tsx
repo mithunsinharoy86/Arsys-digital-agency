@@ -183,7 +183,17 @@ export function ContactSection({
               </button>
             </div>
           ) : (
-            <form onSubmit={submit} className="split-form" noValidate={false}>
+            <form
+              onSubmit={submit}
+              className="split-form"
+              noValidate={false}
+              data-toolname="schedule_consultation"
+              data-tooldescription="Submit an inquiry to book a free 30-minute strategy call and architecture audit with Klyro Works"
+              {...({
+                toolname: 'schedule_consultation',
+                tooldescription: 'Submit an inquiry to book a free 30-minute strategy call and architecture audit with Klyro Works',
+              } as any)}
+            >
               <div className="split-form-header">
                 <h3>What are you working on?</h3>
                 <p>Share a little about your business goals. We&rsquo;ll take it from there.</p>

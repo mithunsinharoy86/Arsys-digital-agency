@@ -237,7 +237,16 @@ function ConsultationModalDialog({ service, onClose }: { service: string; onClos
               </p>
             </div>
 
-            <form onSubmit={handleSubmit} className="modal-form">
+            <form
+              onSubmit={handleSubmit}
+              className="modal-form"
+              data-toolname="schedule_consultation"
+              data-tooldescription="Schedule a 30-minute discovery call and architecture audit with Klyro Works"
+              {...({
+                toolname: 'schedule_consultation',
+                tooldescription: 'Schedule a 30-minute discovery call and architecture audit with Klyro Works',
+              } as any)}
+            >
               {/* Multi-honeypot anti-spam gate */}
               <div className="honeypot" aria-hidden="true">
                 <input type="text" name="website_url" tabIndex={-1} autoComplete="off" />

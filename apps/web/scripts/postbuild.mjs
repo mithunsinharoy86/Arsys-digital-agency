@@ -140,6 +140,18 @@ if (fs.existsSync(apiDir)) {
   fs.cpSync(apiDir, repoApiDir, { recursive: true });
 }
 
+// Copy .well-known directory (RFC 5785 / SEP-1649 MCP Server Card)
+const publicWellKnownDir = path.resolve(__dirname, '../public/.well-known');
+const clientWellKnownDir = path.join(clientDir, '.well-known');
+const rootWellKnownDir = path.join(rootDistDir, '.well-known');
+const repoWellKnownDir = path.join(repoRootDir, '.well-known');
+if (fs.existsSync(publicWellKnownDir)) {
+  fs.cpSync(publicWellKnownDir, clientWellKnownDir, { recursive: true });
+  fs.cpSync(publicWellKnownDir, rootWellKnownDir, { recursive: true });
+  fs.cpSync(publicWellKnownDir, repoWellKnownDir, { recursive: true });
+  console.log('✓ [postbuild] Synchronized /.well-known directory across all targets');
+}
+
 // Copy manifest endpoints
 fs.writeFileSync(path.join(repoRootDir, '__manifest'), manifestJsonStr, 'utf8');
 fs.writeFileSync(path.join(rootDistDir, '__manifest'), manifestJsonStr, 'utf8');
@@ -263,12 +275,14 @@ const staticRoutes = [
   { path: '/terms', priority: '0.3', changefreq: 'yearly' },
 ];
 
+const today = new Date().toISOString().split('T')[0];
 const sitemapXml = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 ${staticRoutes
   .map(
     (r) => `  <url>
     <loc>${origin}${r.path}</loc>
+    <lastmod>${r.lastmod || today}</lastmod>
     <changefreq>${r.changefreq}</changefreq>
     <priority>${r.priority}</priority>
   </url>`

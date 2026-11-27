@@ -13,58 +13,91 @@ DirectoryIndex index.html
   RewriteCond %{HTTP:X-Forwarded-Proto} !https [NC]
   RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
 
-  # 3. Block access to hidden files and directories (.git, .env, .htaccess, etc.)
+  # 3. Allow RFC 5785 .well-known directory (e.g. MCP Server Card at /.well-known/mcp/server-card.json)
+  RewriteRule ^\.well-known/ - [L]
+
+  # 4. Block access to other hidden files and directories (.git, .env, .htaccess, etc.)
+  RewriteCond %{REQUEST_URI} !^/\.well-known/ [NC]
   RewriteRule (?:^|/)\. - [F,L]
 
-  # 4. Block access to private directories, backend source code, and data
+  # 5. Block access to private directories, backend source code, and data
   RewriteRule ^(data|apps|scripts|node_modules|build|\.git)(/.*)?$ - [F,L,NC]
 
-  # 5. Manifest exceptions (must remain readable for React Router)
+  # 6. Exceptions for public manifest and MCP server card JSON
   RewriteRule ^assets/manifest\.json$ - [L]
+  RewriteRule ^\.well-known/mcp/server-card\.json$ - [L]
   RewriteRule ^__manifest$ assets/manifest.json [L,T=application/json]
 
-  # 6. Block sensitive file types/extensions (protect configs, backups, logs, package files)
+  # 7. Block sensitive file types/extensions (protect configs, backups, logs, package files)
+  RewriteCond %{REQUEST_URI} !^/\.well-known/ [NC]
+  RewriteCond %{REQUEST_URI} !^/assets/manifest\.json$ [NC]
   RewriteRule \.(json|log|env|lock|md|ts|tsx|mjs|cjs|sql|sh|template|yml|yaml|bak|backup|config)$ - [F,L,NC]
 
-  # Route /api/consultation to native PHP handler
+  # 8. Content Negotiation: Serve Markdown when AI agents request Accept: text/markdown or text/x-markdown
+  RewriteCond %{HTTP:Accept} (?:text/markdown|text/x-markdown) [NC]
+  RewriteCond %{DOCUMENT_ROOT}/llms.txt -f
+  RewriteRule ^(.*)$ /llms.txt [L,T=text/markdown;charset=UTF-8]
+
+  # 9. Route /api/consultation to native PHP handler
   RewriteRule ^api/consultation/?$ api/consultation.php [L]
 
-  # Don't rewrite real files
+  # 10. Don't rewrite real files
   RewriteRule ^index\.html$ - [L]
   RewriteCond %{REQUEST_FILENAME} -f
   RewriteRule ^ - [L]
 
-  # Serve pre-rendered static route HTML files directly if they exist
+  # 11. Serve pre-rendered static route HTML files directly if they exist
   # Matches /services/seo or /services/seo/ and maps to services/seo/index.html
   RewriteCond %{DOCUMENT_ROOT}/$1/index.html -f
   RewriteRule ^(.*)/?$ $1/index.html [L]
 
-  # Don't rewrite real directories
+  # 12. Don't rewrite real directories
   RewriteCond %{REQUEST_FILENAME} -d
   RewriteRule ^ - [L]
 
-  # Return 404 for missing static assets instead of serving index.html
+  # 13. Return 404 for missing static assets
   RewriteCond %{REQUEST_URI} \.(js|css|png|jpg|jpeg|gif|svg|ico|webp|woff|woff2|ttf|eot|json|map)$ [NC]
   RewriteCond %{REQUEST_FILENAME} !-f
   RewriteRule ^ - [R=404,L]
 
-  # SPA Fallback for client routing
-  RewriteRule . /index.html [L]
+  # 14. Real 404 for any non-existent page/route (Ensures AI agents receive real HTTP 404 instead of 200)
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteRule ^ - [R=404,L]
 </IfModule>
 
+# Custom 404 Error Document
 ErrorDocument 404 /404.html
-
 
 # Disable directory browsing
 Options -Indexes
 
-# Security headers & cache control
+# Security headers, Link headers & cache control
 <IfModule mod_headers.c>
   Header set X-Content-Type-Options "nosniff"
   Header set X-Frame-Options "SAMEORIGIN"
 
-  # Ensure index.html and __manifest are never cached indefinitely by browsers
-  <FilesMatch "(index\.html|__manifest|manifest\.json)$">
+  # RFC 8288 Link headers advertising llms.txt, MCP Server Card, and sitemap on HTML pages
+  <FilesMatch "(index\.html|404\.html)?$">
+    Header set Link '</llms.txt>; rel="alternate"; type="text/markdown", </.well-known/mcp/server-card.json>; rel="service-desc"; type="application/json", </sitemap.xml>; rel="sitemap"; type="application/xml"'
+  </FilesMatch>
+
+  # Explicit Content-Type and CORS for llms.txt (Markdown)
+  <Files "llms.txt">
+    ForceType text/markdown; charset=utf-8
+    Header set Content-Type "text/markdown; charset=utf-8"
+    Header set Access-Control-Allow-Origin "*"
+  </Files>
+
+  # Explicit Content-Type and CORS for MCP Server Card
+  <Files "server-card.json">
+    ForceType application/json; charset=utf-8
+    Header set Content-Type "application/json; charset=utf-8"
+    Header set Access-Control-Allow-Origin "*"
+  </Files>
+
+  # Ensure index.html, __manifest, and server-card.json are revalidated
+  <FilesMatch "(index\.html|__manifest|manifest\.json|server-card\.json)$">
     Header set Cache-Control "no-cache, no-store, must-revalidate"
     Header set Pragma "no-cache"
     Header set Expires 0

@@ -23,12 +23,12 @@ function toLoc(origin: string, path: string): string {
 }
 
 function serializeSitemap(origin: string, entries: SitemapEntry[]): string {
+	const defaultLastMod = new Date().toISOString().split('T')[0];
 	const urls = entries
 		.map(entry => {
 			const loc = escapeXml(toLoc(origin, entry.path));
-			const lastmod = entry.lastmod
-				? `\n\t\t<lastmod>${escapeXml(entry.lastmod)}</lastmod>`
-				: '';
+			const lastmodDate = entry.lastmod || defaultLastMod;
+			const lastmod = `\n\t\t<lastmod>${escapeXml(lastmodDate)}</lastmod>`;
 
 			return `\t<url>\n\t\t<loc>${loc}</loc>${lastmod}\n\t</url>`;
 		})

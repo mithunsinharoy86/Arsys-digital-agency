@@ -33,12 +33,15 @@ export const links: Route.LinksFunction = () => [
 		rel: 'stylesheet',
 		href: 'https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Sora:wght@400;500;600;700&display=swap',
 	},
+	{ rel: 'alternate', type: 'text/markdown', href: '/llms.txt', title: 'LLM & Agent Documentation' },
+	{ rel: 'service-desc', type: 'application/json', href: '/.well-known/mcp/server-card.json', title: 'MCP Server Card' },
+	{ rel: 'sitemap', type: 'application/xml', href: '/sitemap.xml', title: 'Sitemap' },
 ];
 
 /**
  * Publishes the site's public origin, which `seo()` reads to build canonical and
- * `og:url` tags, and advertises the sitemap to crawlers that read response
- * headers rather than HTML.
+ * `og:url` tags, and advertises the sitemap, llms.txt, and MCP Server Card to
+ * crawlers and autonomous agents that read response headers rather than HTML.
  *
  * A `meta` export can only reach server data through `matches`, and the `headers`
  * export cannot see loader data at all, so both have to travel this way.
@@ -48,7 +51,11 @@ export function loader({ request }: Route.LoaderArgs) {
 
 	return data(
 		{ origin },
-		{ headers: { Link: `<${origin}/sitemap.xml>; rel="sitemap"; type="application/xml", <${origin}/llms.txt>; rel="describedby"; type="text/plain"` } },
+		{
+			headers: {
+				Link: `<${origin}/llms.txt>; rel="alternate"; type="text/markdown", <${origin}/.well-known/mcp/server-card.json>; rel="service-desc"; type="application/json", <${origin}/sitemap.xml>; rel="sitemap"; type="application/xml"`,
+			},
+		},
 	);
 }
 
@@ -70,6 +77,9 @@ export function headers({ loaderHeaders }: Route.HeadersArgs) {
 	headers.set('Permissions-Policy', 'camera=(), microphone=(), geolocation=(), payment=()');
 	headers.set('Strict-Transport-Security', 'max-age=31536000; includeSubDomains');
 	headers.set('Cross-Origin-Opener-Policy', 'same-origin-allow-popups');
+	if (loaderHeaders.has('Link')) {
+		headers.set('Link', loaderHeaders.get('Link')!);
+	}
 	return headers;
 }
 
@@ -110,6 +120,12 @@ export function Layout({ children }: { children: React.ReactNode }) {
 								},
 							],
 						}),
+					}}
+				/>
+				{/* WebMCP Tool Registration for in-browser autonomous AI agents */}
+				<script
+					dangerouslySetInnerHTML={{
+						__html: `(function(){try{var reg=function(){if(typeof window!=='undefined'&&window.navigator&&'modelContext' in window.navigator&&typeof window.navigator.modelContext?.registerTool==='function'){window.navigator.modelContext.registerTool({name:'get_agency_capabilities',description:'Retrieve verified Klyro Works service catalog, technology stack, and commercial delivery model.',inputSchema:{type:'object',properties:{service:{type:'string',description:'Optional service category (e.g. web-dev, seo, ai-automation, ecommerce)'}}},execute:async function(){return{agency:'Klyro Works',website:'https://klyroworks.com',services:['Bespoke Website Development','Technical SEO & Generative Engine Optimization (GEO)','AI Workflow Automation & CRM Sync','Google Ads & Performance PPC','UI/UX Design Systems','Headless Ecommerce'],contact:'admin@klyroworks.com',consultationUrl:'https://klyroworks.com/contact'};}});window.navigator.modelContext.registerTool({name:'schedule_consultation',description:'Prepare or submit an inquiry to schedule a 30-minute discovery call and architecture audit with Klyro Works senior engineers.',inputSchema:{type:'object',properties:{name:{type:'string',description:'Prospective client name'},email:{type:'string',description:'Business email address'},service:{type:'string',description:'Requested service or project focus'},message:{type:'string',description:'Project overview and objectives'}},required:['name','email']},execute:async function(){return{status:'success',message:'Inquiry prepared. Complete submission on the official consultation booking modal.',url:'https://klyroworks.com/contact'};}});}};if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',reg);}else{reg();}}catch(e){}})();`,
 					}}
 				/>
 			</head>

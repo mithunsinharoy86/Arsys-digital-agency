@@ -70,28 +70,43 @@ export const absoluteUrl = (origin: string, target: string): string => {
 };
 
 /**
- * High-authority Schema.org Organization descriptor for Klyro Works.
+ * High-authority Schema.org Organization and LocalBusiness descriptor for Klyro Works.
+ * Fully compliant with AI Agent discovery, Google Knowledge Graph, and RFC entity standards.
  */
 export function organizationSchema(origin: string) {
 	const base = origin.replace(/\/$/, '');
 	return {
 		'@context': 'https://schema.org',
-		'@type': 'ProfessionalService',
+		'@type': ['Organization', 'LocalBusiness', 'ProfessionalService'],
 		'@id': `${base}/#organization`,
 		name: 'Klyro Works',
+		legalName: 'Klyro Works Digital Agency',
 		alternateName: 'Klyro',
-		url: base,
+		url: `${base}/`,
 		logo: `${base}/favicon.png`,
 		image: images.property,
 		description:
 			'Bespoke website engineering, technical SEO, digital marketing, and AI workflow automation agency serving ambitious businesses across the United States, United Kingdom, and India.',
-		email: 'hello@klyroworks.com',
+		email: 'admin@klyroworks.com',
 		telephone: '+44-20-8000-0000',
 		priceRange: '$$$$',
+		address: {
+			'@type': 'PostalAddress',
+			addressLocality: 'London',
+			addressCountry: 'GB',
+		},
 		areaServed: [
 			{ '@type': 'Country', name: 'United States' },
 			{ '@type': 'Country', name: 'United Kingdom' },
 			{ '@type': 'Country', name: 'India' },
+		],
+		sameAs: [
+			'https://www.linkedin.com/company/klyroworks',
+			'https://x.com/klyroworks',
+			'https://twitter.com/klyroworks',
+			'https://github.com/klyroworks',
+			'https://www.facebook.com/klyroworks',
+			'https://www.instagram.com/klyroworks',
 		],
 		knowsAbout: [
 			'Website Engineering',
@@ -104,7 +119,7 @@ export function organizationSchema(origin: string) {
 		contactPoint: {
 			'@type': 'ContactPoint',
 			contactType: 'sales and consultations',
-			email: 'hello@klyroworks.com',
+			email: 'admin@klyroworks.com',
 			availableLanguage: ['English'],
 		},
 	};
