@@ -1,0 +1,70 @@
+name: Daily SEO Blog Automation & QC Publishing
+
+on:
+  schedule:
+    # Runs daily at 23:00 UTC (4:30 AM IST)
+    - cron: '0 23 * * *'
+  workflow_dispatch:
+    inputs:
+      article_count:
+        description: 'Number of articles to generate (default 5)'
+        required: false
+        default: '5'
+
+permissions:
+  contents: write
+
+jobs:
+  generate-and-publish:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+
+      - name: Install Dependencies
+        run: npm ci
+
+      - name: Run Intelligent Content Generation & Quality Control
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+        run: |
+          COUNT="${{ github.event.inputs.article_count || '5' }}"
+          node scripts/generate-daily-blogs.mjs --count=$COUNT
+
+      - name: Build Application and Pre-render Static HTML & Sitemaps
+        run: npm run build
+
+      - name: Configure Git
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+
+      - name: Commit and Push Changes to Remotes
+        env:
+          ARSYS_PAT: ${{ secrets.ARSYS_PAT || secrets.GITHUB_TOKEN }}
+        run: |
+          # Check if there are changes
+          if [ -n "$(git status --porcelain)" ]; then
+            git add .
+            git commit -m "chore(content): automated daily SEO blogs publication [skip ci]"
+            
+            # Push to origin
+            git push origin main
+            
+            # Push to Hostinger deployment remote (arsys)
+            git remote add arsys https://x-access-token:${ARSYS_PAT}@github.com/mithunsinharoy86/Arsys-digital-agency.git 2>/dev/null || true
+            git push arsys main --force
+            echo "Successfully published and synchronized to both repositories."
+          else
+            echo "No new approved articles to publish today."
+          fi

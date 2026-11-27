@@ -240,7 +240,34 @@ Disallow: /
 Sitemap: ${origin}/sitemap.xml
 `;
 
-const staticRoutes = [
+// Dynamically load all articles from site.ts to include in static routes and sitemap
+let dynamicArticles = [];
+try {
+  const siteTsPath = path.resolve(__dirname, '../src/data/site.ts');
+  if (fs.existsSync(siteTsPath)) {
+    const siteTsContent = fs.readFileSync(siteTsPath, 'utf8');
+    // Extract everything from `export const articles = [` to the end of the file
+    const articlesStartIndex = siteTsContent.indexOf('export const articles');
+    if (articlesStartIndex !== -1) {
+      const articlesBody = siteTsContent.slice(articlesStartIndex);
+      const slugMatches = [...articlesBody.matchAll(/"slug":\s*"([^"]+)"|slug:\s*['"]([^'"]+)['"]/g)];
+      
+      const seenSlugs = new Set();
+      slugMatches.forEach((m) => {
+        const slug = m[1] || m[2];
+        if (slug && !seenSlugs.has(slug)) {
+          seenSlugs.add(slug);
+          dynamicArticles.push({ slug });
+        }
+      });
+    }
+    console.log(`[postbuild] Dynamically discovered ${dynamicArticles.length} articles from site.ts`);
+  }
+} catch (e) {
+  console.warn(`[postbuild] Could not parse site.ts articles dynamically: ${e.message}`);
+}
+
+const baseStaticRoutes = [
   { path: '/', priority: '1.0', changefreq: 'weekly' },
   { path: '/services', priority: '0.9', changefreq: 'weekly' },
   { path: '/services/website-development', priority: '0.9', changefreq: 'weekly' },
@@ -260,20 +287,19 @@ const staticRoutes = [
   { path: '/our-work', priority: '0.8', changefreq: 'weekly' },
   { path: '/about', priority: '0.8', changefreq: 'monthly' },
   { path: '/blogs', priority: '0.9', changefreq: 'daily' },
-  { path: '/blogs/conversion-focused-website', priority: '0.8', changefreq: 'monthly' },
-  { path: '/blogs/local-seo-for-service-businesses', priority: '0.8', changefreq: 'monthly' },
-  { path: '/blogs/first-business-automation', priority: '0.8', changefreq: 'monthly' },
-  { path: '/blogs/geo-and-ai-search-ranking', priority: '0.8', changefreq: 'monthly' },
-  { path: '/blogs/core-web-vitals-business-impact', priority: '0.8', changefreq: 'monthly' },
-  { path: '/blogs/b2b-google-ads-ppc-scaling-playbook', priority: '0.8', changefreq: 'monthly' },
-  { path: '/blogs/ai-lead-qualification-and-crm-automation', priority: '0.8', changefreq: 'monthly' },
-  { path: '/blogs/headless-ecommerce-shopify-growth-architecture', priority: '0.8', changefreq: 'monthly' },
-  { path: '/blogs/b2b-website-redesign-strategy-and-roi', priority: '0.8', changefreq: 'monthly' },
-  { path: '/blogs/healthcare-patient-acquisition-funnels', priority: '0.8', changefreq: 'monthly' },
   { path: '/contact', priority: '0.8', changefreq: 'monthly' },
   { path: '/privacy', priority: '0.3', changefreq: 'yearly' },
   { path: '/terms', priority: '0.3', changefreq: 'yearly' },
 ];
+
+const articleRoutes = dynamicArticles.map(a => ({
+  path: `/blogs/${a.slug}`,
+  priority: '0.8',
+  changefreq: 'monthly',
+  lastmod: a.lastmod,
+}));
+
+const staticRoutes = [...baseStaticRoutes, ...articleRoutes];
 
 const today = new Date().toISOString().split('T')[0];
 const sitemapXml = `<?xml version="1.0" encoding="UTF-8"?>

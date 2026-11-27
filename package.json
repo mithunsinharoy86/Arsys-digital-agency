@@ -9,7 +9,9 @@
     "build": "npm run build --prefix apps/web",
     "start": "npm run start --prefix apps/web",
     "lint": "npm run lint --prefix apps/web",
-    "typecheck": "npm run typecheck --prefix apps/web"
+    "typecheck": "npm run typecheck --prefix apps/web",
+    "generate-blogs": "node scripts/generate-daily-blogs.mjs",
+    "dry-run-blogs": "node scripts/generate-daily-blogs.mjs --dry-run"
   },
   "devDependencies": {
     "@react-router/node": "^8.5.2",

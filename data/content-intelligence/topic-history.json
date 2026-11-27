@@ -1,0 +1,212 @@
+[
+  {
+    "slug": "conversion-focused-website",
+    "title": "What Makes a Website Truly Conversion-Focused? (Engineering & UX Playbook)",
+    "category": "WEBSITE STRATEGY",
+    "primaryKeyword": "conversion focused website",
+    "secondaryKeywords": [
+      "website strategy",
+      "klyro works"
+    ],
+    "searchIntent": "Problem-Solving",
+    "contentFormat": "Problem-Solving Guide",
+    "targetService": "/services/website-development",
+    "targetMarkets": [
+      "US",
+      "UK",
+      "IN"
+    ],
+    "targetIndustry": "Professional & B2B Services",
+    "publishedDate": "2026-11-10",
+    "visual": "web"
+  },
+  {
+    "slug": "local-seo-for-service-businesses",
+    "title": "Local SEO for Commercial Service Businesses: The Entity & Conversion Playbook",
+    "category": "SEARCH & VISIBILITY",
+    "primaryKeyword": "local seo for service businesses",
+    "secondaryKeywords": [
+      "search & visibility",
+      "klyro works"
+    ],
+    "searchIntent": "Strategic Insights",
+    "contentFormat": "Strategic Business Insights",
+    "targetService": "/services/seo",
+    "targetMarkets": [
+      "US",
+      "UK",
+      "IN"
+    ],
+    "targetIndustry": "Professional & B2B Services",
+    "publishedDate": "2026-11-11",
+    "visual": "dental"
+  },
+  {
+    "slug": "first-business-automation",
+    "title": "How to Choose and Implement Your First Business Automation (Without Workflow Chaos)",
+    "category": "AI & AUTOMATION",
+    "primaryKeyword": "first business automation",
+    "secondaryKeywords": [
+      "ai & automation",
+      "klyro works"
+    ],
+    "searchIntent": "Problem-Solving",
+    "contentFormat": "Comparative Analysis",
+    "targetService": "/services/ai-automation",
+    "targetMarkets": [
+      "US",
+      "UK",
+      "IN"
+    ],
+    "targetIndustry": "Professional & B2B Services",
+    "publishedDate": "2026-11-12",
+    "visual": "team"
+  },
+  {
+    "slug": "geo-and-ai-search-ranking",
+    "title": "Generative Engine Optimization (GEO): How to Earn Citations in Google AI Overviews & ChatGPT",
+    "category": "AI SEARCH & SEO",
+    "primaryKeyword": "geo and ai search ranking",
+    "secondaryKeywords": [
+      "ai search & seo",
+      "klyro works"
+    ],
+    "searchIntent": "Strategic Insights",
+    "contentFormat": "Problem-Solving Guide",
+    "targetService": "/services/website-development",
+    "targetMarkets": [
+      "US",
+      "UK",
+      "IN"
+    ],
+    "targetIndustry": "Professional & B2B Services",
+    "publishedDate": "2026-11-13",
+    "visual": "seo"
+  },
+  {
+    "slug": "core-web-vitals-business-impact",
+    "title": "Why Sub-Second Page Speed is Your Greatest Commercial Growth Advantage",
+    "category": "TECHNICAL PERFORMANCE",
+    "primaryKeyword": "core web vitals business impact",
+    "secondaryKeywords": [
+      "technical performance",
+      "klyro works"
+    ],
+    "searchIntent": "Problem-Solving",
+    "contentFormat": "Strategic Business Insights",
+    "targetService": "/services/website-development",
+    "targetMarkets": [
+      "US",
+      "UK",
+      "IN"
+    ],
+    "targetIndustry": "Professional & B2B Services",
+    "publishedDate": "2026-11-14",
+    "visual": "web"
+  },
+  {
+    "slug": "b2b-google-ads-ppc-scaling-playbook",
+    "title": "B2B Google Ads & PPC Scaling Playbook: How High-Growth Companies Generate Qualified Inquiries at Scale",
+    "category": "PERFORMANCE MARKETING & PPC",
+    "primaryKeyword": "b2b google ads ppc scaling playbook",
+    "secondaryKeywords": [
+      "performance marketing & ppc",
+      "klyro works"
+    ],
+    "searchIntent": "Strategic Insights",
+    "contentFormat": "Comparative Analysis",
+    "targetService": "/services/digital-marketing",
+    "targetMarkets": [
+      "US",
+      "UK",
+      "IN"
+    ],
+    "targetIndustry": "Professional & B2B Services",
+    "publishedDate": "2026-11-15",
+    "visual": "marketing"
+  },
+  {
+    "slug": "ai-lead-qualification-and-crm-automation",
+    "title": "Zero-Lag Lead Qualification: How AI Agents & CRM Automation Eliminate Speed-to-Lead Drop-Off",
+    "category": "AI & AUTOMATION ARCHITECTURE",
+    "primaryKeyword": "ai lead qualification and crm automation",
+    "secondaryKeywords": [
+      "ai & automation architecture",
+      "klyro works"
+    ],
+    "searchIntent": "Problem-Solving",
+    "contentFormat": "Problem-Solving Guide",
+    "targetService": "/services/ai-automation",
+    "targetMarkets": [
+      "US",
+      "UK",
+      "IN"
+    ],
+    "targetIndustry": "Professional & B2B Services",
+    "publishedDate": "2026-11-16",
+    "visual": "ai"
+  },
+  {
+    "slug": "headless-ecommerce-shopify-growth-architecture",
+    "title": "Headless Ecommerce vs Monolithic Shopify: The Engineering & Revenue Blueprint for DTC Brands",
+    "category": "ECOMMERCE ENGINEERING",
+    "primaryKeyword": "headless ecommerce shopify growth architecture",
+    "secondaryKeywords": [
+      "ecommerce engineering",
+      "klyro works"
+    ],
+    "searchIntent": "Strategic Insights",
+    "contentFormat": "Strategic Business Insights",
+    "targetService": "/services/ecommerce",
+    "targetMarkets": [
+      "US",
+      "UK",
+      "IN"
+    ],
+    "targetIndustry": "Ecommerce DTC",
+    "publishedDate": "2026-11-17",
+    "visual": "ecommerce"
+  },
+  {
+    "slug": "b2b-website-redesign-strategy-and-roi",
+    "title": "The Executive Guide to B2B Website Redesign: Scope, Milestones, and Revenue ROI",
+    "category": "DIGITAL TRANSFORMATION",
+    "primaryKeyword": "b2b website redesign strategy and roi",
+    "secondaryKeywords": [
+      "digital transformation",
+      "klyro works"
+    ],
+    "searchIntent": "Problem-Solving",
+    "contentFormat": "Comparative Analysis",
+    "targetService": "/services/website-development",
+    "targetMarkets": [
+      "US",
+      "UK",
+      "IN"
+    ],
+    "targetIndustry": "Professional & B2B Services",
+    "publishedDate": "2026-11-18",
+    "visual": "design"
+  },
+  {
+    "slug": "healthcare-patient-acquisition-funnels",
+    "title": "Building a Predictable Patient Acquisition Engine: High-Trust Web Design, Local 3-Pack, & Automated Booking",
+    "category": "HEALTHCARE & DENTAL GROWTH",
+    "primaryKeyword": "healthcare patient acquisition funnels",
+    "secondaryKeywords": [
+      "healthcare & dental growth",
+      "klyro works"
+    ],
+    "searchIntent": "Strategic Insights",
+    "contentFormat": "Problem-Solving Guide",
+    "targetService": "/services/website-development",
+    "targetMarkets": [
+      "US",
+      "UK",
+      "IN"
+    ],
+    "targetIndustry": "Dental & Healthcare",
+    "publishedDate": "2026-11-19",
+    "visual": "healthcare"
+  }
+]

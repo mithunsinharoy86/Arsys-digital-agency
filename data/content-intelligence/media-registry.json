@@ -1,0 +1,122 @@
+[
+  {
+    "id": "webDevCorporate",
+    "source": "Unsplash",
+    "originalUrl": "https://unsplash.com/photos/afdab827c52f",
+    "cdnUrl": "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fm=webp&fit=crop&w=1200&q=80",
+    "license": "Unsplash License - Free for commercial and non-commercial use",
+    "licenseUrl": "https://unsplash.com/license",
+    "photographer": "Carlos Muza",
+    "photographerUrl": "https://unsplash.com/@kmuza",
+    "verified": true,
+    "tags": ["web development", "analytics", "dashboard", "corporate strategy"]
+  },
+  {
+    "id": "digitalMarketing",
+    "source": "Unsplash",
+    "originalUrl": "https://unsplash.com/photos/cd871a92f312",
+    "cdnUrl": "https://images.unsplash.com/photo-1533750349088-cd871a92f312?auto=format&fm=webp&fit=crop&w=1200&q=80",
+    "license": "Unsplash License - Free for commercial and non-commercial use",
+    "licenseUrl": "https://unsplash.com/license",
+    "photographer": "Campaign Creators",
+    "photographerUrl": "https://unsplash.com/@campaign_creators",
+    "verified": true,
+    "tags": ["digital marketing", "ppc", "google ads", "performance marketing"]
+  },
+  {
+    "id": "aiAutomation",
+    "source": "Unsplash",
+    "originalUrl": "https://unsplash.com/photos/4636190af475",
+    "cdnUrl": "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fm=webp&fit=crop&w=1200&q=80",
+    "license": "Unsplash License - Free for commercial and non-commercial use",
+    "licenseUrl": "https://unsplash.com/license",
+    "photographer": "Alexandre Debiève",
+    "photographerUrl": "https://unsplash.com/@alexandre_debieve",
+    "verified": true,
+    "tags": ["ai automation", "circuits", "machine learning", "crm integration"]
+  },
+  {
+    "id": "seoAudit",
+    "source": "Unsplash",
+    "originalUrl": "https://unsplash.com/photos/d5d88e9218df",
+    "cdnUrl": "https://images.unsplash.com/photo-1551836022-d5d88e9218df?auto=format&fm=webp&fit=crop&w=1200&q=80",
+    "license": "Unsplash License - Free for commercial and non-commercial use",
+    "licenseUrl": "https://unsplash.com/license",
+    "photographer": "Luke Peters",
+    "photographerUrl": "https://unsplash.com/@lukepeters",
+    "verified": true,
+    "tags": ["seo audit", "technical seo", "search visibility", "rankings"]
+  },
+  {
+    "id": "uiUxDesign",
+    "source": "Unsplash",
+    "originalUrl": "https://unsplash.com/photos/4e27b48ff24e",
+    "cdnUrl": "https://images.unsplash.com/photo-1581291518857-4e27b48ff24e?auto=format&fm=webp&fit=crop&w=1200&q=80",
+    "license": "Unsplash License - Free for commercial and non-commercial use",
+    "licenseUrl": "https://unsplash.com/license",
+    "photographer": "Balázs Kétyi",
+    "photographerUrl": "https://unsplash.com/@balazsketyi",
+    "verified": true,
+    "tags": ["ui ux design", "wireframes", "design systems", "prototyping"]
+  },
+  {
+    "id": "brandingIdentity",
+    "source": "Unsplash",
+    "originalUrl": "https://unsplash.com/photos/3a31f272c490",
+    "cdnUrl": "https://images.unsplash.com/photo-1542744094-3a31f272c490?auto=format&fm=webp&fit=crop&w=1200&q=80",
+    "license": "Unsplash License - Free for commercial and non-commercial use",
+    "licenseUrl": "https://unsplash.com/license",
+    "photographer": "Austin Distel",
+    "photographerUrl": "https://unsplash.com/@austindistel",
+    "verified": true,
+    "tags": ["branding", "brand identity", "typography", "creative direction"]
+  },
+  {
+    "id": "ecommerceStore",
+    "source": "Unsplash",
+    "originalUrl": "https://unsplash.com/photos/062f824d29cc",
+    "cdnUrl": "https://images.unsplash.com/photo-1472851294608-062f824d29cc?auto=format&fm=webp&fit=crop&w=1200&q=80",
+    "license": "Unsplash License - Free for commercial and non-commercial use",
+    "licenseUrl": "https://unsplash.com/license",
+    "photographer": "Clark Street Mercantile",
+    "photographerUrl": "https://unsplash.com/@clarkstreetmercantile",
+    "verified": true,
+    "tags": ["ecommerce", "headless shopify", "retail", "dtc store"]
+  },
+  {
+    "id": "teamCollaboration",
+    "source": "Unsplash",
+    "originalUrl": "https://unsplash.com/photos/009f0129c71c",
+    "cdnUrl": "https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fm=webp&fit=crop&w=1200&q=80",
+    "license": "Unsplash License - Free for commercial and non-commercial use",
+    "licenseUrl": "https://unsplash.com/license",
+    "photographer": "Annie Spratt",
+    "photographerUrl": "https://unsplash.com/@anniespratt",
+    "verified": true,
+    "tags": ["team", "engineering", "collaboration", "consulting"]
+  },
+  {
+    "id": "dentalAesthetic",
+    "source": "Unsplash",
+    "originalUrl": "https://unsplash.com/photos/28e377c37b09",
+    "cdnUrl": "https://images.unsplash.com/photo-1629909613654-28e377c37b09?auto=format&fm=webp&fit=crop&w=1200&q=80",
+    "license": "Unsplash License - Free for commercial and non-commercial use",
+    "licenseUrl": "https://unsplash.com/license",
+    "photographer": "Cedric Fauntleroy",
+    "photographerUrl": "https://unsplash.com/@cedricfauntleroy",
+    "verified": true,
+    "tags": ["dental clinic", "healthcare", "patient care", "medical practices"]
+  },
+  {
+    "id": "realEstateCommercial",
+    "source": "Unsplash",
+    "originalUrl": "https://unsplash.com/photos/c627a92ad1ab",
+    "cdnUrl": "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fm=webp&fit=crop&w=1200&q=80",
+    "license": "Unsplash License - Free for commercial and non-commercial use",
+    "licenseUrl": "https://unsplash.com/license",
+    "photographer": "Sean Pollock",
+    "photographerUrl": "https://unsplash.com/@seanpollock",
+    "verified": true,
+    "tags": ["real estate", "commercial architecture", "corporate buildings", "property"]
+  }
+]
